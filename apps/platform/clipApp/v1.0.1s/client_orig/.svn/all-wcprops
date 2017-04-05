@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/kalorg/!svn/ver/3907/kalturaCE/trunk/package/app/apps/clipapp/v1.0.1/client
+END
+KalturaEnums.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/kalorg/!svn/ver/3907/kalturaCE/trunk/package/app/apps/clipapp/v1.0.1/client/KalturaEnums.php
+END
+KalturaClientBase.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/kalorg/!svn/ver/3907/kalturaCE/trunk/package/app/apps/clipapp/v1.0.1/client/KalturaClientBase.php
+END
+KalturaClient.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/kalorg/!svn/ver/3907/kalturaCE/trunk/package/app/apps/clipapp/v1.0.1/client/KalturaClient.php
+END
+KalturaTypes.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/kalorg/!svn/ver/3907/kalturaCE/trunk/package/app/apps/clipapp/v1.0.1/client/KalturaTypes.php
+END
