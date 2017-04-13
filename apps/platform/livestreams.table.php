@@ -183,8 +183,8 @@ class livestreams {
                 $platforms_status_arr = array();
                 $platforms_preview_embed_arr = array();
                 $platforms = $this->getPlatforms($partnerData);
+                $platform_logos = array();
                 if ($platforms['snConfig']) {
-                    $platform_logos = array();
                     foreach ($platforms['platforms'] as $platform) {
                         if ($platform['platform'] == 'smh') {
                             if ($platform['status']) {
