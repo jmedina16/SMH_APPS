@@ -184,13 +184,14 @@ class livestreams {
                 $platforms_preview_embed_arr = array();
                 $platforms = $this->getPlatforms($partnerData);
                 if ($platforms['snConfig']) {
-                    $platform_logos = '';
+                    $platform_logos = array();
                     foreach ($platforms['platforms'] as $platform) {
                         if ($platform['platform'] == 'smh') {
                             if ($platform['status']) {
                                 array_push($platforms_status_arr, "smh:1");
                                 array_push($platforms_preview_embed_arr, "smh:1");
-                                $platform_logos .= "<div><img src='/img/smh_logo.png' width='80px'>";
+                                //$platform_logos .= "<div><img src='/img/smh_logo.png' width='80px'>";
+                                array_push($platform_logos, "smh");
                             } else {
                                 array_push($platforms_status_arr, "smh:0");
                                 array_push($platforms_preview_embed_arr, "smh:0");
@@ -201,7 +202,8 @@ class livestreams {
                                 $facebook = true;
                                 array_push($platforms_status_arr, "facebook:1");
                                 array_push($platforms_preview_embed_arr, "facebook:1:" . $platform['liveId']);
-                                $platform_logos .= "<div style='margin-top: 10px;'><img src='/img/facebook_logo.png' width='75px'></div>";
+                                array_push($platform_logos, "fb");
+                                //$platform_logos .= "<div style='margin-top: 10px;'><img src='/img/facebook_logo.png' width='75px'></div>";
                             } else {
                                 array_push($platforms_status_arr, "facebook:0");
                                 array_push($platforms_preview_embed_arr, "facebook:0");
@@ -212,7 +214,8 @@ class livestreams {
                                 $youtube = true;
                                 array_push($platforms_status_arr, "youtube:1");
                                 array_push($platforms_preview_embed_arr, "youtube:1:" . $platform['broadcastId']);
-                                $platform_logos .= "<div style='margin-top: 10px;'><img src='/img/youtube_logo.png' width='75px'></div>";
+                                array_push($platform_logos, "yt");
+                                //$platform_logos .= "<div style='margin-top: 10px;'><img src='/img/youtube_logo.png' width='75px'></div>";
                             } else {
                                 array_push($platforms_status_arr, "youtube:0");
                                 array_push($platforms_preview_embed_arr, "youtube:0");
@@ -222,7 +225,8 @@ class livestreams {
                     $platforms_status = implode(";", $platforms_status_arr);
                     $platforms_preview_embed = implode(";", $platforms_preview_embed_arr);
                 } else {
-                    $platform_logos = "<div><img src='/img/smh_logo.png' width='80px'>";
+                    //$platform_logos = "<div><img src='/img/smh_logo.png' width='80px'>";
+                    array_push($platform_logos, "smh");
                 }
             }
 
@@ -320,7 +324,8 @@ class livestreams {
             $row[] = "<div class='data-break'>" . $newDatetime . "</div>";
 
             if ($this->sn == 1) {
-                $row[] = $platform_logos;
+                $platform_logos = implode(",", $platform_logos);
+                $row[] = "<div class='data-break'><a onclick='smhLS.viewPlatforms(\"" . $platform_logos . "\");'>View Platforms <i class='fa fa-external-link' style='width: 100%; text-align: center; display: inline; font-size: 12px;'></i></a></div>";
             }
 
             $row[] = $stats;
