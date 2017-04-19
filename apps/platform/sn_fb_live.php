@@ -3,8 +3,8 @@ session_start();
 require_once( '../facebook/vendor/autoload.php' );
 
 $fb = new Facebook\Facebook([
-    'app_id' => '753618154817279',
-    'app_secret' => 'd6606e1a0e3490c6294ca2507cd36e7e',
+    'app_id' => '1880095552209614',
+    'app_secret' => 'e52af82e8fe68106197f87138355436c',
     'default_graph_version' => 'v2.8',
         ]);
 //$requestPicture = $fb->get('/me/picture?redirect=false&height=300', 'EAAKtaWZAqBv8BAEbmCH7kvBDxNbWLfvZAAencfV0nbxYDCr2hSUUvhJ8ozfItMlLevgRs1fQ181XlKKBPZBKZC31t6ZA0iTDmsBlk6WH2ZAfZAVp3yQC1tZBdvGFFH6gpPKK24gjb2d4OwidbZAbvBrZAISVm7HCEZBLVCM0bnBUSrXQwZDZD');
@@ -89,17 +89,17 @@ $fb = new Facebook\Facebook([
 //echo '</pre>';
 try {
 //    // to create live video
-//    $createLiveVideo = $fb->post('/119297148602495/live_videos', ['title' => 'SMH Test 1', 'description' => 'descrip of the video'], 'EAAKtaWZAqBv8BADqFxYteyE9teoiPUrVNw97HqMIMJJdH1Sc1ZAZBRyEbdGoDntANn8cOAd0tbeNyPHpY1ChyCJimlBdE7nOmW1vSVZCQ1ESTKsjJw358BWB1LKQyIDNfwvZAuZCJtQfZCpdGtw4GKtUB08OyN00nwxmYv05Fr4iQZDZD');
-//    $createLiveVideo = $createLiveVideo->getGraphNode()->asArray();
-//    echo '<pre>';
-//    print_r($createLiveVideo);
-//    echo '</pre>';
-    //$LiveVideo = $fb->get('/131357290729814?fields=created_time,embed_html,live_status,privacy', 'EAAKtaWZAqBv8BAI3m5ZCtqpi75vF003ZAtRqDM2lN2bhCzOr7E1y9kIysPFfkVN1oNpVpujz9w6nHmkPmeeIukmxO77ztXYZCtFXEZArpLy40WfGTXAfy1CDz3zIJ0ZCRNZAqqdhUvtCeczYa3WuzJG3jqbTJlwfG8gTkp4gryBEgZDZD');
-    $LiveVideo = $fb->get('/131357290729814?fields=broadcast_start_time,creation_time,embed_html,is_manual_mode,permalink_url,status,video', 'EAAKtaWZAqBv8BAI3m5ZCtqpi75vF003ZAtRqDM2lN2bhCzOr7E1y9kIysPFfkVN1oNpVpujz9w6nHmkPmeeIukmxO77ztXYZCtFXEZArpLy40WfGTXAfy1CDz3zIJ0ZCRNZAqqdhUvtCeczYa3WuzJG3jqbTJlwfG8gTkp4gryBEgZDZD');
-    $LiveVideo = $LiveVideo->getGraphNode()->asArray();
+    $createLiveVideo = $fb->post('/102317076997247/live_videos', ['title' => 'SMH Test 360', 'description' => 'descrip of the video', 'is_spherical' => true], 'EAAat79uIgs4BADz9haKAxFH3YEoM3ZCxyz7UcVrQsNQI5jG2qsU52XMhgaFVyUoDLur0qdsZB8PfxMTuyo8MHepyH8TpMqMnRt0K9rKHgGdkJycFdgk9XEX7BmP9veZAy12w22P6lAR2xcZAkr9cZAcvZCLZB0ZBq2TlpxpQ3PlDowZDZD');
+    $createLiveVideo = $createLiveVideo->getGraphNode()->asArray();
     echo '<pre>';
-    print_r($LiveVideo);
+    print_r($createLiveVideo);
     echo '</pre>';
+    //$LiveVideo = $fb->get('/131357290729814?fields=created_time,embed_html,live_status,privacy', 'EAAKtaWZAqBv8BAI3m5ZCtqpi75vF003ZAtRqDM2lN2bhCzOr7E1y9kIysPFfkVN1oNpVpujz9w6nHmkPmeeIukmxO77ztXYZCtFXEZArpLy40WfGTXAfy1CDz3zIJ0ZCRNZAqqdhUvtCeczYa3WuzJG3jqbTJlwfG8gTkp4gryBEgZDZD');
+//    $LiveVideo = $fb->get('/102317076997247?fields=broadcast_start_time,creation_time,embed_html,is_manual_mode,permalink_url,status,video', 'EAAat79uIgs4BADz9haKAxFH3YEoM3ZCxyz7UcVrQsNQI5jG2qsU52XMhgaFVyUoDLur0qdsZB8PfxMTuyo8MHepyH8TpMqMnRt0K9rKHgGdkJycFdgk9XEX7BmP9veZAy12w22P6lAR2xcZAkr9cZAcvZCLZB0ZBq2TlpxpQ3PlDowZDZD');
+//    $LiveVideo = $LiveVideo->getGraphNode()->asArray();
+//    echo '<pre>';
+//    print_r($LiveVideo);
+//    echo '</pre>';
 } catch (\Facebook\Exceptions\FacebookResponseException $e) {
     // When Graph returns an error
     echo 'Graph returned an error: ' . $e->getMessage();
