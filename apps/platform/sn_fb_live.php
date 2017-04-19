@@ -89,7 +89,7 @@ $fb = new Facebook\Facebook([
 //echo '</pre>';
 try {
 //    // to create live video
-    $createLiveVideo = $fb->post('/102317076997247/live_videos', ['title' => 'SMH Test 360', 'description' => 'descrip of the video', 'is_spherical' => true], 'EAAat79uIgs4BADz9haKAxFH3YEoM3ZCxyz7UcVrQsNQI5jG2qsU52XMhgaFVyUoDLur0qdsZB8PfxMTuyo8MHepyH8TpMqMnRt0K9rKHgGdkJycFdgk9XEX7BmP9veZAy12w22P6lAR2xcZAkr9cZAcvZCLZB0ZBq2TlpxpQ3PlDowZDZD');
+    $createLiveVideo = $fb->post('/104139716814983', ['title' => 'Test', 'description' => 'descrip of the video'], 'EAAat79uIgs4BADz9haKAxFH3YEoM3ZCxyz7UcVrQsNQI5jG2qsU52XMhgaFVyUoDLur0qdsZB8PfxMTuyo8MHepyH8TpMqMnRt0K9rKHgGdkJycFdgk9XEX7BmP9veZAy12w22P6lAR2xcZAkr9cZAcvZCLZB0ZBq2TlpxpQ3PlDowZDZD');
     $createLiveVideo = $createLiveVideo->getGraphNode()->asArray();
     echo '<pre>';
     print_r($createLiveVideo);
