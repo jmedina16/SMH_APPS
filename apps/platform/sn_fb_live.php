@@ -89,17 +89,23 @@ $fb = new Facebook\Facebook([
 //echo '</pre>';
 try {
 //    // to create live video
-    $createLiveVideo = $fb->post('/104139716814983', ['title' => 'Test', 'description' => 'descrip of the video'], 'EAAat79uIgs4BADz9haKAxFH3YEoM3ZCxyz7UcVrQsNQI5jG2qsU52XMhgaFVyUoDLur0qdsZB8PfxMTuyo8MHepyH8TpMqMnRt0K9rKHgGdkJycFdgk9XEX7BmP9veZAy12w22P6lAR2xcZAkr9cZAcvZCLZB0ZBq2TlpxpQ3PlDowZDZD');
-    $createLiveVideo = $createLiveVideo->getGraphNode()->asArray();
-    echo '<pre>';
-    print_r($createLiveVideo);
-    echo '</pre>';
+//    $createLiveVideo = $fb->post('/104139716814983', ['title' => 'Test', 'description' => 'descrip of the video'], 'EAAat79uIgs4BADz9haKAxFH3YEoM3ZCxyz7UcVrQsNQI5jG2qsU52XMhgaFVyUoDLur0qdsZB8PfxMTuyo8MHepyH8TpMqMnRt0K9rKHgGdkJycFdgk9XEX7BmP9veZAy12w22P6lAR2xcZAkr9cZAcvZCLZB0ZBq2TlpxpQ3PlDowZDZD');
+//    $createLiveVideo = $createLiveVideo->getGraphNode()->asArray();
+//    echo '<pre>';
+//    print_r($createLiveVideo);
+//    echo '</pre>';
     //$LiveVideo = $fb->get('/131357290729814?fields=created_time,embed_html,live_status,privacy', 'EAAKtaWZAqBv8BAI3m5ZCtqpi75vF003ZAtRqDM2lN2bhCzOr7E1y9kIysPFfkVN1oNpVpujz9w6nHmkPmeeIukmxO77ztXYZCtFXEZArpLy40WfGTXAfy1CDz3zIJ0ZCRNZAqqdhUvtCeczYa3WuzJG3jqbTJlwfG8gTkp4gryBEgZDZD');
 //    $LiveVideo = $fb->get('/102317076997247?fields=broadcast_start_time,creation_time,embed_html,is_manual_mode,permalink_url,status,video', 'EAAat79uIgs4BADz9haKAxFH3YEoM3ZCxyz7UcVrQsNQI5jG2qsU52XMhgaFVyUoDLur0qdsZB8PfxMTuyo8MHepyH8TpMqMnRt0K9rKHgGdkJycFdgk9XEX7BmP9veZAy12w22P6lAR2xcZAkr9cZAcvZCLZB0ZBq2TlpxpQ3PlDowZDZD');
 //    $LiveVideo = $LiveVideo->getGraphNode()->asArray();
 //    echo '<pre>';
 //    print_r($LiveVideo);
 //    echo '</pre>';
+
+    $accounts = $fb->get('/102317076997247/events', 'EAAat79uIgs4BADx7A998LX2Oo1TSxeZCtiLgKbGC6hR8aCDmE39kQ1lXFqW4m7g85xw7CxGkhUi6POFntWk4fOP56O4o6yq9ZBziBZBusF2xdAuVFvZBlhnKWLyb13QHtwNu0gz8QZAWmp50kDZBtSSvoQgvIyS3zxR6TNatcmqwZDZD');
+    $createLiveVideo = $accounts->getGraphEdge()->asArray();
+    echo '<pre>';
+    print_r($createLiveVideo);
+    echo '</pre>';
 } catch (\Facebook\Exceptions\FacebookResponseException $e) {
     // When Graph returns an error
     echo 'Graph returned an error: ' . $e->getMessage();
