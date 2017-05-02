@@ -73,12 +73,12 @@ class dcp {
             $stmt = $this->link->prepare("SET SESSION wait_timeout = 600");
             $stmt->execute();
 
-            $this->partnerIds = $this->link->prepare("SELECT * FROM partner WHERE `status` IN (1,2) AND `id` NOT IN (-1,-2,-3,-4,-5,0,99) AND `id` IN 
-                (
-10012
-)");
+//            $this->partnerIds = $this->link->prepare("SELECT * FROM partner WHERE `status` IN (1,2) AND `id` NOT IN (-1,-2,-3,-4,-5,0,99) AND `id` IN 
+//                (
+//10012
+//)");
 
-//            $this->partnerIds = $this->link->prepare("SELECT * FROM partner WHERE `status` IN (1) AND `id` NOT IN (-1,-2,-3,-4,-5,0,99)");
+            $this->partnerIds = $this->link->prepare("SELECT * FROM partner WHERE `status` IN (1,2) AND `id` NOT IN (-1,-2,-3,-4,-5,0,99)");
 
             $this->partnerIds->execute();
         } catch (PDOException $e) {
@@ -88,26 +88,36 @@ class dcp {
     }
 
     public function createHLSInstances() {
+//        $total = 0;
+//        foreach ($this->partnerIds->fetchAll(PDO::FETCH_OBJ) as $row) {
+//            $create_hls_instances = json_decode($this->createHLSInstance($row->id));
+//            echo "<br>";
+//            foreach ($create_hls_instances as $instance) {
+//                echo $instance->Id . " : " . $instance->InstanceName;
+//                echo "<br>";
+//            }
+//            $total++;
+//        }
+//        echo "TOTAL: " . $total;
+//        echo "<br>";
+
         $total = 0;
-        foreach ($this->partnerIds->fetchAll(PDO::FETCH_OBJ) as $row) {
-            echo $row->id;
+        echo "<br>";
+        $hls_instances = json_decode($this->getAllInstances());
+        foreach ($hls_instances as $instance) {
+            echo $instance->InstanceName;
             echo "<br>";
             $total++;
         }
         echo "TOTAL: " . $total;
         echo "<br>";
-
-//        $hls_instances = json_decode($this->getAllInstances());
-//        foreach ($hls_instances as $instance) {
-//            echo $instance->InstanceName;
+//        
+//        
+//        $create_hls_instances = json_decode($this->createHLSInstance(100));
+//        foreach ($create_hls_instances as $instance) {
+//            echo $instance->Id ." : ". $instance->InstanceName;
 //            echo "<br>";
 //        }
-
-        $create_hls_instances = json_decode($this->createHLSInstance(100));
-        foreach ($create_hls_instances as $instance) {
-            echo $instance->InstanceName;
-            echo "<br>";
-        }
     }
 
     public function getAllInstances() {
@@ -137,11 +147,10 @@ class dcp {
 //        );
 
         $fields = array(
-            'InstanceName' => 'test2-live',
+            'InstanceName' => $pid . '-live',
             'SegmentSize' => 10
         );
         $field_string = json_encode($fields);
-        print_r($field_string);
 
         //open connection
         $ch = curl_init();
@@ -155,7 +164,6 @@ class dcp {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $field_string);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $output = curl_exec($ch);
-        print_r($output);
         curl_close($ch);
         return $output;
     }
