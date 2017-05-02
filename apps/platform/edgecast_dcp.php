@@ -100,23 +100,24 @@ class dcp {
 //        }
 //        echo "TOTAL: " . $total;
 //        echo "<br>";
-//        $total = 0;
-//        echo "<br>";
-//        $hls_instances = json_decode($this->getAllInstances());
+        $total = 0;
+        echo "<br>";
+        $hls_instances = json_decode($this->getAllInstances());
+        print_r($hls_instances);
 //        foreach ($hls_instances as $instance) {
 //            echo $instance->InstanceName;
 //            echo "<br>";
 //            $total++;
 //        }
-//        echo "TOTAL: " . $total;
-//        echo "<br>";
+        echo "TOTAL: " . $total;
+        echo "<br>";
 //        
 //        
-        $create_hls_instances = json_decode($this->createHLSInstance('testing'));
-        if (isset($instance->Id)) {
-            echo $instance->Id . " : " . $instance->InstanceName;
-            echo "<br>";
-        }
+//        $create_hls_instances = json_decode($this->createHLSInstance('testing'));
+//        if (isset($create_hls_instances->Id)) {
+//            echo $create_hls_instances->Id . " : " . $create_hls_instances->InstanceName;
+//            echo "<br>";
+//        }
 
 //        foreach ($create_hls_instances as $instance) {
 //            echo $instance->Id ." : ". $instance->InstanceName;
