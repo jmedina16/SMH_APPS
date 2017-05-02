@@ -100,20 +100,24 @@ class dcp {
 //        }
 //        echo "TOTAL: " . $total;
 //        echo "<br>";
-
-        $total = 0;
-        echo "<br>";
-        $hls_instances = json_decode($this->getAllInstances());
-        foreach ($hls_instances as $instance) {
-            echo $instance->InstanceName;
+//        $total = 0;
+//        echo "<br>";
+//        $hls_instances = json_decode($this->getAllInstances());
+//        foreach ($hls_instances as $instance) {
+//            echo $instance->InstanceName;
+//            echo "<br>";
+//            $total++;
+//        }
+//        echo "TOTAL: " . $total;
+//        echo "<br>";
+//        
+//        
+        $create_hls_instances = json_decode($this->createHLSInstance('testing'));
+        if (isset($instance->Id)) {
+            echo $instance->Id . " : " . $instance->InstanceName;
             echo "<br>";
-            $total++;
         }
-        echo "TOTAL: " . $total;
-        echo "<br>";
-//        
-//        
-//        $create_hls_instances = json_decode($this->createHLSInstance(100));
+
 //        foreach ($create_hls_instances as $instance) {
 //            echo $instance->Id ." : ". $instance->InstanceName;
 //            echo "<br>";
@@ -138,14 +142,6 @@ class dcp {
     }
 
     public function createHLSInstance($pid) {
-//        $fields = array(
-//            'SsaEnabled' => false,
-//            'Encrypted' => false,
-//            'InstanceName' => 'mythirdinstance',
-//            'DvrDuration' => null,
-//            'SegmentSize' => 10
-//        );
-
         $fields = array(
             'InstanceName' => $pid . '-live',
             'SegmentSize' => 10
