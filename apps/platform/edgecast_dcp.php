@@ -135,12 +135,11 @@ class dcp {
 //            'DvrDuration' => null,
 //            'SegmentSize' => 10
 //        );
-        
-        $fields = array(
-            'InstanceName' => 'mythirdinstance',
-            'SegmentSize' => 10
-        );        
 
+        $fields = array(
+            'InstanceName' => 'test2-live',
+            'SegmentSize' => 10
+        );
         $field_string = json_encode($fields);
         print_r($field_string);
 
@@ -149,10 +148,11 @@ class dcp {
         curl_setopt($ch, CURLOPT_URL, "https://api.edgecast.com/v2/mcc/customers/52BF3/httpstreaming/dcp/live");
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Authorization: TOK:f71bfb62-4684-42fa-9e26-72aafe49968e',
-            'Content-Type: application/json'
+            'Content-Type: application/json',
+            'Accept: application/json'
         ));
         curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $field_string);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $output = curl_exec($ch);
         print_r($output);
