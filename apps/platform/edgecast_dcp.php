@@ -97,17 +97,17 @@ class dcp {
         echo "TOTAL: " . $total;
         echo "<br>";
 
-        $hls_instances = json_decode($this->getAllInstances());
-        foreach ($hls_instances as $instance) {
-            echo $instance->InstanceName;
-            echo "<br>";
-        }
-
-//        $create_hls_instances = json_decode($this->createHLSInstance(100));
-//        foreach ($create_hls_instances as $instance) {
+//        $hls_instances = json_decode($this->getAllInstances());
+//        foreach ($hls_instances as $instance) {
 //            echo $instance->InstanceName;
 //            echo "<br>";
 //        }
+
+        $create_hls_instances = json_decode($this->createHLSInstance(100));
+        foreach ($create_hls_instances as $instance) {
+            echo $instance->InstanceName;
+            echo "<br>";
+        }
     }
 
     public function getAllInstances() {
@@ -128,15 +128,20 @@ class dcp {
     }
 
     public function createHLSInstance($pid) {
+//        $fields = array(
+//            'SsaEnabled' => false,
+//            'Encrypted' => false,
+//            'InstanceName' => 'mythirdinstance',
+//            'DvrDuration' => null,
+//            'SegmentSize' => 10
+//        );
+        
         $fields = array(
-            'SsaEnabled' => false,
-            'Encrypted' => false,
-            'InstanceName' => 'test',
-            'DvrDuration' => null,
+            'InstanceName' => 'mythirdinstance',
             'SegmentSize' => 10
-        );
+        );        
 
-        $field_string = http_build_query($fields);
+        $field_string = json_encode($fields);
         print_r($field_string);
 
         //open connection
@@ -144,10 +149,7 @@ class dcp {
         curl_setopt($ch, CURLOPT_URL, "https://api.edgecast.com/v2/mcc/customers/52BF3/httpstreaming/dcp/live");
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Authorization: TOK:f71bfb62-4684-42fa-9e26-72aafe49968e',
-            'Content-Type: application/json',
-            'Accept: application/json',
-            'Host: api.edgecast.com',
-            //'Content-Length: 61'
+            'Content-Type: application/json'
         ));
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
