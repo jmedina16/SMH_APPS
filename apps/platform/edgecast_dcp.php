@@ -1,10 +1,10 @@
-#!/usr/bin/php
 <?php
-ini_set('error_reporting', 1);
+
+ini_set('error_reporting', 0);
 ini_set('memory_limit', '1024M'); // or you could use 1G
 require_once('../../app/clients/php5/KalturaClient.php');
 
-class smhUpdateHTML5 {
+class dcp {
 
     protected $link = null;
     protected $login;
@@ -41,7 +41,6 @@ class smhUpdateHTML5 {
 
         $this->findPartnerIds();
         $this->createHLSInstances();
-        $this->makeAPIcall();
         // mark the stop time
         $stop_time = MICROTIME(TRUE);
 
@@ -92,14 +91,26 @@ class smhUpdateHTML5 {
         $total = 0;
         foreach ($this->partnerIds->fetchAll(PDO::FETCH_OBJ) as $row) {
             echo $row->id;
-            echo "\n\r";
+            echo "<br>";
             $total++;
         }
         echo "TOTAL: " . $total;
-        echo "\n\r";
+        echo "<br>";
+
+        $hls_instances = json_decode($this->getAllInstances());
+        foreach ($hls_instances as $instance) {
+            echo $instance->InstanceName;
+            echo "<br>";
+        }
+
+//        $create_hls_instances = json_decode($this->createHLSInstance(100));
+//        foreach ($create_hls_instances as $instance) {
+//            echo $instance->InstanceName;
+//            echo "<br>";
+//        }
     }
 
-    public function makeAPIcall() {
+    public function getAllInstances() {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "https://api.edgecast.com/v2/mcc/customers/52BF3/httpstreaming/dcp/live");
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -110,7 +121,40 @@ class smhUpdateHTML5 {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $output = curl_exec($ch);
         curl_close($ch);
-        error_log(print_r($output, true));
+//        echo "<pre>";
+//        print_r(json_decode($output));
+//        echo "</pre>";
+        return $output;
+    }
+
+    public function createHLSInstance($pid) {
+        $fields = array(
+            'SsaEnabled' => false,
+            'Encrypted' => false,
+            'InstanceName' => 'test',
+            'DvrDuration' => null,
+            'SegmentSize' => 10
+        );
+
+        $field_string = http_build_query($fields);
+        print_r($field_string);
+
+        //open connection
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://api.edgecast.com/v2/mcc/customers/52BF3/httpstreaming/dcp/live");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: TOK:f71bfb62-4684-42fa-9e26-72aafe49968e',
+            'Content-Type: application/json',
+            'Accept: application/json',
+            'Host: api.edgecast.com',
+            //'Content-Length: 61'
+        ));
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $output = curl_exec($ch);
+        print_r($output);
+        curl_close($ch);
         return $output;
     }
 
@@ -121,6 +165,6 @@ class smhUpdateHTML5 {
 
 }
 
-$instance = new smhUpdateHTML5();
+$instance = new dcp();
 $instance->run();
 ?>
