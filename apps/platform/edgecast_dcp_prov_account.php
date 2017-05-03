@@ -27,7 +27,7 @@ class dcp {
     }
 
     public function createHLSInstances() {
-        $create_hls_instances = json_decode($this->createHLSInstance('testing3'));
+        $create_hls_instances = json_decode($this->createHLSInstance('testing5'));
         if (isset($create_hls_instances->Id)) {
             echo $create_hls_instances->Id . " : " . $create_hls_instances->InstanceName;
             echo "<br>";

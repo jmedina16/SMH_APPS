@@ -6,7 +6,9 @@ require_once('../../app/clients/php5/KalturaClient.php');
 
 class dcp {
 
-    public function __construct() {}
+    public function __construct() {
+        
+    }
 
     //run garbage collection
     public function run() {
@@ -16,7 +18,7 @@ class dcp {
         $date = date('Y-m-d H:i:s');
         print($date . " [smhUpdateHTML5->run] INFO: HTML5 Update is running \n");
 
-        $this->deleteHLSInstance();
+        $this->deleteHLSInstance('testing5');
         // mark the stop time
         $stop_time = MICROTIME(TRUE);
 
@@ -25,14 +27,19 @@ class dcp {
         $date = date('Y-m-d H:i:s');
         print($date . " [smhUpdateHTML5->run] INFO: Done after [" . $time . "] seconds\n");
     }
-   
-    public function deleteHLSInstance() {
+
+    public function deleteHLSInstance($pid) {
         $total = 0;
         echo "<br>";
         $hls_instances = json_decode($this->getAllInstances());
         foreach ($hls_instances as $instance) {
-            echo $instance->InstanceName;
-            echo "<br>";
+            if ($instance->InstanceName === $pid . '-live') {
+                $response = $this->doInstanceDelete($instance->Id);
+                if($response === 200){
+                    echo 'Deleted!';
+                    echo "<br>";
+                }
+            }
             $total++;
         }
         echo "TOTAL: " . $total;
@@ -52,6 +59,23 @@ class dcp {
         curl_close($ch);
         return $output;
     }
+
+    public function doInstanceDelete($id) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://api.edgecast.com/v2/mcc/customers/52BF3/httpstreaming/dcp/live/" . $id);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: TOK:f71bfb62-4684-42fa-9e26-72aafe49968e',
+            'Content-Type: application/json',
+            'Accept: application/json'
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        return $httpCode;
+    }
+
 }
 
 $instance = new dcp();
