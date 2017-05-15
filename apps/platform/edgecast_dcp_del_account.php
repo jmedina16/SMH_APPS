@@ -48,9 +48,9 @@ class dcp {
 
     public function getAllInstances() {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://api.edgecast.com/v2/mcc/customers/52BF3/httpstreaming/dcp/live");
+        curl_setopt($ch, CURLOPT_URL, "https://api.edgecast.com/v2/mcc/customers/19BC0/httpstreaming/dcp/live");
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization: TOK:f71bfb62-4684-42fa-9e26-72aafe49968e',
+            'Authorization: TOK:d7e4fb53-0bbf-4e6d-aa03-976ce9294a0f',
             'Content-Type: application/json',
             'Accept: application/json'
         ));
@@ -62,10 +62,10 @@ class dcp {
 
     public function doInstanceDelete($id) {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://api.edgecast.com/v2/mcc/customers/52BF3/httpstreaming/dcp/live/" . $id);
+        curl_setopt($ch, CURLOPT_URL, "https://api.edgecast.com/v2/mcc/customers/19BC0/httpstreaming/dcp/live/" . $id);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization: TOK:f71bfb62-4684-42fa-9e26-72aafe49968e',
+            'Authorization: TOK:d7e4fb53-0bbf-4e6d-aa03-976ce9294a0f',
             'Content-Type: application/json',
             'Accept: application/json'
         ));
