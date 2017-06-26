@@ -30,6 +30,7 @@ class entries {
     protected $clip_perm;
     protected $captions_perm;
     private $_link;
+    protected $sn;
 
     public function __construct() {
         $this->ks = $_POST["ks"];
@@ -52,6 +53,7 @@ class entries {
         $this->download_perm = $_POST['download_perm'];
         $this->clip_perm = $_POST['clip_perm'];
         $this->captions_perm = $_POST['captions_perm'];
+        $this->sn = $_POST['sn'];
         $this->_link = @mysqli_connect("127.0.0.1", "kaltura", "nUKFRl7bE9hShpV", "kaltura", 3307) or die('Unable to establish a DB connection');
     }
 
@@ -172,8 +174,6 @@ class entries {
             $newDatetime = strtotime($unixtime_to_date);
             $newDatetime = date('m/d/Y h:i A', $newDatetime);
 
-            $preview_arr = $entry->id . '\',\'' . htmlspecialchars(addslashes($entry->name), ENT_QUOTES);
-
             if ($this->delete_perm) {
                 $delete_arr = $entry->id . '\',\'' . htmlspecialchars(addslashes($entry->name), ENT_QUOTES);
                 $delete_action = '<li role="presentation" style="border-top: solid 1px #f0f0f0;"><a role="menuitem" tabindex="-1" onclick="smhContent.deleteEntry(\'' . $delete_arr . '\');">Delete</a></li>';
@@ -193,6 +193,49 @@ class entries {
                 }
             }
 
+            $entry->partnerData = '{"snConfig":[{"platform":"youtube","status":true,"videoId":"i2oAcQtJ7m0"},{"platform":"facebook","status":false}]}';
+            $partnerData = json_decode($entry->partnerData);
+            $platforms_status = '';
+            $platforms_preview_embed = '';
+            $youtube = false;
+            $facebook = false;
+            if ($this->sn == 1) {
+                $platforms_status_arr = array();
+                $platforms_preview_embed_arr = array();
+                $platforms = $this->getPlatforms($partnerData);
+                $platform_logos = array();
+                if ($platforms['snConfig']) {
+                    foreach ($platforms['platforms'] as $platform) {
+                        if ($platform['platform'] == 'facebook') {
+                            if ($platform['status']) {
+                                $facebook = true;
+                                array_push($platforms_status_arr, "facebook:1");
+                                array_push($platforms_preview_embed_arr, "facebook:1:" . $platform['videoId']);
+                                array_push($platform_logos, "fb");
+                            } else {
+                                array_push($platforms_status_arr, "facebook:0");
+                                array_push($platforms_preview_embed_arr, "facebook:0");
+                            }
+                        }
+                        if ($platform['platform'] == 'youtube') {
+                            if ($platform['status']) {
+                                $youtube = true;
+                                array_push($platforms_status_arr, "youtube:1");
+                                array_push($platforms_preview_embed_arr, "youtube:1:" . $platform['videoId']);
+                                array_push($platform_logos, "yt");
+                            } else {
+                                array_push($platforms_status_arr, "youtube:0");
+                                array_push($platforms_preview_embed_arr, "youtube:0");
+                            }
+                        }
+                    }
+                    $platforms_status = implode(";", $platforms_status_arr);
+                    $platforms_preview_embed = implode(";", $platforms_preview_embed_arr);
+                }
+            }
+
+            $preview_arr = $entry->id . '\',\'' . htmlspecialchars(addslashes($entry->name), ENT_QUOTES) . '\',\'' . $platforms_preview_embed;
+
             $entry_thumbnail = '<div class="entries-wrapper">
         <div class="play-wrapper">
             <a onclick="smhContent.previewEmbed(\'' . $preview_arr . '\');">
@@ -201,13 +244,6 @@ class entries {
                 ' . $duration . '
             </a>
         </div>';
-
-//            $partnerId = 0;
-//            $config = new KalturaConfiguration($partnerId);
-//            $config->serviceUrl = 'http://mediaplatform.streamingmediahosting.com/';
-//            $client = new KalturaClient($config);
-//            $client->setKs($this->ks);
-//            $flavor_result = $client->flavorAsset->getflavorassetswithparams($entry->id);
 
             if ($entry->status == '6') {
                 $status = "Blocked";
@@ -244,7 +280,7 @@ class entries {
             }
 
             if ($prevMedia) {
-                $preview_arr = $entry->id . '\',\'' . htmlspecialchars(addslashes($entry->name), ENT_QUOTES);
+                $preview_arr = $entry->id . '\',\'' . htmlspecialchars(addslashes($entry->name), ENT_QUOTES) . '\',\'' . $platforms_preview_embed;
                 $preview_action = '<li role="presentation"><a role="menuitem" tabindex="-1" onclick="smhContent.previewEmbed(\'' . $preview_arr . '\');">Preview & Embed</a></li>';
             }
 
@@ -358,6 +394,37 @@ class entries {
         }
         $hr_result = ($hr == "00") ? '' : $hr . ':';
         return $hr_result . $min . ':' . $sec;
+    }
+
+    public function getPlatforms($json) {
+        $result = array();
+        $result['platforms'] = array();
+        foreach ($json as $key => $value) {
+            if ($key == 'snConfig') {
+                $result['snConfig'] = true;
+                foreach ($value as $platforms) {
+                    if ($platforms->platform == "facebook") {
+                        if ($platforms->status) {
+                            $platform = array('platform' => 'facebook', 'status' => $platforms->status, 'videoId' => $platforms->videoId);
+                            array_push($result['platforms'], $platform);
+                        } else {
+                            $platform = array('platform' => 'facebook', 'status' => $platforms->status);
+                            array_push($result['platforms'], $platform);
+                        }
+                    }
+                    if ($platforms->platform == "youtube") {
+                        if ($platforms->status) {
+                            $platform = array('platform' => 'youtube', 'status' => $platforms->status, 'videoId' => $platforms->videoId);
+                            array_push($result['platforms'], $platform);
+                        } else {
+                            $platform = array('platform' => 'youtube', 'status' => $platforms->status);
+                            array_push($result['platforms'], $platform);
+                        }
+                    }
+                }
+            }
+        }
+        return $result;
     }
 
 }
