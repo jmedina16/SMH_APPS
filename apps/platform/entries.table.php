@@ -194,7 +194,7 @@ class entries {
                 }
             }
 
-            $entry->partnerData = '{"snConfig":[{"platform":"youtube","status":true,"videoId":"i2oAcQtJ7m0"},{"platform":"facebook","status":false}]}';
+            //$entry->partnerData = '{"snConfig":[{"platform":"youtube","status":true,"videoId":"i2oAcQtJ7m0"},{"platform":"facebook","status":false}]}';
             $partnerData = json_decode($entry->partnerData);
             $platforms_status = '';
             $platforms_preview_embed = '';
@@ -235,7 +235,8 @@ class entries {
                 }
 
                 if ($entry->mediaType == '1') {
-                    $social_action = '<li role="presentation"><a role="menuitem" tabindex="-1" onclick="smhContent.editPlatformConfig(\'' . $platforms_status . '\');">Social Media</a></li>';
+                    $social_arr = $entry->id . '\',\'' . $platforms_status;
+                    $social_action = '<li role="presentation"><a role="menuitem" tabindex="-1" onclick="smhContent.editPlatformConfig(\'' . $social_arr . '\');">Social Media</a></li>';
                 }
             }
 
