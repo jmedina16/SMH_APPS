@@ -164,6 +164,7 @@ class entries {
             $chapters_action = '';
             $survey_action = '';
             $applications_action = '';
+            $social_action = '';
             $re_import = '';
             $row = array();
             $status = '';
@@ -231,6 +232,10 @@ class entries {
                     }
                     $platforms_status = implode(";", $platforms_status_arr);
                     $platforms_preview_embed = implode(";", $platforms_preview_embed_arr);
+                }
+
+                if ($entry->mediaType == '1') {
+                    $social_action = '<li role="presentation"><a role="menuitem" tabindex="-1" onclick="smhContent.editPlatformConfig(\'' . $platforms_status . '\');">Social Media</a></li>';
                 }
             }
 
@@ -346,7 +351,8 @@ class entries {
                                             ' . $thumb_action . '
                                             ' . $flavors_action . '      
                                             ' . $applications_action . '                                                 
-                                            ' . $stats_action . '                                                
+                                            ' . $stats_action . '    
+                                            ' . $social_action . ' 
                                             ' . $preview_action . '                                                   
                                             ' . $download_action . '
                                             ' . $delete_action . '
