@@ -22,14 +22,14 @@ session_start();
  * <https://developers.google.com/youtube/v3/guides/authentication>
  * Please ensure that you have enabled the YouTube Data API for your project.
  */
-$OAUTH2_CLIENT_ID = '625514053094-0rdhl4tub0dn2kd4edk9onfcd38i1uci.apps.googleusercontent.com';
-$OAUTH2_CLIENT_SECRET = 'o9fEzEUdCq_mXLMGDMHboE6m';
+$OAUTH2_CLIENT_ID = '1069246456766-7phr0gp5q2uiahgm4r6ar875ok60tve7.apps.googleusercontent.com';
+$OAUTH2_CLIENT_SECRET = 'Xj28Fq2IdAZl8hJwNuzGGK0K';
 
 $client = new Google_Client();
 $client->setClientId($OAUTH2_CLIENT_ID);
 $client->setClientSecret($OAUTH2_CLIENT_SECRET);
 $client->setScopes('https://www.googleapis.com/auth/youtube');
-$redirect = filter_var('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'], FILTER_SANITIZE_URL);
+$redirect = filter_var('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'], FILTER_SANITIZE_URL);
 $client->setRedirectUri($redirect);
 
 //$test = $client->refreshToken('1/LAbVK-stGh9Sm50j8ICoXVq92mbgkjrOk3XIdQYkVwI');
@@ -63,43 +63,46 @@ if ($client->getAccessToken()) {
 //        echo "<pre>";
 //        print_r($channels);
 //        echo "</pre>";
-
 //        $test = new Google_Service_YouTube_AccessPolicy();
 //        $test = $test->getAllowed();
 //
 //        echo "<pre>";
 //        print_r($test);
 //        echo "</pre>";
-
-
         // Execute an API request that lists broadcasts owned by the user who
         // authorized the request.
-        $broadcastsResponse = $youtube->liveBroadcasts->listLiveBroadcasts('snippet,contentDetails,status', array(
-            'mine' => 'true',
-            'broadcastType' => 'persistent',
-            'maxResults' => 50,
-            //'fields' => 'items(contentDetails/boundStreamId,snippet/title),pageInfo'
+        $broadcastsResponse = $youtube->videos->listVideos('snippet', array(
+            'id' => 'IGjX1YlDC5E'
         ));
 
         echo "<pre>";
         print_r($broadcastsResponse);
         echo "</pre>";
 
-        $streamIds = array();
         foreach ($broadcastsResponse['items'] as $item) {
-            $boundStreamId = $item['contentDetails']['boundStreamId'];
-            array_push($streamIds, $boundStreamId);
+            $categoryId = $item['snippet']['categoryId'];
         }
 
-        $streamIds = implode(",", $streamIds);
-        $streamsResponse = $youtube->liveStreams->listLiveStreams('snippet,contentDetails,cdn,status', array(
-            'id' => $streamIds,
-            'maxResults' => 50,
-            //'fields' => 'items(cdn(format,frameRate,ingestionInfo,resolution),id),pageInfo'
-        ));
         echo "<pre>";
-        print_r($streamsResponse);
+        print_r($categoryId);
         echo "</pre>";
+
+
+//        $streamIds = array();
+//        foreach ($broadcastsResponse['items'] as $item) {
+//            $boundStreamId = $item['contentDetails']['boundStreamId'];
+//            array_push($streamIds, $boundStreamId);
+//        }
+//
+//        $streamIds = implode(",", $streamIds);
+//        $streamsResponse = $youtube->liveStreams->listLiveStreams('snippet,contentDetails,cdn,status', array(
+//            'id' => $streamIds,
+//            'maxResults' => 50,
+//            //'fields' => 'items(cdn(format,frameRate,ingestionInfo,resolution),id),pageInfo'
+//        ));
+//        echo "<pre>";
+//        print_r($streamsResponse);
+//        echo "</pre>";
 //
 //        $htmlBody .= "<h3>Live Broadcasts</h3><ul>";
 //        foreach ($broadcastsResponse['items'] as $broadcastItem) {

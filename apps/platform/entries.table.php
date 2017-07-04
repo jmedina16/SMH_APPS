@@ -194,7 +194,7 @@ class entries {
                 }
             }
 
-            //$entry->partnerData = '{"snConfig":[{"platform":"youtube","status":true,"upload_status":"completed","videoId":"k7D-lQfihQo"},{"platform":"facebook","status":false}]}';
+            $entry->partnerData = '{"snConfig":[{"platform":"youtube","status":true,"upload_status":"completed","videoId":"k7D-lQfihQo"},{"platform":"facebook","status":false}]}';
             $partnerData = json_decode($entry->partnerData);
             $platforms_status = '';
             $platforms_preview_embed = '';
