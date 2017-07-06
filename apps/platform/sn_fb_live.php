@@ -101,7 +101,12 @@ try {
 //    print_r($LiveVideo);
 //    echo '</pre>';
 
-    $accounts = $fb->get('/102317076997247/events', 'EAAat79uIgs4BAOGF4dqEgCoVQZCiDwbYV69ONka74omRQoV8pjkiIXlDWfMjDbGR6Y5rACw0nrOF0DI3SFpweihuXigCiCLzIezUlJDMhxtasihnQYun2hPJ4sfE1qxOcX3z6KAJDN3iKW6mQ0qv9ZCtrM3dFOfsBK6rLC1gZDZD');
+    $accounts = $fb->get('/100230903925419/videos?type=uploaded', 'EAAat79uIgs4BAI6tskPG5YvMdXdPSzGYQAl9kNmZAKXSZAa2wKlXrempZAGY2LsZAvZCNBZCZANhAIbyUNj4I8cB7Wv11ZCsmmdmHN7c3C5INNE0If7UxmSakMXSb9lTzwJYPZBZBowVqZAXbZAIkPFDOsXeZAU1u5k9dzzJn6XHxZAbD9TQZDZD');
+    
+        echo '<pre>';
+    print_r($accounts);
+    echo '</pre>';
+    
     $createLiveVideo = $accounts->getGraphEdge()->asArray();
     echo '<pre>';
     print_r($createLiveVideo);
