@@ -194,6 +194,7 @@ class entries {
                 }
             }
 
+            $entry->partnerData = '{"snConfig":[{"platform":"facebook","status":true,"upload_status":"completed","videoId":"118359495445893"},{"platform":"youtube","status":true,"upload_status":"completed","videoId":"2quQuA8mDg8"}]}';
             $partnerData = json_decode($entry->partnerData);
             $platforms_status = '';
             $platforms_preview_embed = '';
