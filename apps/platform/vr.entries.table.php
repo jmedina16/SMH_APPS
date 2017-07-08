@@ -194,7 +194,7 @@ class entries {
                 }
             }
 
-            $entry->partnerData = '{"snConfig":[{"platform":"facebook","status":true,"upload_status":"completed","videoId":"118359495445893"},{"platform":"youtube","status":true,"upload_status":"completed","videoId":"2quQuA8mDg8"}]}';
+            $entry->partnerData = '{"vrSettings":[{"stereo_mode":"left-right"}],"snConfig":[{"platform":"facebook","status":true,"upload_status":"completed","videoId":"118359495445893"},{"platform":"youtube","status":true,"upload_status":"completed","videoId":"2quQuA8mDg8"}]}';
             $partnerData = json_decode($entry->partnerData);
             $platforms_status = '';
             $platforms_preview_embed = '';
@@ -204,6 +204,7 @@ class entries {
                 $platforms_status_arr = array();
                 $platforms_preview_embed_arr = array();
                 $platforms = $this->getPlatforms($partnerData);
+                $entryVrSettings = $this->getEntryVrSettings($partnerData);
                 $platform_logos = array();
                 $upload_status = '';
                 if ($platforms['snConfig']) {
@@ -258,8 +259,15 @@ class entries {
                     $platforms_preview_embed = implode(";", $platforms_preview_embed_arr);
                 }
 
+                $stereo_mode = '';
+                if ($entryVrSettings['vrSettings']) {
+                    $stereo_mode = $entryVrSettings['settings']['stereo_mode'];
+                } else {
+                    $stereo_mode = 'none';
+                }
+
                 if ($entry->mediaType == '1') {
-                    $social_arr = $entry->id . '\',\'' . $platforms_status;
+                    $social_arr = $entry->id . '\',\'' . $platforms_status. '\',\'' . $stereo_mode;
                     $social_action = '<li role="presentation"><a role="menuitem" tabindex="-1" onclick="smhContent.editPlatformConfig(\'' . $social_arr . '\');">Social Media</a></li>';
                 }
             }
@@ -607,6 +615,21 @@ class entries {
                             array_push($result['platforms'], $platform);
                         }
                     }
+                }
+            }
+        }
+        return $result;
+    }
+
+    public function getEntryVrSettings($json) {
+        $result = array();
+        $result['vrSettings'] = false;
+        $result['settings'] = array();
+        foreach ($json as $key => $value) {
+            if ($key == 'vrSettings') {
+                $result['vrSettings'] = true;
+                foreach ($value as $setting) {
+                    $result['settings']['stereo_mode'] = $setting->stereo_mode;
                 }
             }
         }
