@@ -28,6 +28,7 @@ class entries {
     protected $download_perm;
     protected $flavors_perm;
     private $_link;
+    protected $sn;
 
     public function __construct() {
         $this->action = $_POST["action"];
@@ -49,6 +50,7 @@ class entries {
         $this->thumb_perm = $_POST['thumb_perm'];
         $this->stats_perm = $_POST['stats_perm'];
         $this->download_perm = $_POST['download_perm'];
+        $this->sn = $_POST['sn'];
         $this->_link = @mysqli_connect("127.0.0.1", "kaltura", "nUKFRl7bE9hShpV", "kaltura", 3307) or die('Unable to establish a DB connection');
     }
 
@@ -162,6 +164,7 @@ class entries {
             $stats_action = '';
             $download_action = '';
             $flavors_action = '';
+            $social_action = '';
             $re_import = '';
             $row = array();
             $status = '';
@@ -171,8 +174,6 @@ class entries {
             $unixtime_to_date = date('n/j/Y H:i', $entry->createdAt);
             $newDatetime = strtotime($unixtime_to_date);
             $newDatetime = date('m/d/Y h:i A', $newDatetime);
-
-            $preview_arr = $entry->id . '\',\'' . htmlspecialchars(addslashes($entry->name), ENT_QUOTES);
 
             if ($this->delete_perm) {
                 $delete_arr = $entry->id . '\',\'' . htmlspecialchars(addslashes($entry->name), ENT_QUOTES);
@@ -192,6 +193,78 @@ class entries {
                     $duration = "<div class='videos-num-long'>" . $time . "</div>";
                 }
             }
+
+            $partnerData = json_decode($entry->partnerData);
+            $platforms_status = '';
+            $platforms_preview_embed = '';
+            $youtube = false;
+            $facebook = false;
+            if ($this->sn == 1) {
+                $platforms_status_arr = array();
+                $platforms_preview_embed_arr = array();
+                $platforms = $this->getPlatforms($partnerData);
+                $platform_logos = array();
+                $upload_status = '';
+                if ($platforms['snConfig']) {
+                    foreach ($platforms['platforms'] as $platform) {
+                        if ($platform['platform'] == 'facebook') {
+                            if (isset($platform['upload_status'])) {
+                                if ($platform['upload_status'] == 'uploading') {
+                                    $upload_status = 1;
+                                } else if ($platform['upload_status'] == 'completed') {
+                                    $upload_status = 2;
+                                } else {
+                                    $upload_status = 3;
+                                }
+                            } else {
+                                $upload_status = 0;
+                            }
+
+                            if ($platform['status']) {
+                                $facebook = true;
+                                array_push($platforms_status_arr, "facebook:1:" . $upload_status);
+                                array_push($platforms_preview_embed_arr, "facebook:1:" . $platform['videoId']);
+                                array_push($platform_logos, "fb");
+                            } else {
+                                array_push($platforms_status_arr, "facebook:0:" . $upload_status);
+                                array_push($platforms_preview_embed_arr, "facebook:0");
+                            }
+                        }
+                        if ($platform['platform'] == 'youtube') {
+                            if (isset($platform['upload_status'])) {
+                                if ($platform['upload_status'] === 'uploading') {
+                                    $upload_status = 1;
+                                } else if ($platform['upload_status'] === 'completed') {
+                                    $upload_status = 2;
+                                } else {
+                                    $upload_status = 3;
+                                }
+                            } else {
+                                $upload_status = 0;
+                            }
+                            if ($platform['status']) {
+                                $youtube = true;
+                                array_push($platforms_status_arr, "youtube:1:" . $upload_status);
+                                array_push($platforms_preview_embed_arr, "youtube:1:" . $platform['videoId']);
+                                array_push($platform_logos, "yt");
+                            } else {
+                                array_push($platforms_status_arr, "youtube:0:" . $upload_status);
+                                array_push($platforms_preview_embed_arr, "youtube:0");
+                            }
+                        }
+                    }
+                    $platforms_status = implode(";", $platforms_status_arr);
+                    $platforms_preview_embed = implode(";", $platforms_preview_embed_arr);
+                }
+
+                if ($entry->mediaType == '1') {
+                    $social_arr = $entry->id . '\',\'' . $platforms_status;
+                    $social_action = '<li role="presentation"><a role="menuitem" tabindex="-1" onclick="smhContent.editPlatformConfig(\'' . $social_arr . '\');">Social Media</a></li>';
+                }
+            }
+
+
+            $preview_arr = $entry->id . '\',\'' . htmlspecialchars(addslashes($entry->name), ENT_QUOTES) . '\',\'' . $platforms_preview_embed;
 
             $entry_thumbnail = '<div class="entries-wrapper">
         <div class="play-wrapper">
@@ -244,7 +317,7 @@ class entries {
             }
 
             if ($prevMedia) {
-                $preview_arr = $entry->id . '\',\'' . htmlspecialchars(addslashes($entry->name), ENT_QUOTES);
+                $preview_arr = $entry->id . '\',\'' . htmlspecialchars(addslashes($entry->name), ENT_QUOTES) . '\',\'' . $platforms_preview_embed;
                 $preview_action = '<li role="presentation"><a role="menuitem" tabindex="-1" onclick="smhContent.previewEmbed(\'' . $preview_arr . '\');">Preview & Embed</a></li>';
             }
 
@@ -285,7 +358,8 @@ class entries {
                                             ' . $ac_action . '
                                             ' . $thumb_action . '
                                             ' . $flavors_action . '                                                      
-                                            ' . $stats_action . '                                                
+                                            ' . $stats_action . '         
+                                            ' . $social_action . '
                                             ' . $preview_action . '                                                   
                                             ' . $download_action . '
                                             ' . $delete_action . '
@@ -505,6 +579,37 @@ class entries {
         }
         $hr_result = ($hr == "00") ? '' : $hr . ':';
         return $hr_result . $min . ':' . $sec;
+    }
+
+    public function getPlatforms($json) {
+        $result = array();
+        $result['platforms'] = array();
+        foreach ($json as $key => $value) {
+            if ($key == 'snConfig') {
+                $result['snConfig'] = true;
+                foreach ($value as $platforms) {
+                    if ($platforms->platform == "facebook") {
+                        if ($platforms->status) {
+                            $platform = array('platform' => 'facebook', 'status' => $platforms->status, 'upload_status' => $platforms->upload_status, 'videoId' => $platforms->videoId);
+                            array_push($result['platforms'], $platform);
+                        } else {
+                            $platform = array('platform' => 'facebook', 'status' => $platforms->status);
+                            array_push($result['platforms'], $platform);
+                        }
+                    }
+                    if ($platforms->platform == "youtube") {
+                        if ($platforms->status) {
+                            $platform = array('platform' => 'youtube', 'status' => $platforms->status, 'upload_status' => $platforms->upload_status, 'videoId' => $platforms->videoId);
+                            array_push($result['platforms'], $platform);
+                        } else {
+                            $platform = array('platform' => 'youtube', 'status' => $platforms->status);
+                            array_push($result['platforms'], $platform);
+                        }
+                    }
+                }
+            }
+        }
+        return $result;
     }
 
 }
