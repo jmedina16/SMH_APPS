@@ -141,6 +141,7 @@ class livestreams {
             $edit_config_action = '';
             $ac_action = '';
             $thumb_action = '';
+            $social_action = '';
             $preview_action = '';
             $stats_action = '';
             $row = array();
@@ -228,6 +229,9 @@ class livestreams {
                     //$platform_logos = "<div><img src='/img/smh_logo.png' width='80px'>";
                     array_push($platform_logos, "smh");
                 }
+
+                $social_arr = $entry->id . '\',\'' . $platforms_status;
+                $social_action = '<li role="presentation"><a role="menuitem" tabindex="-1" onclick="smhLS.editPlatformConfig(\'' . $social_arr . '\');">Social Media</a></li>';
             }
 
             $thumbnail_url = str_replace("http://mediaplatform.streamingmediahosting.com", "", $entry->thumbnailUrl);
@@ -282,6 +286,7 @@ class livestreams {
                                             ' . $ac_action . '
                                             ' . $thumb_action . '
                                             ' . $stats_action . '
+                                            ' . $social_action . '
                                             ' . $preview_action . '
                                             ' . $delete_action . '
                                         </ul>
