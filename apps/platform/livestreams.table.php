@@ -211,7 +211,7 @@ class livestreams {
                             if ($platform['status']) {
                                 $youtube = true;
                                 array_push($platforms_status_arr, "youtube:1");
-                                array_push($platforms_preview_embed_arr, "youtube:1:" . $platform['broadcastId']);
+                                array_push($platforms_preview_embed_arr, "youtube:1:" . $platform['liveId']);
                                 array_push($platform_logos, "yt");
                             } else {
                                 array_push($platforms_status_arr, "youtube:0");
