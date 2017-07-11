@@ -195,7 +195,7 @@ class entries {
             }
 
             //$entry->partnerData = '{"snConfig":[{"platform":"youtube","status":true,"upload_status":"uploading","videoId":"k7D-lQfihQo"},{"platform":"facebook","status":false}]}';
-            $entry->partnerData = '{"snConfig":[{"platform":"facebook","status":true,"upload_status":"completed","videoId":"118359495445893"},{"platform":"youtube","status":true,"upload_status":"completed","videoId":"2quQuA8mDg8"}]}';
+            //$entry->partnerData = '{"snConfig":[{"platform":"facebook","status":true,"upload_status":"completed","videoId":"118359495445893"},{"platform":"youtube","status":true,"upload_status":"completed","videoId":"2quQuA8mDg8"}]}';
             $partnerData = json_decode($entry->partnerData);
             $platforms_status = '';
             $platforms_preview_embed = '';
@@ -387,8 +387,7 @@ class entries {
                                 </span>';
 
             $stats = '<div><i class="fa fa-play-circle" style="width: 20px;" data-placement="right" data-toggle="tooltip" data-delay=\'{"show":700, "hide":30}\' data-original-title="Plays"></i> ' . number_format($entry->plays) . '</div>
-                <div><i class="fa fa-eye" style="width: 20px;" data-placement="right" data-toggle="tooltip" data-delay=\'{"show":700, "hide":30}\' data-original-title="Views"></i> ' . number_format($entry->views) . '</div>
-                <div><i class="fa fa-star" style="width: 20px;" data-placement="right" data-toggle="tooltip" data-delay=\'{"show":700, "hide":30}\' data-original-title="Rank"></i> ' . $entry->rank . ' / 5</div>';
+                <div><i class="fa fa-eye" style="width: 20px;" data-placement="right" data-toggle="tooltip" data-delay=\'{"show":700, "hide":30}\' data-original-title="Views"></i> ' . number_format($entry->views) . '</div>';
 
             $bulk_entries = $entry->id . ';' . str_replace(" ", "", $entry->tags) . ';' . $entry->categoriesIds;
 

@@ -377,8 +377,7 @@ class entries {
                                 </span>';
 
             $stats = '<div><i class="fa fa-play-circle" style="width: 20px;" data-placement="right" data-toggle="tooltip" data-delay=\'{"show":700, "hide":30}\' data-original-title="Plays"></i> ' . number_format($entry->plays) . '</div>
-                <div><i class="fa fa-eye" style="width: 20px;" data-placement="right" data-toggle="tooltip" data-delay=\'{"show":700, "hide":30}\' data-original-title="Views"></i> ' . number_format($entry->views) . '</div>
-                <div><i class="fa fa-star" style="width: 20px;" data-placement="right" data-toggle="tooltip" data-delay=\'{"show":700, "hide":30}\' data-original-title="Rank"></i> ' . $entry->rank . ' / 5</div>';
+                <div><i class="fa fa-eye" style="width: 20px;" data-placement="right" data-toggle="tooltip" data-delay=\'{"show":700, "hide":30}\' data-original-title="Views"></i> ' . number_format($entry->views) . '</div>';
 
             $bulk_entries = $entry->id . ';' . str_replace(" ", "", $entry->tags) . ';' . $entry->categoriesIds;
 
