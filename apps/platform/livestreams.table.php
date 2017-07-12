@@ -357,7 +357,7 @@ class livestreams {
                     }
                     if ($platforms->platform == "youtube_live") {
                         if ($platforms->status) {
-                            $platform = array('platform' => 'youtube_live', 'status' => $platforms->status, 'broadcastId' => $platforms->broadcastId);
+                            $platform = array('platform' => 'youtube_live', 'status' => $platforms->status, 'liveId' => $platforms->liveId);
                             array_push($result['platforms'], $platform);
                         } else {
                             $platform = array('platform' => 'youtube_live', 'status' => $platforms->status);
