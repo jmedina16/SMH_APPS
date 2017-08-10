@@ -288,20 +288,30 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
         if ($valid) {
             ?>
             <script>
+                var smh2;
+                $(document).ready(function () {
+                    smh2 = jQuery.noConflict();
+                    var headTag = document.getElementsByTagName("head")[0];
+                    var jqTag = document.createElement('script');
+                    jqTag.setAttribute("type", "text/javascript")
+                    jqTag.setAttribute("src", 'https://devplatform.streamingmediahosting.com/html5/html5lib/v2.55/kWidget/onPagePlugins/mem/mem_init.js');
+                    headTag.appendChild(jqTag);
+                });
+
                 mem_protocol = 'https';
                 mem_protocol_prev = "http";
                 mem_type = '<?php echo $_GET['mode'] ?>';
                 var err_comp = true;
                 var fb_eid = '';
                 function load_smh_mem() {
-                    format = $('select.format option:selected').val();
-                    delivery = $('select.delivery option:selected').val();
+                    format = smh2('select.format option:selected').val();
+                    delivery = smh2('select.delivery option:selected').val();
                     mem.init(mem_protocol, true, format, delivery, fb_eid, err_comp);
 
-                    $smh('.options').on('change', 'select#players', function (event) {
-                        $smh('#memWindow').css('display', 'none');
+                    smh2('.options').on('change', 'select#players', function (event) {
+                        smh2('#memWindow').css('display', 'none');
                         var p = '';
-                        if ($smh("#ssl-embed").is(':checked')) {
+                        if (smh2("#ssl-embed").is(':checked')) {
                             p = 'https';
                         } else {
                             p = 'http';
@@ -310,27 +320,27 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
     <?php if ($mode == 'p' || $mode == 's') { ?>
                             var mode = "<?php echo $mode ?>";
     <?php } else { ?>
-                            var mode = $smh('select#layoutmode option:selected').val();
+                            var mode = smh2('select#layoutmode option:selected').val();
     <?php } ?>
-                        var data = $smh('select#players option:selected').val();
+                        var data = smh2('select#players option:selected').val();
                         var temp = data.split(',');
                         var uiconf_id = temp[0];
                         var width = temp[1];
                         var height = temp[2];
-                        $('#dim_width').val(width);
-                        $('#dim_height').val(height);                        
-                        mem.checkAccess(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>",uiconf_id, width, height, "<?php echo $_GET['entry_id'] ?>", mode);
+                        smh2('#dim_width').val(width);
+                        smh2('#dim_height').val(height);
+                        mem.checkAccess(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>", uiconf_id, width, height, "<?php echo $_GET['entry_id'] ?>", mode);
                         var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>", uiconf_id, width, height, "<?php echo $_GET['entry_id'] ?>", mode, p, format, delivery, fb_eid, err_comp);
-                        $smh('#embed_code').val(player);
-                        $smh('#prev-result').css("display", "none");
+                        smh2('#embed_code').val(player);
+                        smh2('#prev-result').css("display", "none");
                     });
                     mem.checkAccess(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>",<?php echo $_GET['uiconf_id'] ?>,<?php echo $_GET['width'] ?>,<?php echo $_GET['height'] ?>, "<?php echo $_GET['entry_id'] ?>", '<?php echo $_GET['mode'] ?>');
                     var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>",<?php echo $_GET['uiconf_id'] ?>,<?php echo $_GET['width'] ?>,<?php echo $_GET['height'] ?>, "<?php echo $_GET['entry_id'] ?>", "<?php echo $_GET['mode'] ?>", mem_protocol_prev, format, delivery, fb_eid, err_comp);
-                    $smh('#embed_code').val(player);
+                    smh2('#embed_code').val(player);
 
-                    $smh('#select-bttn').click(function (event) {
-                        $smh('#embed_code').select();
-                        $smh('#prev-result').css({
+                    smh2('#select-bttn').click(function (event) {
+                        smh2('#embed_code').select();
+                        smh2('#prev-result').css({
                             "display": "block",
                             "margin-left": "auto",
                             "margin-right": "auto",
@@ -338,16 +348,16 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
                             "margin-top": "5px",
                             "margin-bottom": "10px"
                         });
-                        $smh('#prev-result').html('<span class="label label-info">Press Ctrl+C to copy embed code (Command+C on Mac)</span>');
+                        smh2('#prev-result').html('<span class="label label-info">Press Ctrl+C to copy embed code (Command+C on Mac)</span>');
                     });
 
-                    $smh('select.format').change(function (event) {
-                        format = $('select.format option:selected').val();
-                        delivery = $('select.delivery option:selected').val();
+                    smh2('select.format').change(function (event) {
+                        format = smh2('select.format option:selected').val();
+                        delivery = smh2('select.delivery option:selected').val();
                         mem.init(mem_protocol, true, format, delivery, fb_eid, err_comp);
-                        $smh('#memWindow').css('display', 'none');
+                        smh2('#memWindow').css('display', 'none');
                         var p = '';
-                        if ($smh("#ssl-embed").is(':checked')) {
+                        if (smh2("#ssl-embed").is(':checked')) {
                             p = 'https';
                         } else {
                             p = 'http';
@@ -356,23 +366,23 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
     <?php if ($mode == 'p' || $mode == 's') { ?>
                             var mode = "<?php echo $mode ?>";
     <?php } else { ?>
-                            var mode = $smh('select#layoutmode option:selected').val();
+                            var mode = smh2('select#layoutmode option:selected').val();
     <?php } ?>
-                        var width = $('#dim_width').val();
-                        var height = $('#dim_height').val();
+                        var width = smh2('#dim_width').val();
+                        var height = smh2('#dim_height').val();
                         mem.checkAccess(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>",<?php echo $_GET['uiconf_id'] ?>, width, height, "<?php echo $_GET['entry_id'] ?>", mode);
                         var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>", <?php echo $_GET['uiconf_id'] ?>, width, height, "<?php echo $_GET['entry_id'] ?>", mode, p, format, delivery, fb_eid, err_comp);
-                        $smh('#embed_code').val(player);
-                        $smh('#prev-result').css("display", "none");
+                        smh2('#embed_code').val(player);
+                        smh2('#prev-result').css("display", "none");
                     });
 
-                    $smh('select.delivery').change(function (event) {
-                        format = $('select.format option:selected').val();
-                        delivery = $('select.delivery option:selected').val();
+                    smh2('select.delivery').change(function (event) {
+                        format = smh2('select.format option:selected').val();
+                        delivery = smh2('select.delivery option:selected').val();
                         mem.init(mem_protocol, true, format, delivery, fb_eid, err_comp);
-                        $smh('#memWindow').css('display', 'none');
+                        smh2('#memWindow').css('display', 'none');
                         var p = '';
-                        if ($smh("#ssl-embed").is(':checked')) {
+                        if (smh2("#ssl-embed").is(':checked')) {
                             p = 'https';
                         } else {
                             p = 'http';
@@ -381,23 +391,23 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
     <?php if ($mode == 'p' || $mode == 's') { ?>
                             var mode = "<?php echo $mode ?>";
     <?php } else { ?>
-                            var mode = $smh('select#layoutmode option:selected').val();
+                            var mode = smh2('select#layoutmode option:selected').val();
     <?php } ?>
-                        var width = $('#dim_width').val();
-                        var height = $('#dim_height').val();
+                        var width = smh2('#dim_width').val();
+                        var height = smh2('#dim_height').val();
                         mem.checkAccess(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>",<?php echo $_GET['uiconf_id'] ?>, width, height, "<?php echo $_GET['entry_id'] ?>", mode);
                         var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>", <?php echo $_GET['uiconf_id'] ?>, width, height, "<?php echo $_GET['entry_id'] ?>", mode, p, format, delivery, fb_eid, err_comp);
-                        $smh('#embed_code').val(player);
-                        $smh('#prev-result').css("display", "none");
+                        smh2('#embed_code').val(player);
+                        smh2('#prev-result').css("display", "none");
                     });
 
-                    $smh('select#layoutmode').change(function (event) {
-                        format = $('select.format option:selected').val();
-                        delivery = $('select.delivery option:selected').val();
+                    smh2('select#layoutmode').change(function (event) {
+                        format = smh2('select.format option:selected').val();
+                        delivery = smh2('select.delivery option:selected').val();
                         mem.init(mem_protocol, true, format, delivery, fb_eid, err_comp);
-                        $smh('#memWindow').css('display', 'none');
+                        smh2('#memWindow').css('display', 'none');
                         var p = '';
-                        if ($smh("#ssl-embed").is(':checked')) {
+                        if (smh2("#ssl-embed").is(':checked')) {
                             p = 'https';
                         } else {
                             p = 'http';
@@ -406,55 +416,55 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
     <?php if ($mode == 'p' || $mode == 's') { ?>
                             var mode = "<?php echo $mode ?>";
     <?php } else { ?>
-                            var mode = $smh('select#layoutmode option:selected').val();
+                            var mode = smh2('select#layoutmode option:selected').val();
     <?php } ?>
-                        var width = $('#dim_width').val();
-                        var height = $('#dim_height').val();
+                        var width = smh2('#dim_width').val();
+                        var height = smh2('#dim_height').val();
                         mem.checkAccess(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>",<?php echo $_GET['uiconf_id'] ?>, width, height, "<?php echo $_GET['entry_id'] ?>", mode);
                         var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>", <?php echo $_GET['uiconf_id'] ?>, width, height, "<?php echo $_GET['entry_id'] ?>", mode, p, format, delivery, fb_eid, err_comp);
-                        $smh('#embed_code').val(player);
-                        $smh('#prev-result').css("display", "none");
+                        smh2('#embed_code').val(player);
+                        smh2('#prev-result').css("display", "none");
 
                     });
 
-                    $smh('#ssl-embed').click(function () {
-                        format = $('select.format option:selected').val();
-                        delivery = $('select.delivery option:selected').val();
+                    smh2('#ssl-embed').click(function () {
+                        format = smh2('select.format option:selected').val();
+                        delivery = smh2('select.delivery option:selected').val();
                         mem.init(mem_protocol, true, format, delivery, fb_eid, err_comp);
-                        if ($smh("#ssl-embed").is(':checked')) {
+                        if (smh2("#ssl-embed").is(':checked')) {
     <?php if ($mode == 'p' || $mode == 's') { ?>
                                 var mode = "<?php echo $mode ?>";
     <?php } else { ?>
-                                var mode = $smh('select#layoutmode option:selected').val();
+                                var mode = smh2('select#layoutmode option:selected').val();
     <?php } ?>
-                            var width = $('#dim_width').val();
-                            var height = $('#dim_height').val();
+                            var width = smh2('#dim_width').val();
+                            var height = smh2('#dim_height').val();
                             var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>", <?php echo $_GET['uiconf_id'] ?>, width, height, "<?php echo $_GET['entry_id'] ?>", mode, 'https', format, delivery, fb_eid, err_comp);
-                            $smh('#embed_code').val(player);
-                            $smh('#prev-result').css("display", "none");
-                            $smh('#ssl-notice').html('Your web server must be configured for SSL in order to support https connections');
+                            smh2('#embed_code').val(player);
+                            smh2('#prev-result').css("display", "none");
+                            smh2('#ssl-notice').html('Your web server must be configured for SSL in order to support https connections');
                         } else {
     <?php if ($mode == 'p' || $mode == 's') { ?>
                                 var mode = "<?php echo $mode ?>";
     <?php } else { ?>
-                                var mode = $smh('select#layoutmode option:selected').val();
+                                var mode = smh2('select#layoutmode option:selected').val();
     <?php } ?>
-                            var width = $('#dim_width').val();
-                            var height = $('#dim_height').val();
+                            var width = smh2('#dim_width').val();
+                            var height = smh2('#dim_height').val();
                             var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>", <?php echo $_GET['uiconf_id'] ?>, width, height, "<?php echo $_GET['entry_id'] ?>", mode, 'http', format, delivery, fb_eid, err_comp);
-                            $smh('#embed_code').val(player);
-                            $smh('#prev-result').css("display", "none");
-                            $smh('#ssl-notice').empty();
+                            smh2('#embed_code').val(player);
+                            smh2('#prev-result').css("display", "none");
+                            smh2('#ssl-notice').empty();
                         }
                     });
 
-                    $('.options').on('click', '#update-dim', function () {
-                        format = $('select.format option:selected').val();
-                        delivery = $('select.delivery option:selected').val();
+                    smh2('.options').on('click', '#update-dim', function () {
+                        format = smh2('select.format option:selected').val();
+                        delivery = smh2('select.delivery option:selected').val();
                         mem.init(mem_protocol, true, format, delivery, fb_eid, err_comp);
-                        $smh('#memWindow').css('display', 'none');
+                        smh2('#memWindow').css('display', 'none');
                         var p = '';
-                        if ($smh("#ssl-embed").is(':checked')) {
+                        if (smh2("#ssl-embed").is(':checked')) {
                             p = 'https';
                         } else {
                             p = 'http';
@@ -463,49 +473,49 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
     <?php if ($mode == 'p' || $mode == 's') { ?>
                             var mode = "<?php echo $mode ?>";
     <?php } else { ?>
-                            var mode = $smh('select#layoutmode option:selected').val();
+                            var mode = smh2('select#layoutmode option:selected').val();
     <?php } ?>
-                        var width = $('#dim_width').val();
-                        var height = $('#dim_height').val();
+                        var width = smh2('#dim_width').val();
+                        var height = smh2('#dim_height').val();
                         mem.checkAccess(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>",<?php echo $_GET['uiconf_id'] ?>, width, height, "<?php echo $_GET['entry_id'] ?>", mode);
                         var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>", <?php echo $_GET['uiconf_id'] ?>, width, height, "<?php echo $_GET['entry_id'] ?>", mode, p, format, delivery, fb_eid, err_comp);
-                        $smh('#embed_code').val(player);
-                        $smh('#prev-result').css("display", "none");
+                        smh2('#embed_code').val(player);
+                        smh2('#prev-result').css("display", "none");
                     });
 
-                    $('.options').on('keyup', '#dim_width', function () {
-                        var ratio = $('#aspect_ratio').val();
+                    smh2('.options').on('keyup', '#dim_width', function () {
+                        var ratio = smh2('#aspect_ratio').val();
                         if (ratio !== 'dim_custom') {
                             var aspect = ratio == 'dim_16_9' ? 9 / 16 : 3 / 4;
-                            width = $('#dim_width').val();
+                            width = smh2('#dim_width').val();
                             height = parseInt(width * aspect);
-                            $('#dim_height').val(height);
+                            smh2('#dim_height').val(height);
                         }
                     });
 
-                    $('.options').on('change', '#aspect_ratio', function () {
-                        var ratio = $('#aspect_ratio').val();
+                    smh2('.options').on('change', '#aspect_ratio', function () {
+                        var ratio = smh2('#aspect_ratio').val();
                         var width, height;
                         if (ratio !== 'dim_custom') {
-                            $('#dim_height').attr('disabled', '');
+                            smh2('#dim_height').attr('disabled', '');
                             var aspect = ratio == 'dim_16_9' ? 9 / 16 : 3 / 4;
-                            width = $('#dim_width').val();
+                            width = smh2('#dim_width').val();
                             height = parseInt(width * aspect);
-                            $('#dim_height').val(height);
+                            smh2('#dim_height').val(height);
                         } else {
-                            $('#dim_height').removeAttr('disabled');
+                            smh2('#dim_height').removeAttr('disabled');
                         }
                     });
 
-                    $('.options').on('change', '#error-comp', function () {
-                        if ($smh("#error-comp").is(':checked')) {
+                    smh2('.options').on('change', '#error-comp', function () {
+                        if (smh2("#error-comp").is(':checked')) {
                             err_comp = true;
-                            format = $('select.format option:selected').val();
-                            delivery = $('select.delivery option:selected').val();
+                            format = smh2('select.format option:selected').val();
+                            delivery = smh2('select.delivery option:selected').val();
                             mem.init(mem_protocol, true, format, delivery, fb_eid, err_comp);
-                            $smh('#memWindow').css('display', 'none');
+                            smh2('#memWindow').css('display', 'none');
                             var p = '';
-                            if ($smh("#ssl-embed").is(':checked')) {
+                            if (smh2("#ssl-embed").is(':checked')) {
                                 p = 'https';
                             } else {
                                 p = 'http';
@@ -513,22 +523,22 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
     <?php if ($mode == 'p' || $mode == 's') { ?>
                                 var mode = "<?php echo $mode ?>";
     <?php } else { ?>
-                                var mode = $smh('select#layoutmode option:selected').val();
+                                var mode = smh2('select#layoutmode option:selected').val();
     <?php } ?>
-                            var width = $('#dim_width').val();
-                            var height = $('#dim_height').val();
+                            var width = smh2('#dim_width').val();
+                            var height = smh2('#dim_height').val();
                             mem.checkAccess(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>",<?php echo $_GET['uiconf_id'] ?>, width, height, "<?php echo $_GET['entry_id'] ?>", mode);
                             var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>", <?php echo $_GET['uiconf_id'] ?>, width, height, "<?php echo $_GET['entry_id'] ?>", mode, p, format, delivery, fb_eid, err_comp);
-                            $smh('#embed_code').val(player);
-                            $smh('#prev-result').css("display", "none");
+                            smh2('#embed_code').val(player);
+                            smh2('#prev-result').css("display", "none");
                         } else {
                             err_comp = false;
-                            format = $('select.format option:selected').val();
-                            delivery = $('select.delivery option:selected').val();
+                            format = smh2('select.format option:selected').val();
+                            delivery = smh2('select.delivery option:selected').val();
                             mem.init(mem_protocol, true, format, delivery, fb_eid, err_comp);
-                            $smh('#memWindow').css('display', 'none');
+                            smh2('#memWindow').css('display', 'none');
                             var p = '';
-                            if ($smh("#ssl-embed").is(':checked')) {
+                            if (smh2("#ssl-embed").is(':checked')) {
                                 p = 'https';
                             } else {
                                 p = 'http';
@@ -536,20 +546,20 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
     <?php if ($mode == 'p' || $mode == 's') { ?>
                                 var mode = "<?php echo $mode ?>";
     <?php } else { ?>
-                                var mode = $smh('select#layoutmode option:selected').val();
+                                var mode = smh2('select#layoutmode option:selected').val();
     <?php } ?>
-                            var width = $('#dim_width').val();
-                            var height = $('#dim_height').val();
+                            var width = smh2('#dim_width').val();
+                            var height = smh2('#dim_height').val();
                             mem.checkAccess(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>",<?php echo $_GET['uiconf_id'] ?>, width, height, "<?php echo $_GET['entry_id'] ?>", mode);
                             var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>", <?php echo $_GET['uiconf_id'] ?>, width, height, "<?php echo $_GET['entry_id'] ?>", mode, p, format, delivery, fb_eid, err_comp);
-                            $smh('#embed_code').val(player);
-                            $smh('#prev-result').css("display", "none");
+                            smh2('#embed_code').val(player);
+                            smh2('#prev-result').css("display", "none");
                         }
                     });
                 }
 
                 function getPlayerEmbed(pid, sm_ak, uiconf_id, width, height, entry_id, mode, protocol, format, delivery, fb_eid, err_comp) {
-                    var player = '<script>mem_protocol=\'' + protocol + '\';mem_type=\'' + mode + '\';function load_smh_mem(){mem.init(\'' + protocol + '\',true,\'' + format + '\', \'' + delivery + '\', \'' + fb_eid + '\', ' + err_comp + ');mem.checkAccess(' + pid + ',"' + sm_ak + '",' + uiconf_id + ',' + width + ',' + height + ',"' + entry_id + '",mem_type);}<\/script><script src="' + protocol + '://mediaplatform.streamingmediahosting.com/html5/html5lib/v2.52.3/kWidget/onPagePlugins/mem/mem_init.js" type="text/javascript"><\/script><div id="myVideoContainer"></div><div id="memWindow" style="display: none;"></div>';
+                    var player = '<script>mem_protocol=\'' + protocol + '\';mem_type=\'' + mode + '\';function load_smh_mem(){mem.init(\'' + protocol + '\',true,\'' + format + '\', \'' + delivery + '\', \'' + fb_eid + '\', ' + err_comp + ');mem.checkAccess(' + pid + ',"' + sm_ak + '",' + uiconf_id + ',' + width + ',' + height + ',"' + entry_id + '",mem_type);}<\/script><script src="' + protocol + '://mediaplatform.streamingmediahosting.com/p/<?php echo $_GET['pid'] ?>/html5/html5lib/v2.55/kWidget/onPagePlugins/mem/mem_init.js" type="text/javascript"><\/script><div id="myVideoContainer"></div><div id="memWindow" style="display: none;"></div>';
                     return player;
                 }
             </script>
@@ -619,12 +629,12 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
             <div>Error</div>
         <?php } ?>
         <script>
-            $('.options').mCustomScrollbar({
-                theme: "inset-dark",
-                scrollButtons: {
-                    enable: true
-                }
-            });
+                $('.options').mCustomScrollbar({
+                    theme: "inset-dark",
+                    scrollButtons: {
+                        enable: true
+                    }
+                });
         </script>
     </body>
 </html>

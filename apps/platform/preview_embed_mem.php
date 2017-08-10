@@ -273,127 +273,137 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
         <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.52.3/kWidget/onPagePlugins/mem/resources/css/categoryOnPage.css?1385197029"></link>
         <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.52.3/kWidget/onPagePlugins/mem/resources/css/font-awesome.min.css?1385197029"></link>
         <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.52.3/kWidget/onPagePlugins/mem/resources/css/tooltipster.css?1385197029"></link>
+        <script src="/html5/html5lib/v2.55/resources/jquery/jquery.min.js"></script>
     </head>
     <body>
         <?php
         if ($valid) {
             ?>
             <script>
+                var smh2;
+                $(document).ready(function () {
+                    smh2 = jQuery.noConflict();
+                    var headTag = document.getElementsByTagName("head")[0];
+                    var jqTag = document.createElement('script');
+                    jqTag.setAttribute("type", "text/javascript")
+                    jqTag.setAttribute("src", 'https://devplatform.streamingmediahosting.com/html5/html5lib/v2.55/kWidget/onPagePlugins/mem/mem_init.js');
+                    headTag.appendChild(jqTag);
+                });
+
                 mem_protocol = 'https';
                 mem_protocol_prev = "http";
-                mem_type = '<?php echo $_GET['mode'] ?>';                                                                                                
-                function load_smh_mem(){
+                mem_type = '<?php echo $_GET['mode'] ?>';
+                function load_smh_mem() {
                     //mw.setConfig( 'KalturaSupport.LeadWithHTML5' , true );
                     mem.init(mem_protocol);
-                    mem.checkAccess(<?php echo $_GET['pid'] ?>,"<?php echo $_GET['sm_ak'] ?>",<?php echo $_GET['uiconf_id'] ?>,<?php echo $_GET['width'] ?>,<?php echo $_GET['height'] ?>,"<?php echo $_GET['entry_id'] ?>",'<?php echo $_GET['mode'] ?>');
-                                                                                                                                                                                                                                                                                            
-                    $smh('.options').on('change', 'select#players', function(event) {
-                        $smh('#memWindow').css('display','none');
+                    mem.checkAccess(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>",<?php echo $_GET['uiconf_id'] ?>,<?php echo $_GET['width'] ?>,<?php echo $_GET['height'] ?>, "<?php echo $_GET['entry_id'] ?>", '<?php echo $_GET['mode'] ?>');
+
+                    smh2('.options').on('change', 'select#players', function (event) {
+                        smh2('#memWindow').css('display', 'none');
                         var p = '';
-                        if($smh("#ssl-embed").is(':checked')){
+                        if (smh2("#ssl-embed").is(':checked')) {
                             p = 'https';
                         } else {
                             p = 'http';
                         }
-                                                                                                                                            
+
     <?php if ($mode == 'p' || $mode == 's') { ?>
-                    var mode = "<?php echo $mode ?>";        
+                            var mode = "<?php echo $mode ?>";
     <?php } else { ?>
-                    var mode = $smh('select#layoutmode option:selected').val();
+                            var mode = smh2('select#layoutmode option:selected').val();
     <?php } ?>
-                var data = $smh('select#players option:selected').val();
-                var temp = data.split(',');
-                var uiconf_id = temp[0];
-                var width = temp[1];
-                var height = temp[2];
-                mem.loadVideo('',<?php echo $_GET['pid'] ?>,"<?php echo $_GET['sm_ak'] ?>",uiconf_id,width,height,"<?php echo $_GET['entry_id'] ?>",mode);
-                var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>,"<?php echo $_GET['sm_ak'] ?>",uiconf_id,width,height,"<?php echo $_GET['entry_id'] ?>",mode,p);
-                $smh('#embed_code').val(player);
-                $smh('#prev-result').css("display","none");
-            });
-            var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>,"<?php echo $_GET['sm_ak'] ?>",<?php echo $_GET['uiconf_id'] ?>,<?php echo $_GET['width'] ?>,<?php echo $_GET['height'] ?>,"<?php echo $_GET['entry_id'] ?>","<?php echo $_GET['mode'] ?>", mem_protocol_prev);
-            $smh('#embed_code').val(player);
-                                                                                                                                                                                                                    
-            $smh('#select-bttn').click(function(event) {
-                $smh('#embed_code').select();
-                $smh('#prev-result').css({
-                    "display":"block",
-                    "margin-left":"auto",
-                    "margin-right":"auto",
-                    "width":"326px",
-                    "margin-top":"5px",
-                    "margin-bottom":"10px"
-                });
-                $smh('#prev-result').html('<span class="label label-info">Press Ctrl+C to copy embed code (Command+C on Mac)</span>');       
-            });
-                                                                                                                                                                                                
-            $smh('select#layoutmode').change(function(event) {
-                $smh('#memWindow').css('display','none');
-                var p = '';
-                if($smh("#ssl-embed").is(':checked')){
-                    p = 'https';
-                } else {
-                    p = 'http';
+                        var data = smh2('select#players option:selected').val();
+                        var temp = data.split(',');
+                        var uiconf_id = temp[0];
+                        var width = temp[1];
+                        var height = temp[2];
+                        mem.loadVideo('',<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>", uiconf_id, width, height, "<?php echo $_GET['entry_id'] ?>", mode);
+                        var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>", uiconf_id, width, height, "<?php echo $_GET['entry_id'] ?>", mode, p);
+                        smh2('#embed_code').val(player);
+                        smh2('#prev-result').css("display", "none");
+                    });
+                    var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>",<?php echo $_GET['uiconf_id'] ?>,<?php echo $_GET['width'] ?>,<?php echo $_GET['height'] ?>, "<?php echo $_GET['entry_id'] ?>", "<?php echo $_GET['mode'] ?>", mem_protocol_prev);
+                    smh2('#embed_code').val(player);
+
+                    smh2('#select-bttn').click(function (event) {
+                        smh2('#embed_code').select();
+                        smh2('#prev-result').css({
+                            "display": "block",
+                            "margin-left": "auto",
+                            "margin-right": "auto",
+                            "width": "326px",
+                            "margin-top": "5px",
+                            "margin-bottom": "10px"
+                        });
+                        smh2('#prev-result').html('<span class="label label-info">Press Ctrl+C to copy embed code (Command+C on Mac)</span>');
+                    });
+
+                    smh2('select#layoutmode').change(function (event) {
+                        smh2('#memWindow').css('display', 'none');
+                        var p = '';
+                        if (smh2("#ssl-embed").is(':checked')) {
+                            p = 'https';
+                        } else {
+                            p = 'http';
+                        }
+
+    <?php if ($mode == 'p' || $mode == 's') { ?>
+                            var mode = "<?php echo $mode ?>";
+    <?php } else { ?>
+                            var mode = smh2('select#layoutmode option:selected').val();
+    <?php } ?>
+                        var data = smh2('select#players option:selected').val();
+                        var temp = data.split(',');
+                        var uiconf_id = temp[0];
+                        var width = temp[1];
+                        var height = temp[2];
+                        mem.loadVideo('',<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>", uiconf_id, width, height, "<?php echo $_GET['entry_id'] ?>", mode);
+                        var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>", uiconf_id, width, height, "<?php echo $_GET['entry_id'] ?>", mode, p);
+                        smh2('#embed_code').val(player);
+                        smh2('#prev-result').css("display", "none");
+
+                    });
+
+                    smh2('#ssl-embed').click(function () {
+                        if (smh2("#ssl-embed").is(':checked')) {
+    <?php if ($mode == 'p' || $mode == 's') { ?>
+                                var mode = "<?php echo $mode ?>";
+    <?php } else { ?>
+                                var mode = smh2('select#layoutmode option:selected').val();
+    <?php } ?>
+                            var data = smh2('select#players option:selected').val();
+                            var temp = data.split(',');
+                            var uiconf_id = temp[0];
+                            var width = temp[1];
+                            var height = temp[2];
+                            var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>", uiconf_id, width, height, "<?php echo $_GET['entry_id'] ?>", mode, 'https');
+                            smh2('#embed_code').val(player);
+                            smh2('#prev-result').css("display", "none");
+                            smh2('#ssl-notice').html('Your web server must be configured for SSL in order to support https connections');
+                        } else {
+    <?php if ($mode == 'p' || $mode == 's') { ?>
+                                var mode = "<?php echo $mode ?>";
+    <?php } else { ?>
+                                var mode = smh2('select#layoutmode option:selected').val();
+    <?php } ?>
+                            var data = smh2('select#players option:selected').val();
+                            var temp = data.split(',');
+                            var uiconf_id = temp[0];
+                            var width = temp[1];
+                            var height = temp[2];
+                            var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>, "<?php echo $_GET['sm_ak'] ?>", uiconf_id, width, height, "<?php echo $_GET['entry_id'] ?>", mode, 'http');
+                            smh2('#embed_code').val(player);
+                            smh2('#prev-result').css("display", "none");
+                            smh2('#ssl-notice').empty();
+                        }
+                    });
                 }
-                                                                                                                                
-    <?php if ($mode == 'p' || $mode == 's') { ?>
-                    var mode = "<?php echo $mode ?>";        
-    <?php } else { ?>
-                    var mode = $smh('select#layoutmode option:selected').val();
-    <?php } ?>
-                var data = $smh('select#players option:selected').val();
-                var temp = data.split(',');
-                var uiconf_id = temp[0];
-                var width = temp[1];
-                var height = temp[2];
-                mem.loadVideo('',<?php echo $_GET['pid'] ?>,"<?php echo $_GET['sm_ak'] ?>",uiconf_id,width,height,"<?php echo $_GET['entry_id'] ?>",mode);
-                var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>,"<?php echo $_GET['sm_ak'] ?>",uiconf_id,width,height,"<?php echo $_GET['entry_id'] ?>",mode,p);
-                $smh('#embed_code').val(player);
-                $smh('#prev-result').css("display","none");
-                                                                                                                                                                                                    
-            });
-                                                                                                                                        
-            $smh('#ssl-embed').click(function(){
-                if($smh("#ssl-embed").is(':checked')){
-    <?php if ($mode == 'p' || $mode == 's') { ?>
-                        var mode = "<?php echo $mode ?>";        
-    <?php } else { ?>
-                        var mode = $smh('select#layoutmode option:selected').val();
-    <?php } ?>
-                    var data = $smh('select#players option:selected').val();
-                    var temp = data.split(',');
-                    var uiconf_id = temp[0];
-                    var width = temp[1];
-                    var height = temp[2];
-                    var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>,"<?php echo $_GET['sm_ak'] ?>",uiconf_id,width,height,"<?php echo $_GET['entry_id'] ?>",mode, 'https');
-                    $smh('#embed_code').val(player);
-                    $smh('#prev-result').css("display","none");
-                    $smh('#ssl-notice').html('Your web server must be configured for SSL in order to support https connections');
-                } else {
-    <?php if ($mode == 'p' || $mode == 's') { ?>
-                        var mode = "<?php echo $mode ?>";        
-    <?php } else { ?>
-                        var mode = $smh('select#layoutmode option:selected').val();
-    <?php } ?>
-                    var data = $smh('select#players option:selected').val();
-                    var temp = data.split(',');
-                    var uiconf_id = temp[0];
-                    var width = temp[1];
-                    var height = temp[2];
-                    var player = getPlayerEmbed(<?php echo $_GET['pid'] ?>,"<?php echo $_GET['sm_ak'] ?>",uiconf_id,width,height,"<?php echo $_GET['entry_id'] ?>",mode, 'http');
-                    $smh('#embed_code').val(player);
-                    $smh('#prev-result').css("display","none");  
-                    $smh('#ssl-notice').empty();                    
+
+                function getPlayerEmbed(pid, sm_ak, uiconf_id, width, height, entry_id, mode, protocol) {
+                    var player = '<script>mem_protocol=\'' + protocol + '\';mem_type=\'' + mode + '\';function load_smh_mem(){mem.init(\'' + protocol + '\');mem.checkAccess(' + pid + ',"' + sm_ak + '",' + uiconf_id + ',' + width + ',' + height + ',"' + entry_id + '",mem_type);}<\/script><script src="' + protocol + '://mediaplatform.streamingmediahosting.com/p/<?php echo $_GET['pid'] ?>/html5/html5lib/v2.55/kWidget/onPagePlugins/mem/mem_init.js" type="text/javascript"><\/script><div id="myVideoContainer"></div><div id="memWindow" style="display: none;"></div>';
+                    return player;
                 }
-            });
-        }
-                                                                                                                                                                                        
-        function getPlayerEmbed(pid, sm_ak, uiconf_id, width, height, entry_id, mode, protocol){
-            var player = '<script>mem_protocol=\''+protocol+'\';mem_type=\''+mode+'\';function load_smh_mem(){mem.init(\''+protocol+'\');mem.checkAccess('+pid+',"'+sm_ak+'",'+uiconf_id+','+width+','+height+',"'+entry_id+'",mem_type);}<\/script><script src="'+protocol+'://mediaplatform.streamingmediahosting.com/html5/html5lib/v2.52.3/kWidget/onPagePlugins/mem/mem_init.js" type="text/javascript"><\/script><div id="myVideoContainer"></div><div id="memWindow" style="display: none;"></div>';
-            return player;
-        }
             </script>
-            <script src="/html5/html5lib/v2.52.3/kWidget/onPagePlugins/mem/mem_init.js" type="text/javascript"></script>
             <div class="content">
                 <div class="options">
                     <div style="font-size: 14px; font-weight: bold; margin-left: auto; margin-right: auto; margin-top: 10px;">
