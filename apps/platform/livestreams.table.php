@@ -179,6 +179,7 @@ class livestreams {
             $platforms_preview_embed = '';
             $youtube = false;
             $facebook = false;
+            $twitch = false;
             if ($this->sn == 1) {
                 $platforms_status_arr = array();
                 $platforms_preview_embed_arr = array();
@@ -216,6 +217,17 @@ class livestreams {
                             } else {
                                 array_push($platforms_status_arr, "youtube:0");
                                 array_push($platforms_preview_embed_arr, "youtube:0");
+                            }
+                        }
+                        if ($platform['platform'] == 'twitch') {
+                            if ($platform['status']) {
+                                $twitch = true;
+                                array_push($platforms_status_arr, "twitch:1");
+                                array_push($platforms_preview_embed_arr, "twitch:1:" . $platform['liveId']);
+                                array_push($platform_logos, "twch");
+                            } else {
+                                array_push($platforms_status_arr, "twitch:0");
+                                array_push($platforms_preview_embed_arr, "twitch:0");
                             }
                         }
                     }
@@ -305,7 +317,7 @@ class livestreams {
             $bulk_entries = $entry->id . ';' . str_replace(" ", "", $entry->tags) . ';' . $entry->categoriesIds;
 
             $sn = '';
-            if ($youtube || $facebook) {
+            if ($youtube || $facebook || $twitch) {
                 $sn = $entry->streamName . "&entryId=" . $entry->id;
             } else {
                 $sn = $entry->streamName;
