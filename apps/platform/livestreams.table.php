@@ -376,6 +376,15 @@ class livestreams {
                             array_push($result['platforms'], $platform);
                         }
                     }
+                    if ($platforms->platform == "twitch") {
+                        if ($platforms->status) {
+                            $platform = array('platform' => 'twitch', 'status' => $platforms->status, 'liveId' => $platforms->liveId);
+                            array_push($result['platforms'], $platform);
+                        } else {
+                            $platform = array('platform' => 'twitch', 'status' => $platforms->status);
+                            array_push($result['platforms'], $platform);
+                        }
+                    }
                 }
             }
         }
