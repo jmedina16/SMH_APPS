@@ -194,11 +194,14 @@ class entries {
                 }
             }
 
-            $partnerData = json_decode($entry->partnerData);
+            //$partnerData = json_decode($entry->partnerData);
+            $partnerData = '{"snConfig":[{"platform":"twitch","status":true,"upload_status":"completed","videoId":"173319979"}]}';
+            $partnerData = json_decode($partnerData);
             $platforms_status = '';
             $platforms_preview_embed = '';
             $youtube = false;
             $facebook = false;
+            $twitch = false;
             if ($this->sn == 1) {
                 $platforms_status_arr = array();
                 $platforms_preview_embed_arr = array();
@@ -250,6 +253,28 @@ class entries {
                             } else {
                                 array_push($platforms_status_arr, "youtube:0:" . $upload_status);
                                 array_push($platforms_preview_embed_arr, "youtube:0");
+                            }
+                        }
+                        if ($platform['platform'] == 'twitch') {
+                            if (isset($platform['upload_status'])) {
+                                if ($platform['upload_status'] === 'uploading') {
+                                    $upload_status = 1;
+                                } else if ($platform['upload_status'] === 'completed') {
+                                    $upload_status = 2;
+                                } else {
+                                    $upload_status = 3;
+                                }
+                            } else {
+                                $upload_status = 0;
+                            }
+                            if ($platform['status']) {
+                                $twitch = true;
+                                array_push($platforms_status_arr, "twitch:1:" . $upload_status);
+                                array_push($platforms_preview_embed_arr, "twitch:1:" . $platform['videoId']);
+                                array_push($platform_logos, "twch");
+                            } else {
+                                array_push($platforms_status_arr, "twitch:0:" . $upload_status);
+                                array_push($platforms_preview_embed_arr, "twitch:0");
                             }
                         }
                     }
@@ -447,6 +472,15 @@ class entries {
                             array_push($result['platforms'], $platform);
                         } else {
                             $platform = array('platform' => 'youtube', 'status' => $platforms->status);
+                            array_push($result['platforms'], $platform);
+                        }
+                    }
+                    if ($platforms->platform == "twitch") {
+                        if ($platforms->status) {
+                            $platform = array('platform' => 'twitch', 'status' => $platforms->status, 'upload_status' => $platforms->upload_status, 'videoId' => $platforms->videoId);
+                            array_push($result['platforms'], $platform);
+                        } else {
+                            $platform = array('platform' => 'twitch', 'status' => $platforms->status);
                             array_push($result['platforms'], $platform);
                         }
                     }
