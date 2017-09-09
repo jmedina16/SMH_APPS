@@ -194,9 +194,7 @@ class entries {
                 }
             }
 
-            //$partnerData = json_decode($entry->partnerData);
-            $partnerData = '{"snConfig":[{"platform":"twitch","status":true,"upload_status":"completed","videoId":"173319979"}]}';
-            $partnerData = json_decode($partnerData);
+            $partnerData = json_decode($entry->partnerData);
             $platforms_status = '';
             $platforms_preview_embed = '';
             $youtube = false;
