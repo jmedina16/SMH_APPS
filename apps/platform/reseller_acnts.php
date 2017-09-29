@@ -106,7 +106,7 @@ class reseller {
 
         $url = 'http://mediaplatform.streamingmediahosting.com/apps/services/v1.0/index.php?action=get_services&pid=' . $this->parent_id;
         $parent_services = json_decode($this->curl_request($url));
-        $available = (int) $parent_services->reseller_users_quota - count($child_ids);
+        $available = (int) $parent_services->reseller_users_quota - $result[0]->totalCount;
 
         $user_bandwidth_left = (int) $user_bandwidth_limit_gb - $child_stats['child_bandwidth_limit'];
         $user_bandwidth_percentage = number_format($this->get_used_percentage($user_bandwidth_left, (int) $user_bandwidth_limit_gb), 2);
