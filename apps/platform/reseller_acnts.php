@@ -242,7 +242,8 @@ class reseller {
                                 <li role="presentation"><a role="menuitem" tabindex="-1" onclick="smhRS.editAccount(' . $partner->id . ',\'' . $partner->name . '\',\'' . $partner->description . '\',\'' . $partner->adminName . '\',\'' . $partner->adminEmail . '\');">Account</a></li>
                                 <li role="presentation"><a role="menuitem" tabindex="-1" onclick="smhRS.editServices(' . $partner_services->transcoding_vod . ',' . $partner_services->pay_per_view . ',' . $partner_services->membership . ',' . $partner_services->streaming_live_chat . ',' . $partner_services->white_label . ',' . $partner_services->force_parent_layout . ',' . $partner_services->use_custom_layout . ',' . $partner->id . ',' . 'false' . ');">Services</a></li>' .
                     $limits_action .
-                    '<li role="presentation"><a role="menuitem" tabindex="-1" onclick="smhRS.editStatus(' . $partner->id . ',\'' . $partner->adminName . '\',\'' . $block_action . '\');">' . $block_action_text . '</a></li>
+                    '<li role="presentation"><a role="menuitem" tabindex="-1" onclick="smhRS.getStats(' . $partner->id . ');">Statistics</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" onclick="smhRS.editStatus(' . $partner->id . ',\'' . $partner->adminName . '\',\'' . $block_action . '\');">' . $block_action_text . '</a></li>
                                 <li role="presentation" style="border-top: solid 1px #f0f0f0;"><a role="menuitem" tabindex="-1" onclick="smhRS.deleteAccount(' . $partner->id . ',\'' . $partner->adminName . '\');">Delete</a></li>                                        
                                 </ul>
                             </div>
