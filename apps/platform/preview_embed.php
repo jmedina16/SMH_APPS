@@ -4,7 +4,7 @@ require_once('../../app/clients/php5/KalturaClient.php');
 function verfiy_ks($pid, $ks) {
     $success = false;
     $config = new KalturaConfiguration(0);
-    $config->serviceUrl = 'https://mediaplatform.streamingmediahosting.com/';
+    $config->serviceUrl = 'https://devplatform.streamingmediahosting.com/';
     $client = new KalturaClient($config);
     $partnerFilter = null;
     $pager = null;
@@ -26,7 +26,7 @@ function verfiy_ks($pid, $ks) {
 }
 
 function get_regular_player_details($ks, $pid) {
-    $url = 'https://mediaplatform.streamingmediahosting.com/index.php/kmc/getuiconfs';
+    $url = 'https://devplatform.streamingmediahosting.com/index.php/kmc/getuiconfs';
     $fields = array(
         'ks' => urlencode($ks),
         'partner_id' => urlencode($pid),
@@ -55,7 +55,7 @@ function get_regular_player_details($ks, $pid) {
 }
 
 function get_playlist_player_details($ks, $pid) {
-    $url = 'https://mediaplatform.streamingmediahosting.com/index.php/kmc/getuiconfs';
+    $url = 'https://devplatform.streamingmediahosting.com/index.php/kmc/getuiconfs';
     $fields = array(
         'ks' => urlencode($ks),
         'partner_id' => urlencode($pid),
