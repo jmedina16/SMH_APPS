@@ -109,6 +109,8 @@ clipApp.player = {
 clipApp.clipper = {
 	dragging: false,
 	addClip: function( start, end ) {
+            console.log('SMH DEBUG clipLength: '+clipApp.getLength());
+            console.log('SMH DEBUG end: '+end);
 		var clip_length = (end) ? end : ( ( (clipApp.getLength() * 10) / 100 ) * 1000 );
 	//	var clip_offset = (start) ? start : clipApp.kClip.getPlayheadLocation();
 	//	SMH Get this val from new slider
