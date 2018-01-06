@@ -241,7 +241,7 @@ class entries {
         <div class='clear'></div>
         </div>";
 
-            $row[] = "<input type='radio' class='program-entry' name='program_list' style='width=33px' value='" . $entry->id . ";" . $entry->name . "' />";
+            $row[] = "<input type='radio' class='program-entry' name='program_list' style='width=33px' value='" . $entry->id . ";" . $entry->name . ";" . $duration_data . "' />";
             $row[] = $entry_container;
             $output['data'][] = $row;
         }
