@@ -84,7 +84,7 @@ class livestreams {
 
     public function getTable() {
         $smh_akey = substr(md5(strtolower($this->pid . '-live') . 'aq23df2h'), 0, 8);
-        $streams = $this->getLiveStreams();
+        //$streams = $this->getLiveStreams();
         $partnerId = 0;
         $config = new KalturaConfiguration($partnerId);
         $config->serviceUrl = 'http://mediaplatform.streamingmediahosting.com/';
@@ -148,21 +148,21 @@ class livestreams {
             $newDatetime = strtotime($unixtime_to_date);
             $newDatetime = date('m/d/Y h:i A', $newDatetime);
 
-            foreach ($streams as $stream) {
-                $mbr_test = substr($stream['stream_name'], -1);
-                $stream_name = $stream['stream_name'] . "?key=" . $smh_akey;
-
-                if (strpos($entry->streamName, $stream_name) !== false) {
-                    $live_status = '<i class="fa fa-circle" style="color:#FF0000; font-size: 11px;"></i> LIVE';
-                }
-                if (is_numeric($mbr_test)) {
-                    $streamName = substr($stream['stream_name'], 0, -1);
-                    $stream_name = $streamName . "?key=" . $smh_akey;
-                    if (strpos($entry->streamName, $stream_name) !== false) {
-                        $live_status = '<i class="fa fa-circle" style="color:#FF0000; font-size: 11px;"></i> LIVE';
-                    }
-                }
-            }
+//            foreach ($streams as $stream) {
+//                $mbr_test = substr($stream['stream_name'], -1);
+//                $stream_name = $stream['stream_name'] . "?key=" . $smh_akey;
+//
+//                if (strpos($entry->streamName, $stream_name) !== false) {
+//                    $live_status = '<i class="fa fa-circle" style="color:#FF0000; font-size: 11px;"></i> LIVE';
+//                }
+//                if (is_numeric($mbr_test)) {
+//                    $streamName = substr($stream['stream_name'], 0, -1);
+//                    $stream_name = $streamName . "?key=" . $smh_akey;
+//                    if (strpos($entry->streamName, $stream_name) !== false) {
+//                        $live_status = '<i class="fa fa-circle" style="color:#FF0000; font-size: 11px;"></i> LIVE';
+//                    }
+//                }
+//            }
 
             if ($this->delete_perm) {
                 $delete_arr = $entry->id . '\',\'' . htmlspecialchars(addslashes($entry->name), ENT_QUOTES);
