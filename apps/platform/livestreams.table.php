@@ -22,7 +22,6 @@ class livestreams {
     protected $ac_perm;
     protected $thumb_perm;
     protected $stats_perm;
-    protected $_link;
     protected $sn;
 
     public function __construct() {
@@ -41,47 +40,13 @@ class livestreams {
         $this->thumb_perm = $_POST['thumb_perm'];
         $this->stats_perm = $_POST['stats_perm'];
         $this->sn = $_POST['sn'];
-        $this->_link = @mysql_connect("10.5.21.50", "root", "smh0nly") or die('Unable to establish a DB connection');
-        mysql_set_charset('utf8');
-        mysql_select_db("wowza_realtime_stats", $this->_link);
     }
 
     //run
     public function run() {
         $this->getTable();
     }
-
-    public function getLiveStreams() {
-        $streams = array();
-        $query = "SELECT * FROM `livestreams` WHERE app_name LIKE '" . $this->pid . "-live'";
-        $result = mysql_query($query, $this->_link) or die('Query failed: ' . mysql_error());
-        while ($row = mysql_fetch_assoc($result)) {
-            $streams[] = $row;
-        }
-        return $streams;
-    }
-
-    public function getEntryId($pid, $streamName) {
-        $partner_name = $this->getUserInfo($pid);
-        if ($partner_name != '') {
-            $mbr_test = substr($streamName, -1);
-            $entry = array();
-            $smh_akey = substr(md5(strtolower($pid . '-live') . 'aq23df2h'), 0, 8);
-            $query = "SELECT * FROM entry WHERE partner_id = '" . $pid . "' AND status = 2 AND custom_data LIKE '%" . $streamName . "?key=" . $smh_akey . "%';";
-            $result = mysql_query($query, $this->_link2) or die('Query failed: ' . mysql_error());
-
-            if (mysql_num_rows($result) == 0 && is_numeric($mbr_test)) {
-                $streamName = substr($streamName, 0, -1);
-                return $this->getEntryId($pid, $streamName);
-            } else {
-                while ($row = mysql_fetch_assoc($result)) {
-                    $entry['entry_id'] = $row['id'];
-                }
-                return $entry;
-            }
-        }
-    }
-
+    
     public function getTable() {
         $smh_akey = substr(md5(strtolower($this->pid . '-live') . 'aq23df2h'), 0, 8);
         //$streams = $this->getLiveStreams();
@@ -135,7 +100,7 @@ class livestreams {
         );
 
         foreach ($result->objects as $entry) {
-            $live_status = 'Off Air';
+            $live_status = '';
             $delete_action = '';
             $edit_action = '';
             $edit_config_action = '';
@@ -147,6 +112,7 @@ class livestreams {
             $unixtime_to_date = date('n/j/Y H:i', $entry->createdAt);
             $newDatetime = strtotime($unixtime_to_date);
             $newDatetime = date('m/d/Y h:i A', $newDatetime);
+
 
 //            foreach ($streams as $stream) {
 //                $mbr_test = substr($stream['stream_name'], -1);
