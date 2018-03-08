@@ -4,7 +4,7 @@ require_once('../../app/clients/php5/KalturaClient.php');
 function verfiy_ks($pid, $ks) {
     $success = false;
     $config = new KalturaConfiguration(0);
-    $config->serviceUrl = 'https://mediaplatform.streamingmediahosting.com/';
+    $config->serviceUrl = 'https://devplatform.streamingmediahosting.com/';
     $client = new KalturaClient($config);
     $partnerFilter = null;
     $pager = null;
@@ -26,7 +26,7 @@ function verfiy_ks($pid, $ks) {
 }
 
 function get_regular_player_details($ks, $pid) {
-    $url = 'https://mediaplatform.streamingmediahosting.com/index.php/kmc/getuiconfs';
+    $url = 'https://devplatform.streamingmediahosting.com/index.php/kmc/getuiconfs';
     $fields = array(
         'ks' => urlencode($ks),
         'partner_id' => urlencode($pid),
@@ -55,7 +55,7 @@ function get_regular_player_details($ks, $pid) {
 }
 
 function get_playlist_player_details($ks, $pid) {
-    $url = 'https://mediaplatform.streamingmediahosting.com/index.php/kmc/getuiconfs';
+    $url = 'https://devplatform.streamingmediahosting.com/index.php/kmc/getuiconfs';
     $fields = array(
         'ks' => urlencode($ks),
         'partner_id' => urlencode($pid),
@@ -286,11 +286,11 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
                     var headTag = document.getElementsByTagName("head")[0];
                     var jqTag = document.createElement('script');
                     jqTag.setAttribute("type", "text/javascript")
-                    jqTag.setAttribute("src", 'https://devplatform.streamingmediahosting.com/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/mem_init.js');
+                    jqTag.setAttribute("src", 'http://devplatform.streamingmediahosting.com/html5/html5lib/v2.66/kWidget/onPagePlugins/mem_dev/mem_init.js');
                     headTag.appendChild(jqTag);
                 });
 
-                mem_protocol = 'https';
+                mem_protocol = 'http';
                 mem_protocol_prev = "http";
                 mem_type = '<?php echo $_GET['mode'] ?>';
                 function load_smh_mem() {
@@ -400,7 +400,7 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
                 }
 
                 function getPlayerEmbed(pid, sm_ak, uiconf_id, width, height, entry_id, mode, protocol) {
-                    var player = '<script>mem_protocol=\'' + protocol + '\';mem_type=\'' + mode + '\';function load_smh_mem(){mem.init(\'' + protocol + '\');mem.checkAccess(' + pid + ',"' + sm_ak + '",' + uiconf_id + ',' + width + ',' + height + ',"' + entry_id + '",mem_type);}<\/script><script src="' + protocol + '://mediaplatform.streamingmediahosting.com/p/<?php echo $_GET['pid'] ?>/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/mem_init.js" type="text/javascript"><\/script><div id="myVideoContainer"></div><div id="memWindow" style="display: none;"></div>';
+                    var player = '<script>mem_protocol=\'' + protocol + '\';mem_type=\'' + mode + '\';function load_smh_mem(){mem.init(\'' + protocol + '\');mem.checkAccess(' + pid + ',"' + sm_ak + '",' + uiconf_id + ',' + width + ',' + height + ',"' + entry_id + '",mem_type);}<\/script><script src="' + protocol + '://devplatform.streamingmediahosting.com/p/<?php echo $_GET['pid'] ?>/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/mem_init.js" type="text/javascript"><\/script><div id="myVideoContainer"></div><div id="memWindow" style="display: none;"></div>';
                     return player;
                 }
             </script>
