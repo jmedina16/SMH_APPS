@@ -275,11 +275,11 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
             }            
         </style>
         <link type="text/css" rel="stylesheet" media="screen" href="/css/jquery.mCustomScrollbar.css">
-        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.52.3/kWidget/onPagePlugins/mem/resources/css/smh_mem_style.css?1385197029"></link>
-        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.52.3/kWidget/onPagePlugins/mem/resources/css/bootstrap.min.css?1385197029"></link>
-        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.52.3/kWidget/onPagePlugins/mem/resources/css/categoryOnPage.css?1385197029"></link>
-        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.52.3/kWidget/onPagePlugins/mem/resources/css/font-awesome.min.css?1385197029"></link>
-        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.52.3/kWidget/onPagePlugins/mem/resources/css/tooltipster.css?1385197029"></link>
+        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/css/smh_mem_style.css?1385197029"></link>
+        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/css/bootstrap.min.css?1385197029"></link>
+        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/css/categoryOnPage.css?1385197029"></link>
+        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/css/font-awesome.min.css?1385197029"></link>
+        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/css/tooltipster.css?1385197029"></link>
         <script src="/js/jQuery-2.1.4.min.js?v=1" type="text/javascript"></script>
         <script src="/js/jquery.mCustomScrollbar.min.js?v=1" type="text/javascript"></script>        
     </head>
@@ -294,7 +294,7 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
                     var headTag = document.getElementsByTagName("head")[0];
                     var jqTag = document.createElement('script');
                     jqTag.setAttribute("type", "text/javascript")
-                    jqTag.setAttribute("src", 'https://devplatform.streamingmediahosting.com/html5/html5lib/v2.55/kWidget/onPagePlugins/mem/mem_init.js');
+                    jqTag.setAttribute("src", 'https://devplatform.streamingmediahosting.com/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/mem_init.js');
                     headTag.appendChild(jqTag);
                 });
 
@@ -559,11 +559,11 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
                 }
 
                 function getPlayerEmbed(pid, sm_ak, uiconf_id, width, height, entry_id, mode, protocol, format, delivery, fb_eid, err_comp) {
-                    var player = '<script>mem_protocol=\'' + protocol + '\';mem_type=\'' + mode + '\';function load_smh_mem(){mem.init(\'' + protocol + '\',true,\'' + format + '\', \'' + delivery + '\', \'' + fb_eid + '\', ' + err_comp + ');mem.checkAccess(' + pid + ',"' + sm_ak + '",' + uiconf_id + ',' + width + ',' + height + ',"' + entry_id + '",mem_type);}<\/script><script src="' + protocol + '://mediaplatform.streamingmediahosting.com/p/<?php echo $_GET['pid'] ?>/html5/html5lib/v2.55/kWidget/onPagePlugins/mem/mem_init.js" type="text/javascript"><\/script><div id="myVideoContainer"></div><div id="memWindow" style="display: none;"></div>';
+                    var player = '<script>mem_protocol=\'' + protocol + '\';mem_type=\'' + mode + '\';function load_smh_mem(){mem.init(\'' + protocol + '\',true,\'' + format + '\', \'' + delivery + '\', \'' + fb_eid + '\', ' + err_comp + ');mem.checkAccess(' + pid + ',"' + sm_ak + '",' + uiconf_id + ',' + width + ',' + height + ',"' + entry_id + '",mem_type);}<\/script><script src="' + protocol + '://mediaplatform.streamingmediahosting.com/p/<?php echo $_GET['pid'] ?>/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/mem_init.js" type="text/javascript"><\/script><div id="myVideoContainer"></div><div id="memWindow" style="display: none;"></div>';
                     return player;
                 }
             </script>
-            <script src="/html5/html5lib/v2.52.3/kWidget/onPagePlugins/mem/mem_init.js" type="text/javascript"></script>
+            <script src="/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/mem_init.js" type="text/javascript"></script>
             <div class="content">
                 <div class="options">
                     <div style="font-size: 14px; font-weight: bold; margin-left: auto; margin-right: auto; margin-top: 10px;">
