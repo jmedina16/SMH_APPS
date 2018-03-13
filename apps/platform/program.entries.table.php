@@ -88,7 +88,7 @@ class entries {
         $client->setKs($this->ks);
         $filter = new KalturaMediaEntryFilter();
         $filter->orderBy = '-createdAt';
-        $filter->mediaTypeIn = '1,2,5,201,100,101';
+        $filter->mediaTypeIn = '1,5,201,100,101';
         $filter->statusIn = '-1,-2,0,1,2,7,4';
         $filter->isRoot = KalturaNullableBoolean::NULL_VALUE;
         $pager = new KalturaFilterPager();
