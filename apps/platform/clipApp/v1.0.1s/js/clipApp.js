@@ -415,6 +415,7 @@ clipApp.playerSeek = function (val) {
     $('#jqui').slider("option", "value", val2);
     $('#jqui a').attr('title', clipApp.getTime(val));
     clipApp.log('playerSeek :: Update Time to: ' + clipApp.getTime(val));
+    changed = false;
 }
 
 clipApp.getTime = function (val) {
@@ -497,7 +498,8 @@ clipApp.doSave = function () {
         'name': $("#entry_title").val(),
         'desc': $("#entry_desc").val(),
         'start': $("#startTime").timeStepper('getValue'),
-        'end': $("#endTime").timeStepper('getValue')
+        'end': $("#endTime").timeStepper('getValue'),
+        'ks': clipApp.vars.ks
     };
 
     var saveUrl = 'save.php';
@@ -590,7 +592,6 @@ $(document).ready(function () {
         },
 
         change: function (event, ui) {
-            console.log('SMH DEBUG: SEEKING: '+changed);
             if (!changed) {
                 changed = true;
                 time = ui.value / 1000;
