@@ -155,7 +155,8 @@ clipApp.addClipAt = function (clip_offset, clip_length) {
 // SMH updateClip => setClip...
 clipApp.updateClip = function (x) {
     // create same object as returned from clipApp.KClip.addClipAt() function call...
-
+    clipApp.log('SMH DEBUG: ');
+    console.log(x);
     var clip =
             {
                 "clipAttributes":
@@ -284,11 +285,14 @@ clipApp.updateEndTime = function (clip) {
 };
 
 clipApp.setStartTime = function (val) {
+    console.log('SMH DEBUG: setStartTime1: '+val)
+    console.log('SMH DEBUG: setStartTime2: '+clipApp.vars.lastStartTime)
     var startTime = Math.round(val);
     if (!clipApp.checkClipDuration(startTime, 'start')) {
         $("#startTime").timeStepper('setValue', clipApp.vars.lastStartTime);
         // Range Slider update
-        $('#jqclip').slider("values", 0, clipApp.vars.lastStartTime);
+        //$('#jqclip').slider("values", 0, clipApp.vars.lastStartTime);
+        $('#jqclip').slider("values", clipApp.vars.lastStartTime);
         // Main slider
         $('#jqui').slider("value", clipApp.vars.lastStartTime);
         // tooltips
@@ -591,15 +595,15 @@ $(document).ready(function () {
             clipApp.onSeek(time);
         },
 
-        change: function (event, ui) {
-            if (!changed) {
-                changed = true;
-                time = ui.value / 1000;
-                clipApp.kdp.sendNotification("doSeek", time);                
-            }
-//            time = ui.value / 1000;
-//            clipApp.kdp.sendNotification("doSeek", time);
-        }
+//        change: function (event, ui) {
+//            if (!changed) {
+//                changed = true;
+//                time = ui.value / 1000;
+//                clipApp.kdp.sendNotification("doSeek", time);
+//            }
+////            time = ui.value / 1000;
+////            clipApp.kdp.sendNotification("doSeek", time);
+//        }
     });
     $("#jqclip").hide();
     $("#jqclip").slider({
