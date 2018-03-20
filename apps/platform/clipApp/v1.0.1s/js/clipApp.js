@@ -42,7 +42,7 @@ var clipperReady = function () {
     clipApp.kClip.addJsListener("entryReady", "clipApp.enableAddClip");
     clipApp.kClip.addJsListener("clipAdded", "clipApp.clipAdded");
     clipApp.kClip.addJsListener("clipperError", "clipApp.showError");
-    clipApp.kClip.addJsListener("playheadDragStart", "SMHupdatePlayhead");
+    clipApp.kClip.addJsListener("playheadDragStart", "clipApp.clipper.dragStarted");
     clipApp.kClip.addJsListener("playheadDragDrop", "clipApp.player.updatePlayhead")
 };
 
@@ -654,7 +654,5 @@ ttipUpdate = function () {
 }
 
 SMHupdatePlayhead = function (x) {
-    console.log('SMH DEBUG: SMHupdatePlayhead: ');
-    console.log(x);
     $("#jqui").slider("option", "value", x);
 }
