@@ -42,7 +42,7 @@ var clipperReady = function () {
     clipApp.kClip.addJsListener("entryReady", "clipApp.enableAddClip");
     clipApp.kClip.addJsListener("clipAdded", "clipApp.clipAdded");
     clipApp.kClip.addJsListener("clipperError", "clipApp.showError");
-    clipApp.kClip.addJsListener("playheadDragStart", "clipApp.clipper.dragStarted");
+    clipApp.kClip.addJsListener("playheadDragStart", "SMHupdatePlayhead");
     clipApp.kClip.addJsListener("playheadDragDrop", "clipApp.player.updatePlayhead")
 };
 
@@ -376,27 +376,28 @@ clipApp.enableAddClip = function () {
 };
 
 clipApp.doPreview = function () {
-    var startTime = $("#startTime").timeStepper('getValue', 'seconds'),
-            endTime = $("#endTime").timeStepper('getValue', 'seconds');
+    var startTime = Number($("#startTime").timeStepper('getValue', 'seconds')),
+            endTime = Number($("#endTime").timeStepper('getValue', 'seconds'));
 
     clipApp.log('Start Time: ' + startTime + ', End Time: ' + endTime);
 
     clipApp.vars.removeBlackScreen = false;
 
-    clipApp.kdp.removeJsListener("doSeek", "clipApp.onSeek");
+    clipApp.kdp.removeJsListener("doSeek", "clipApp.playerSeek");
     //clipApp.kClip.updateZoomIndex(0);
 
     if (clipApp.vars.playerPlaying) {
         clipApp.kdp.sendNotification("doPause");
     }
+    clipApp.kdp.sendNotification("doStop");
     clipApp.kdp.setKDPAttribute("blackScreen", "visible", "true");
     clipApp.kdp.setKDPAttribute("mediaProxy", "mediaPlayFrom", startTime);
     clipApp.kdp.setKDPAttribute("mediaProxy", "mediaPlayTo", endTime);
     // work around for kdp didn't play at first doPlay
+    
     clipApp.kdp.sendNotification("doPlay");
-    //clipApp.kdp.sendNotification("doPlay");
 
-    clipApp.kdp.addJsListener("doSeek", "clipApp.onSeek");
+    clipApp.kdp.addJsListener("doSeek", "clipApp.playerSeek");
 };
 
 clipApp.onSeek = function (val) {
@@ -413,7 +414,7 @@ clipApp.onSeek = function (val) {
 };
 
 clipApp.playerSeek = function (val) {
-    clipApp.log('playerSeek :: val: ' + val);
+    clipApp.log('playerSeek :: val: ' + time);
     val2 = val * 1000;
     //time = clipApp.getTime(val);
     //$('#jqui').slider("option", "value", val2);
@@ -653,5 +654,7 @@ ttipUpdate = function () {
 }
 
 SMHupdatePlayhead = function (x) {
+    console.log('SMH DEBUG: SMHupdatePlayhead: ');
+    console.log(x);
     $("#jqui").slider("option", "value", x);
 }
