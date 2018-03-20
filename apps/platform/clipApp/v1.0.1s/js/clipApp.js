@@ -394,7 +394,7 @@ clipApp.doPreview = function () {
     clipApp.kdp.setKDPAttribute("mediaProxy", "mediaPlayTo", endTime);
     // work around for kdp didn't play at first doPlay
     clipApp.kdp.sendNotification("doPlay");
-    clipApp.kdp.sendNotification("doPlay");
+    //clipApp.kdp.sendNotification("doPlay");
 
     clipApp.kdp.addJsListener("doSeek", "clipApp.onSeek");
 };
@@ -415,10 +415,10 @@ clipApp.onSeek = function (val) {
 clipApp.playerSeek = function (val) {
     clipApp.log('playerSeek :: val: ' + val);
     val2 = val * 1000;
-    time = clipApp.getTime(val);
-    $('#jqui').slider("option", "value", val2);
-    $('#jqui a').attr('title', clipApp.getTime(val));
-    clipApp.log('playerSeek :: Update Time to: ' + clipApp.getTime(val));
+    //time = clipApp.getTime(val);
+    //$('#jqui').slider("option", "value", val2);
+    $('#jqui a').attr('title', clipApp.getTime(time));
+    clipApp.log('playerSeek :: Update Time to: ' + clipApp.getTime(time));
     changed = false;
 }
 
@@ -595,15 +595,16 @@ $(document).ready(function () {
             clipApp.onSeek(time);
         },
 
-//        change: function (event, ui) {
-//            if (!changed) {
-//                changed = true;
-//                time = ui.value / 1000;
-//                clipApp.kdp.sendNotification("doSeek", time);
-//            }
-////            time = ui.value / 1000;
-////            clipApp.kdp.sendNotification("doSeek", time);
-//        }
+        change: function (event, ui) {
+            if (!changed) {
+                changed = true;
+                time = ui.value / 1000;
+                console.log('SMH DEBUG: slider: Change: '+ time);
+                clipApp.kdp.sendNotification("doSeek", time);
+            }
+//            time = ui.value / 1000;
+//            clipApp.kdp.sendNotification("doSeek", time);
+        }
     });
     $("#jqclip").hide();
     $("#jqclip").slider({
