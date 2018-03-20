@@ -31,6 +31,7 @@ var jsCallbackReady = function (videoId) {
     //clipApp.kdp.addJsListener("doSeek", "clipApp.onSeek");
     clipApp.kdp.addJsListener("doSeek", "clipApp.playerSeek");
     clipApp.kdp.addJsListener("durationChange", "clipApp.player.durationChange");
+    clipApp.kdp.addJsListener("playerUpdatePlayhead", "clipApp.clipper.SMHupdatePlayhead");
     clipApp.clipper.addClip();
 
 };
@@ -79,7 +80,7 @@ clipApp.player = {
 
         clipApp.kClip.removeJsListener("playheadUpdated", "clipApp.player.updatePlayhead");
         //clipApp.kdp.addJsListener("playerUpdatePlayhead", "clipApp.clipper.updatePlayhead");
-        clipApp.kdp.addJSListener("playerUpdatePlayhead", "SMHupdatePlayhead");
+        clipApp.kdp.addJsListener("playerUpdatePlayhead", "clipApp.clipper.SMHupdatePlayhead");
     },
 
     playerPaused: function () {
@@ -132,6 +133,13 @@ clipApp.clipper = {
     dragStarted: function () {
         //clipApp.clipper.dragging = true;
         //clipApp.kClip.removeJsListener("playheadUpdated", "clipApp.player.updatePlayhead");
+    },
+    SMHupdatePlayhead: function (x) {
+        console.log('SMH DEBUG: SMHupdatePlayhead: ');
+        console.log(x);
+        var position = Number(x*1000);
+        $("#jqui").slider("option", "value", position);
+        playheadChanged = true;
     }
 };
 
@@ -285,10 +293,11 @@ clipApp.updateEndTime = function (clip) {
 };
 
 clipApp.setStartTime = function (val) {
-    console.log('SMH DEBUG: setStartTime1: '+val)
-    console.log('SMH DEBUG: setStartTime2: '+clipApp.vars.lastStartTime)
+    console.log('SMH DEBUG: setStartTime1: ' + val)
+    console.log('SMH DEBUG: setStartTime2: ' + clipApp.vars.lastStartTime)
     var startTime = Math.round(val);
     if (!clipApp.checkClipDuration(startTime, 'start')) {
+        console.log('TEESSTTT')
         $("#startTime").timeStepper('setValue', clipApp.vars.lastStartTime);
         // Range Slider update
         //$('#jqclip').slider("values", 0, clipApp.vars.lastStartTime);
@@ -308,6 +317,9 @@ clipApp.setStartTime = function (val) {
     // SMH Mod
     //clipApp.kClip.updateClipAttributes( clipAttributes );
     clipApp.updateClip(clipAttributes);
+    time = startTime / 1000;
+    $('#jqui').slider("value", startTime);
+    clipApp.kdp.sendNotification("doSeek", time);
     clipApp.kdp.sendNotification("doPause");
 };
 
@@ -394,7 +406,7 @@ clipApp.doPreview = function () {
     clipApp.kdp.setKDPAttribute("mediaProxy", "mediaPlayFrom", startTime);
     clipApp.kdp.setKDPAttribute("mediaProxy", "mediaPlayTo", endTime);
     // work around for kdp didn't play at first doPlay
-    
+
     clipApp.kdp.sendNotification("doPlay");
 
     clipApp.kdp.addJsListener("doSeek", "clipApp.playerSeek");
@@ -581,6 +593,7 @@ $(document).ready(function () {
     entryDuration = clipApp.getDuration();
     entryDurationMs = entryDuration * 1000;
     changed = false;
+    playheadChanged = false;
 
     $("#jqui").hide();
     $("#jqui").slider({
@@ -597,14 +610,14 @@ $(document).ready(function () {
         },
 
         change: function (event, ui) {
-            if (!changed) {
+            if (!changed && !playheadChanged) {
                 changed = true;
                 time = ui.value / 1000;
-                console.log('SMH DEBUG: slider: Change: '+ time);
+                console.log('SMH DEBUG: slider: Change: ' + time);
                 clipApp.kdp.sendNotification("doSeek", time);
             }
-//            time = ui.value / 1000;
-//            clipApp.kdp.sendNotification("doSeek", time);
+            //time = ui.value / 1000;
+            //clipApp.kdp.sendNotification("doSeek", time);
         }
     });
     $("#jqclip").hide();
@@ -654,5 +667,7 @@ ttipUpdate = function () {
 }
 
 SMHupdatePlayhead = function (x) {
+    console.log('SMH DEBUG: SMHupdatePlayhead: ');
+    console.log(x);
     $("#jqui").slider("option", "value", x);
 }
