@@ -27,7 +27,6 @@ class entries {
     protected $stats_perm;
     protected $download_perm;
     protected $flavors_perm;
-    private $_link;
     protected $sn;
 
     public function __construct() {
@@ -51,7 +50,6 @@ class entries {
         $this->stats_perm = $_POST['stats_perm'];
         $this->download_perm = $_POST['download_perm'];
         $this->sn = $_POST['sn'];
-        $this->_link = @mysqli_connect("127.0.0.1", "kaltura", "nUKFRl7bE9hShpV", "kaltura", 3307) or die('Unable to establish a DB connection');
     }
 
     //run
@@ -63,21 +61,6 @@ class entries {
             default:
                 echo "Action not found!";
         }
-    }
-
-    public function getImportUrl($pid, $entry_id) {
-        $result_arr = array();
-        $query1 = "SELECT * FROM `bulk_upload_result` WHERE partner_id = " . $pid . " AND object_id = '" . $entry_id . "'";
-        $result = mysqli_query($this->_link, $query1) or die('Query failed: ' . mysqli_error());
-        $result_array = mysqli_fetch_assoc($result);
-        $xml = new SimpleXMLElement($result_array['row_data']);
-        $url = $xml->contentAssets->content->urlContentResource->attributes()->url;
-        $result_arr['url'] = $url;
-        $query2 = "SELECT * FROM `flavor_asset` WHERE partner_id = " . $pid . " AND entry_id = '" . $entry_id . "'";
-        $result = mysqli_query($this->_link, $query2) or die('Query failed: ' . mysqli_error());
-        $result_array = mysqli_fetch_assoc($result);
-        $result_arr['flavor_id'] = $result_array['id'];
-        return $result_arr;
     }
 
     public function getEntriesTable() {
