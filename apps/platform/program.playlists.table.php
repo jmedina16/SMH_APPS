@@ -75,6 +75,7 @@ class playlists {
 
         $totalCount = 0;
         foreach ($result->objects as $entry) {
+            $row = array();
             if ($entry->playlistType == '3') {
                 $totalCount++;
                 $manual_playlist = explode(',', $entry->playlistContent);
@@ -87,15 +88,15 @@ class playlists {
                     $manual_playlist_final_count = count($manual_playlist_final);
                     foreach ($manual_playlist_final as $id) {
                         if ($manual_playlist_final_count == 1) {
-                            $thumbnails .= '<img onerror="smhMain.imgError(this)" src="/p/' . $entry->partnerId . '/thumbnail/entry_id/' . $id . '/quality/100/type/3/width/300/height/90" width="100%" height="90">';
+                            $thumbnails .= '<img onerror="smhMain.imgError(this)" src="/p/' . $entry->partnerId . '/thumbnail/entry_id/' . $id . '/quality/100/type/3/width/300/height/90" width="100%" height="68">';
                         } else if ($manual_playlist_final_count == 2) {
-                            $thumbnails .= '<img onerror="smhMain.imgError(this)" src="/p/' . $entry->partnerId . '/thumbnail/entry_id/' . $id . '/quality/100/type/3/width/300/height/90" width="50%" height="90">';
+                            $thumbnails .= '<img onerror="smhMain.imgError(this)" src="/p/' . $entry->partnerId . '/thumbnail/entry_id/' . $id . '/quality/100/type/3/width/300/height/90" width="50%" height="68">';
                         } else if ($manual_playlist_final_count == 3) {
-                            $thumbnails .= '<img onerror="smhMain.imgError(this)" src="/p/' . $entry->partnerId . '/thumbnail/entry_id/' . $id . '/quality/100/type/3/width/300/height/90" width="33.33%" height="90">';
+                            $thumbnails .= '<img onerror="smhMain.imgError(this)" src="/p/' . $entry->partnerId . '/thumbnail/entry_id/' . $id . '/quality/100/type/3/width/300/height/90" width="33.33%" height="68">';
                         } else if ($manual_playlist_final_count == 4) {
-                            $thumbnails .= '<img onerror="smhMain.imgError(this)" src="/p/' . $entry->partnerId . '/thumbnail/entry_id/' . $id . '/quality/100/type/1/width/300/height/90" width="25%" height="90">';
+                            $thumbnails .= '<img onerror="smhMain.imgError(this)" src="/p/' . $entry->partnerId . '/thumbnail/entry_id/' . $id . '/quality/100/type/1/width/300/height/90" width="25%" height="68">';
                         } else if ($manual_playlist_final_count == 5) {
-                            $thumbnails .= '<img onerror="smhMain.imgError(this)" src="/p/' . $entry->partnerId . '/thumbnail/entry_id/' . $id . '/quality/100/type/1/width/300/height/90" width="20%" height="90">';
+                            $thumbnails .= '<img onerror="smhMain.imgError(this)" src="/p/' . $entry->partnerId . '/thumbnail/entry_id/' . $id . '/quality/100/type/1/width/300/height/90" width="20%" height="68">';
                         }
                     }
                 }
@@ -109,9 +110,7 @@ class playlists {
                     $entry_name = substr($entry_name, 0, 44) . "...";
                 }
 
-                $playlist = '<div class="playlist-wrapper">
-                <div class="play-wrapper">
-                    <i style="top: 18px;" class="play-button"></i></div>
+                $playlist = '<div class="cm-playlist-wrapper">
                     <div class="thumbnail-holder">' . $thumbnails . '</div>
                     <div class="videos-num">' . $video_count . ' Videos</div>
                 </div>';
@@ -123,19 +122,19 @@ class playlists {
                         <div>" . $entry_name . "</div>
                     </div>
                     <div class='entry-subdetails'>
-                        <span style='width: 85px; display: inline-block;'>Entry ID:</span><span>" . $entry->id . "</span>
+                        <span style='width: 65px; display: inline-block;'>Playlist ID:</span><span>" . $entry->id . "</span>
                     </div>
                     <div class='entry-subdetails'>
-                        <span style='width: 85px; display: inline-block;'>Created on:</span><span>" . $newDatetime . "</span>
+                        <span style='width: 65px; display: inline-block;'>Created on:</span><span>" . $newDatetime . "</span>
                     </div>
                 </div>
                 <div class='clear'></div>
                 </div>";
-            }
 
-            $row[] = "<input type='radio' class='program-entry' name='program_list' style='width=33px' value='" . $entry->id . ";" . $entry->name . "' />";
-            $row[] = $entry_container;
-            $output['data'][] = $row;
+                $row[] = "<input type='radio' class='program-entry' name='program_list' style='width=33px' value='" . $entry->id . ";" . $entry->name . "' />";
+                $row[] = $entry_container;
+                $output['data'][] = $row;
+            }
         }
 
         $output["recordsTotal"] = intval($totalCount);
