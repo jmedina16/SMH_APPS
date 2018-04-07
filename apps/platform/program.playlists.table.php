@@ -76,6 +76,8 @@ class playlists {
         $totalCount = 0;
         foreach ($result->objects as $entry) {
             $row = array();
+            $duration = 0;
+            $pthumb = '';
             if ($entry->playlistType == '3') {
                 $totalCount++;
                 $manual_playlist = explode(',', $entry->playlistContent);
@@ -86,6 +88,7 @@ class playlists {
                 } else {
                     $manual_playlist_final = array_slice($manual_playlist, 0, 5);
                     $manual_playlist_final_count = count($manual_playlist_final);
+                    $pthumb = $manual_playlist_final[0];
                     foreach ($manual_playlist_final as $id) {
                         if ($manual_playlist_final_count == 1) {
                             $thumbnails .= '<img onerror="smhMain.imgError(this)" src="/p/' . $entry->partnerId . '/thumbnail/entry_id/' . $id . '/quality/100/type/3/width/300/height/90" width="100%" height="68">';
@@ -98,6 +101,12 @@ class playlists {
                         } else if ($manual_playlist_final_count == 5) {
                             $thumbnails .= '<img onerror="smhMain.imgError(this)" src="/p/' . $entry->partnerId . '/thumbnail/entry_id/' . $id . '/quality/100/type/1/width/300/height/90" width="20%" height="68">';
                         }
+                    }
+
+                    foreach ($manual_playlist as $eid) {
+                        $version = null;
+                        $entry_result = $client->baseEntry->get($eid, $version);
+                        $duration += (int) $entry_result->duration;
                     }
                 }
 
@@ -115,7 +124,7 @@ class playlists {
                     <div class="videos-num">' . $video_count . ' Videos</div>
                 </div>';
 
-                $entry_container = "<div class='entry-wrapper' data-playlistid=" . $entry->id . ">" .
+                $entry_container = "<div class='entry-wrapper' data-playlistid=" . $entry->id . " data-duration=" . $duration . ">" .
                         $playlist .
                         "<div class='entry-details'>
                     <div class='entry-name'>
@@ -131,7 +140,7 @@ class playlists {
                 <div class='clear'></div>
                 </div>";
 
-                $row[] = "<input type='checkbox' class='program-entry' name='program_list' style='width=33px' value='" . $entry->id . ";" . $entry->name . ";" . $manual_playlist_final[0] . "' />";
+                $row[] = "<input type='checkbox' class='program-entry' name='program_list' style='width=33px' value='" . $entry->id . ";" . $entry->name . ";" . $duration . ";" . $pthumb . "' />";
                 $row[] = $entry_container;
                 $output['data'][] = $row;
             }
