@@ -131,7 +131,7 @@ class playlists {
                 <div class='clear'></div>
                 </div>";
 
-                $row[] = "<input type='radio' class='program-entry' name='program_list' style='width=33px' value='" . $entry->id . ";" . $entry->name . "' />";
+                $row[] = "<input type='checkbox' class='program-entry' name='program_list' style='width=33px' value='" . $entry->id . ";" . $entry->name . ";" . $manual_playlist_final[0] . "' />";
                 $row[] = $entry_container;
                 $output['data'][] = $row;
             }
