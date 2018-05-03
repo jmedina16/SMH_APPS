@@ -292,23 +292,20 @@ clipApp.setStartTime = function (val) {
     var startTime = Math.round(val);
     if (!clipApp.checkClipDuration(startTime, 'start')) {
         if (!isNaN(startTime)) {
-            console.log('SMH DEBUG: inside1')
-            console.log(clipApp.vars.lastStartTime)
-            $("#startTime").timeStepper('setValue', clipApp.vars.lastStartTime);
-            // Range Slider update
-            //$('#jqclip').slider("values", 0, clipApp.vars.lastStartTime);
-            $('#jqclip').slider("values", clipApp.vars.lastStartTime);
-            // Main slider
-            $('#jqui').slider("value", clipApp.vars.lastStartTime);
-            // tooltips
-            ttipUpdate();
+            if (clipApp.vars.lastStartTime) {
+                $("#startTime").timeStepper('setValue', clipApp.vars.lastStartTime);
+                // Range Slider update
+                //$('#jqclip').slider("values", 0, clipApp.vars.lastStartTime);
+                $('#jqclip').slider("values", clipApp.vars.lastStartTime);
+                // Main slider
+                $('#jqui').slider("value", clipApp.vars.lastStartTime);
+                // tooltips
+                ttipUpdate();
+                return;
+            }
         }
-        return;
     }
-    console.log('SMH DEBUG: setStartTime')
-    console.log(startTime)
     if (!isNaN(startTime)) {
-        console.log('SMH DEBUG: inside2')
         var clipAttributes = {
             offset: startTime,
             duration: $("#endTime").timeStepper('getValue') - startTime
@@ -327,12 +324,14 @@ clipApp.setStartTime = function (val) {
 clipApp.setEndTime = function (val) {
     var endTime = Math.round(val);
     if (!clipApp.checkClipDuration(endTime, 'end')) {
-        $("#endTime").timeStepper('setValue', clipApp.vars.lastEndTime);
-        // Range Slider update
-        $('#jqclip').slider("values", 1, clipApp.vars.lastEndTime);
-        // tooltips
-        ttipUpdate();
-        return;
+        if (clipApp.vars.lastEndTime) {
+            $("#endTime").timeStepper('setValue', clipApp.vars.lastEndTime);
+            // Range Slider update
+            $('#jqclip').slider("values", 1, clipApp.vars.lastEndTime);
+            // tooltips
+            ttipUpdate();
+            return;
+        }
     }
 
     if (!isNaN(endTime)) {
