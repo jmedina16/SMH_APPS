@@ -291,29 +291,37 @@ clipApp.updateEndTime = function (clip) {
 clipApp.setStartTime = function (val) {
     var startTime = Math.round(val);
     if (!clipApp.checkClipDuration(startTime, 'start')) {
-        $("#startTime").timeStepper('setValue', clipApp.vars.lastStartTime);
-        // Range Slider update
-        //$('#jqclip').slider("values", 0, clipApp.vars.lastStartTime);
-        $('#jqclip').slider("values", clipApp.vars.lastStartTime);
-        // Main slider
-        $('#jqui').slider("value", clipApp.vars.lastStartTime);
-        // tooltips
-        ttipUpdate();
+        if (!isNaN(startTime)) {
+            console.log('SMH DEBUG: inside1')
+            console.log(clipApp.vars.lastStartTime)
+            $("#startTime").timeStepper('setValue', clipApp.vars.lastStartTime);
+            // Range Slider update
+            //$('#jqclip').slider("values", 0, clipApp.vars.lastStartTime);
+            $('#jqclip').slider("values", clipApp.vars.lastStartTime);
+            // Main slider
+            $('#jqui').slider("value", clipApp.vars.lastStartTime);
+            // tooltips
+            ttipUpdate();
+        }
         return;
     }
+    console.log('SMH DEBUG: setStartTime')
+    console.log(startTime)
+    if (!isNaN(startTime)) {
+        console.log('SMH DEBUG: inside2')
+        var clipAttributes = {
+            offset: startTime,
+            duration: $("#endTime").timeStepper('getValue') - startTime
+        };
 
-    var clipAttributes = {
-        offset: startTime,
-        duration: $("#endTime").timeStepper('getValue') - startTime
-    };
-
-    // SMH Mod
-    //clipApp.kClip.updateClipAttributes( clipAttributes );
-    clipApp.updateClip(clipAttributes);
-    time = startTime / 1000;
-    $('#jqui').slider("value", startTime);
-    clipApp.kdp.sendNotification("doSeek", time);
-    clipApp.kdp.sendNotification("doPause");
+        // SMH Mod
+        //clipApp.kClip.updateClipAttributes( clipAttributes );
+        clipApp.updateClip(clipAttributes);
+        time = startTime / 1000;
+        $('#jqui').slider("value", startTime);
+        clipApp.kdp.sendNotification("doSeek", time);
+        clipApp.kdp.sendNotification("doPause");
+    }
 };
 
 clipApp.setEndTime = function (val) {
@@ -327,15 +335,17 @@ clipApp.setEndTime = function (val) {
         return;
     }
 
-    var clipAttributes = {
-        offset: $("#startTime").timeStepper('getValue'),
-        duration: endTime - $("#startTime").timeStepper('getValue')
-    };
+    if (!isNaN(endTime)) {
+        var clipAttributes = {
+            offset: $("#startTime").timeStepper('getValue'),
+            duration: endTime - $("#startTime").timeStepper('getValue')
+        };
 
-    // SMH Mod
-    //clipApp.kClip.updateClipAttributes( clipAttributes );
-    clipApp.updateClip(clipAttributes);
-    clipApp.kdp.sendNotification("doPause");
+        // SMH Mod
+        //clipApp.kClip.updateClipAttributes( clipAttributes );
+        clipApp.updateClip(clipAttributes);
+        clipApp.kdp.sendNotification("doPause");
+    }
 };
 
 clipApp.activateButtons = function () {
@@ -350,6 +360,7 @@ clipApp.activateButtons = function () {
     });
 
     $("#setStartTime").click(function () {
+        console.log('SMH DEBUG CLICK')
         //clipApp.setStartTime(clipApp.kClip.getPlayheadLocation());
         clipApp.setStartTime(clipApp.getPlayLocation());
     });
