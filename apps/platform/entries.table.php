@@ -294,11 +294,16 @@ class entries {
 
             $preview_arr = $entry->id . '\',\'' . htmlspecialchars(addslashes($entry->name), ENT_QUOTES) . '\',\'' . $platforms_preview_embed;
 
+            $thumb_type = 1;
+            if ($entry->mediaType == '2') {
+                $thumb_type = 2;
+            }
+
             $entry_thumbnail = '<div class="entries-wrapper">
         <div class="play-wrapper">
             <a onclick="smhContent.previewEmbed(\'' . $preview_arr . '\');">
                 <i style="top: 18px;" class="play-button"></i></div>
-                <div class="thumbnail-holder"><img onerror="smhMain.imgError(this)" src="' . $thumbnail_url . '/quality/100/type/1/width/300/height/90" width="150" height="110" onmouseover="smhContent.thumbRotatorStart(this)" onmouseout="smhContent.thumbRotatorEnd(this)"></div>
+                <div class="thumbnail-holder"><img onerror="smhMain.imgError(this)" src="' . $thumbnail_url . '/quality/100/type/' . $thumb_type . '/width/300/height/90" width="150" height="110" onmouseover="smhContent.thumbRotatorStart(this)" onmouseout="smhContent.thumbRotatorEnd(this)"></div>
                 ' . $duration . '
             </a>
         </div>';
