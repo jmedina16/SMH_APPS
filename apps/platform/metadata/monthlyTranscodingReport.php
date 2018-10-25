@@ -84,47 +84,70 @@ class transcodeReport {
         $date = date('Y-m-d H:i:s');
         print($date . " [transcodeReport->build_report] INFO: Building report.. \n");
         $transcoding_data = $this->get_transcoding_data($partnerData);
-        $months = $this->get_months();
+        //$months = $this->get_months();
 
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->setActiveSheetIndex(0)
-                ->setCellValue('A1', 'Account')
-                ->setCellValue('B1', 'PartnerId')
-                ->setCellValue('C1', 'Transcoding Limit');
+                ->setCellValue('A1', 'Account ID')
+                ->setCellValue('B1', 'Account Name')
+                ->setCellValue('C1', 'SD Minutes Used')
+                ->setCellValue('D1', 'HD Minutes Used')
+                ->setCellValue('E1', 'UHD Minutes Used')
+                ->setCellValue('F1', 'Audio Only Minutes Used')
+                ->setCellValue('G1', 'Transcoding Limit')
+                ->setCellValue('H1', 'Transcoding Overage');
 
-        $l = 'D';
-        foreach ($months as $month) {
-            $objPHPExcel->setActiveSheetIndex(0)
-                    ->setCellValue($l . '1', $month);
-            $l++;
-        }
+//        $l = 'D';
+//        foreach ($months as $month) {
+//            $objPHPExcel->setActiveSheetIndex(0)
+//                    ->setCellValue($l . '1', $month);
+//            $l++;
+//        }
 
         $i = 2;
         $month_count;
+        $lastMonth = $this->getMonthYear();
         foreach ($transcoding_data as $value) {
             $l = 'D';
             $month_count = 0;
             $objPHPExcel->setActiveSheetIndex(0)
-                    ->setCellValue('A' . $i, $value['partner_name'])
-                    ->setCellValue('B' . $i, $value['partner_id'])
-                    ->setCellValue('C' . $i, $value['transcoding_limit']);
+                    ->setCellValue('A' . $i, $value['partner_id'])
+                    ->setCellValue('B' . $i, $value['partner_name'])
+                    ->setCellValue('G' . $i, $value['transcoding_limit']);
             foreach ($value['months'] as $value) {
-                if ($month_count == count($months))
-                    break;
-                $objPHPExcel->setActiveSheetIndex(0)
-                        ->setCellValue($l . $i, $value['value']);
-                $l++;
-                $month_count++;
+
+                if ($value['month'] == $lastMonth) {
+                    $objPHPExcel->setActiveSheetIndex(0)
+                            ->setCellValue('C' . $i, $value['sd_duration'])
+                            ->setCellValue('D' . $i, $value['hd_duration'])
+                            ->setCellValue('E' . $i, $value['uhd_duration'])
+                            ->setCellValue('F' . $i, $value['audio_duration']);
+                }
+
+//                if ($month_count == count($months))
+//                    break;
+//                $objPHPExcel->setActiveSheetIndex(0)
+//                        ->setCellValue($l . $i, $value['value']);
+//                $l++;
+//                $month_count++;
             }
             $i++;
         }
 
-        $objPHPExcel->getActiveSheet()->setTitle('Transcoding_Report');
+        $objPHPExcel->getActiveSheet()->setTitle('transcodingOverage-' . $lastMonth);
         $objPHPExcel->setActiveSheetIndex(0);
 
-        $filename = 'transcoding_report_' . date('m-d-Y_H_i_s') . '.xlsx';
+        $filename = 'monthlyTranscodingOverage-' . $lastMonth . '.xlsx';
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
         $objWriter->save($filename);
+    }
+
+    public function getMonthYear() {
+        $now = new \DateTime('last day of last month');
+        $month = $now->format('m');
+        $year = $now->format('Y');
+
+        return "$year-$month";
     }
 
     public function get_months() {
@@ -164,26 +187,26 @@ class transcodeReport {
         $current_month = date('n');
         foreach ($partnerData as $partner) {
             $transcoding_data = array();
-            //if ($partner['partnerId'] == 13373 || $partner['partnerId'] == 10012) {
-            if ($current_month == 1) {
-                $previous_year = date("Y", strtotime("-1 years"));
-                $url1 = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getMonthlyStats.php?pid=' . $partner['partnerId'] . '&year=' . $previous_year;
-            } else {
-                $url1 = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getMonthlyStats.php?pid=' . $partner['partnerId'];
-            }
-            $url2 = 'http://10.5.25.17/index.php/api/accounts/limits/' . $partner['partnerId'] . '.json';
-            $partner_stats = json_decode($this->curl_request($url1));
-            $transcoding_stats = json_decode($this->curl_request($url2));
-            $transcoding = $partner_stats->result->transcoding;
-            foreach ($transcoding as $data) {
-                array_push($transcoding_data, array('month' => $data->date, 'value' => $data->value . " GB"));
-            }
-            if (!$transcoding_stats->error) {
-                $transcoding_limit = ($transcoding_stats[0]->transcoding_limit == 0) ? 'unlimited' : $transcoding_stats[0]->transcoding_limit . ' GB';
-            }
+            if ($partner['partnerId'] == 13373 || $partner['partnerId'] == 10012) {
+                if ($current_month == 1) {
+                    $previous_year = date("Y", strtotime("-1 years"));
+                    $url1 = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getMonthlyStats.php?pid=' . $partner['partnerId'] . '&year=' . $previous_year;
+                } else {
+                    $url1 = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getMonthlyStats.php?pid=' . $partner['partnerId'];
+                }
+                $url2 = 'http://10.5.25.17/index.php/api/accounts/limits/' . $partner['partnerId'] . '.json';
+                $partner_stats = json_decode($this->curl_request($url1));
+                $transcoding_stats = json_decode($this->curl_request($url2));
+                $transcoding = $partner_stats->result->transcoding;
+                foreach ($transcoding as $data) {
+                    array_push($transcoding_data, array('month' => $data->date, 'sd_duration' => $data->sd_duration, 'hd_duration' => $data->hd_duration, 'uhd_duration' => $data->uhd_duration, 'audio_duration' => $data->audio_duration));
+                }
+                if (!$transcoding_stats->error) {
+                    $transcoding_limit = ($transcoding_stats[0]->transcoding_limit == 0) ? 'unlimited' : $transcoding_stats[0]->transcoding_limit . ' Minutes';
+                }
 
-            array_push($partner_data, array('partner_id' => $partner['partnerId'], 'partner_name' => $partner['partnerName'], 'transcoding_limit' => $transcoding_limit, 'months' => $transcoding_data));
-            //}
+                array_push($partner_data, array('partner_id' => $partner['partnerId'], 'partner_name' => $partner['partnerName'], 'transcoding_limit' => $transcoding_limit, 'months' => $transcoding_data));
+            }
         }
         //print_r($partner_data);
         return $partner_data;
