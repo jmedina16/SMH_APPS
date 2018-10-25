@@ -46,7 +46,7 @@ class livestreams {
     public function run() {
         $this->getTable();
     }
-    
+
     public function getTable() {
         $smh_akey = substr(md5(strtolower($this->pid . '-live') . 'aq23df2h'), 0, 8);
         //$streams = $this->getLiveStreams();
@@ -136,7 +136,9 @@ class livestreams {
             }
 
             if ($this->modify_perm) {
-                $edit_arr = $entry->id . '\',\'' . htmlspecialchars(addslashes($entry->name), ENT_QUOTES) . '\',\'' . htmlspecialchars(addslashes($entry->description), ENT_QUOTES) . '\',\'' . htmlspecialchars(addslashes($entry->tags), ENT_QUOTES) . '\',\'' . htmlspecialchars(addslashes($entry->referenceId), ENT_QUOTES) . '\',\'' . htmlspecialchars(addslashes($entry->categories), ENT_QUOTES) . '\',' . $entry->accessControlId;
+                $name = preg_replace('~[\r\n]+~', ' ', $entry->name);
+                $desc = preg_replace('~[\r\n]+~', ' ', $entry->description);
+                $edit_arr = $entry->id . '\',\'' . htmlspecialchars(addslashes($name), ENT_QUOTES) . '\',\'' . htmlspecialchars(addslashes($desc), ENT_QUOTES) . '\',\'' . htmlspecialchars(addslashes($entry->tags), ENT_QUOTES) . '\',\'' . htmlspecialchars(addslashes($entry->referenceId), ENT_QUOTES) . '\',\'' . htmlspecialchars(addslashes($entry->categories), ENT_QUOTES) . '\',' . $entry->accessControlId;
                 $edit_action = '<li role="presentation"><a role="menuitem" tabindex="-1" onclick="smhLS.editMetadata(\'' . $edit_arr . ');">Metadata</a></li>';
             }
 

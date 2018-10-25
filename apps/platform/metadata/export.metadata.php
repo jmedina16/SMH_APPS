@@ -708,7 +708,7 @@ class export {
                 }
             }
 
-            $url = 'http://10.5.22.10/index.php/api/accounts/limits/' . $data->id . '.json';
+            $url = 'http://10.5.25.17/index.php/api/accounts/limits/' . $data->id . '.json';
             $partner_limits = json_decode($this->curl_request($url));
             $bandwidth_limit = ($partner_limits[0]->bandwidth_limit == 0) ? 'unlimited' : number_format($partner_limits[0]->bandwidth_limit) . 'GB';
             $storage_limit = ($partner_limits[0]->storage_limit == 0) ? 'unlimited' : number_format($partner_limits[0]->storage_limit) . 'GB';

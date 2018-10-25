@@ -1,0 +1,245 @@
+@charset "UTF-8";
+/*
+ * jQuery File Upload Plugin CSS Example 8.8.2
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2013, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+*/
+
+body {
+    padding-top: 0px;
+    overflow-x:hidden;
+}
+
+.container {
+    max-width: unset !important;
+}
+
+.col-lg-7{
+    width: 100% !important;
+}
+
+#dropzone{
+    width: auto;
+    height: auto;
+    border: dashed 3px #999999;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    padding: 30px;
+    text-align: center;
+    background-color: #F5F5F5;
+}
+
+#dropzone .glyphicon-cloud-upload{
+    font-size: 40px;
+    color: #999;
+}
+
+#dropzone #upload-head, #dropzone #upload-head h4{
+    font-size: 25px;
+    color: #999;
+    margin-bottom: 13px;
+}
+
+#dropzone #upload-head2{
+    font-size: 15px;
+    font-weight: bold;
+    color: #999;
+    margin-bottom: 13px;
+}
+
+.template-upload .start{
+    display: none;
+}
+
+#fileupload{
+    width: 98%;
+    height: 94%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+#fileupload td {
+    padding-bottom: 20px!important;
+    padding-right: 10px;
+    vertical-align: middle;
+}
+
+#fileupload tr {
+    border-top: 10px solid #FFFFFF;
+}
+
+#fileupload .table .upload-btn {
+    float: right;
+}
+
+#fileupload .progress {
+    max-width: 400px;
+    background-color: #e7e7e7;
+}
+
+#fileupload .upload-finish{
+    text-align: left;
+}
+
+#fileupload .upload-finish h4{
+    font-weight: bold;
+}
+
+.files .name {
+    word-wrap: break-word;
+    width: 290px;
+    font-weight: bold;
+}
+
+.fileupload-progress {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.required:after { 
+    color: #d00;
+    content: "*";
+    font-size: 21px;
+    margin-left: 2px;
+    position: relative;
+    top: 3px;
+}
+
+.upload-btn-success{
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    color: #fff;
+}
+
+#fileupload .btn-primary{
+    background-color: #428bca !important;
+    border-color: #357ebd !important;
+    color: #fff !important;
+    background-image: none !important;
+    text-shadow: none !important;
+}
+
+.upload-btn-warning{
+    background-color: #f0ad4e;
+    border-color: #eea236;
+    color: #fff;
+}
+
+.upload-btn{
+    border-image: none;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px !important;
+    font-weight: bold;
+    line-height: 20px;
+    margin: 2px;
+    padding: 4px 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#fileupload .btn{
+    border-image: none !important;
+    border-radius: 4px !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    color: #fff !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    line-height: 20px !important;
+    margin: 2px !important;
+    padding: 4px 12px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    box-shadow: none !important;
+    background-image: none !important;
+    text-shadow: none !important;
+}
+
+.upload-btn-success:hover, .upload-btn-success:focus, .upload-btn-success:active, .upload-btn-success.active, .upload-btn-success.disabled, .upload-btn-success[disabled] {
+    background-color: #51a351;
+    color: #fff;
+}
+
+#fileupload .btn-primary:hover, #fileupload .btn-primary:focus, .btn-primary:active {
+    background-color: #3071a9 !important;
+    border-color: #285e8e !important;
+    color: #fff !important;
+}
+
+.upload-btn-warning:hover, .upload-btn-warning:focus, .upload-btn-warning:active, .upload-btn-warning.active, .upload-btn-warning.disabled, .upload-btn-warning[disabled] {
+    background-color: #ec971f;
+    border-color: #d58512;
+    color: #fff;
+}
+
+#fileupload table{
+    border: 0;
+}
+
+#fileupload .table th, #fileupload .table td{
+    border-top: 0;
+}
+
+#fileupload .table-striped tbody > tr:nth-child(2n) > td, #fileupload .table-striped tbody > tr:nth-child(2n) > th{
+    background-color: #F5F5F5 !important;
+}
+
+#smh-upload-modal{
+    padding-bottom: 0 !important; 
+}
+
+#fileupload .preview audio, #fileupload .preview canvas, #fileupload .preview video{
+    width: 300px !important;
+}
+
+#fileupload .progress-bar-success {
+    background-color: #5cb85c;
+}
+
+#fileupload .progress {
+    margin-top: 10px !important;
+    margin-bottom: 0 !important;
+}
+
+#fileupload .progress.active .progress-bar, #fileupload .progress-bar.active {
+    animation: 2s linear 0s normal none infinite running progress-bar-stripes;
+}
+
+#fileupload .progress-striped .progress-bar-success {
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+#fileupload .progress-striped .progress-bar, #fileupload .progress-bar-striped {
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-size: 40px 40px;
+}
+
+#fileupload .progress-bar {
+    background-color: #5cb85c;
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15) inset;
+    color: #fff;
+    float: left;
+    font-size: 12px;
+    height: 100%;
+    line-height: 20px;
+    text-align: center;
+    transition: width 0.6s ease 0s;
+    width: 0;
+}
+
+#smh-upload-modal .modal-body{
+    max-height: 638px !important;
+}

@@ -161,7 +161,7 @@ class reseller {
                 }
             }
 
-            $url = 'http://10.5.22.10/index.php/api/accounts/limits/' . $partner->id . '.json';
+            $url = 'http://10.5.25.17/index.php/api/accounts/limits/' . $partner->id . '.json';
             $partner_limits = json_decode($this->curl_request($url));
             $bandwidth_limit = ($partner_limits[0]->bandwidth_limit == 0) ? 'unlimited' : number_format($partner_limits[0]->bandwidth_limit) . 'GB';
             $bandwidth_limit_gb = $partner_limits[0]->bandwidth_limit;
@@ -288,7 +288,7 @@ class reseller {
 
     public function get_user_limits() {
         $user_limits = array();
-        $url = 'http://10.5.22.10/index.php/api/accounts/limits/' . $this->parent_id . '.json';
+        $url = 'http://10.5.25.17/index.php/api/accounts/limits/' . $this->parent_id . '.json';
         $user_limits = json_decode($this->curl_request($url));
         $bandwidth_limit = ($user_limits[0]->bandwidth_limit == 0) ? 'unlimited' : number_format($user_limits[0]->bandwidth_limit) . 'GB';
         $storage_limit = ($user_limits[0]->storage_limit == 0) ? 'unlimited' : number_format($user_limits[0]->storage_limit) . 'GB';
@@ -306,7 +306,7 @@ class reseller {
         $bandwidth_limit_total = 0;
         foreach ($child_ids as $child) {
             $url = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getStats.php?pid=' . $child;
-            $limits_url = 'http://10.5.22.10/index.php/api/accounts/limits/' . $child . '.json';
+            $limits_url = 'http://10.5.25.17/index.php/api/accounts/limits/' . $child . '.json';
             $partner_stats = json_decode($this->curl_request($url));
             $partner_limits = json_decode($this->curl_request($limits_url));
             $storage_limit_total += $partner_limits[0]->storage_limit;

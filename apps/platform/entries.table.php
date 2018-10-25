@@ -348,7 +348,9 @@ class entries {
             }
 
             if ($this->modify_perm) {
-                $edit_arr = $entry->id . '\',\'' . htmlspecialchars(addslashes($entry->name), ENT_QUOTES) . '\',\'' . htmlspecialchars(addslashes($entry->description), ENT_QUOTES) . '\',\'' . htmlspecialchars(addslashes($entry->tags), ENT_QUOTES) . '\',\'' . htmlspecialchars(addslashes($entry->referenceId), ENT_QUOTES) . '\',\'' . htmlspecialchars(addslashes($entry->categories), ENT_QUOTES) . '\',' . $entry->accessControlId;
+                $name = preg_replace('~[\r\n]+~', ' ', $entry->name);
+                $desc = preg_replace('~[\r\n]+~', ' ', $entry->description);
+                $edit_arr = $entry->id . '\',\'' . htmlspecialchars(addslashes($name), ENT_QUOTES) . '\',\'' . htmlspecialchars(addslashes($desc), ENT_QUOTES) . '\',\'' . htmlspecialchars(addslashes($entry->tags), ENT_QUOTES) . '\',\'' . htmlspecialchars(addslashes($entry->referenceId), ENT_QUOTES) . '\',\'' . htmlspecialchars(addslashes($entry->categories), ENT_QUOTES) . '\',' . $entry->accessControlId;
                 $edit_action = '<li role="presentation"><a role="menuitem" tabindex="-1" onclick="smhContent.editMetadata(\'' . $edit_arr . ');">Metadata</a></li>';
                 $chapters_action = '<li role="presentation"><a role="menuitem" tabindex="-1" onclick="smhContent.chaptersPlugin(\'' . $entry->id . '\');">Chapters</a></li>';
                 $survey_action = '<li role="presentation"><a role="menuitem" tabindex="-1" onclick="smhContent.surveyPlugin(\'' . $entry->id . '\');">Survey</a></li>';
