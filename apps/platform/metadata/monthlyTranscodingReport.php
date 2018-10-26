@@ -61,9 +61,13 @@ class transcodeReport {
         }
 
         $partnerData = $this->getPartnerIds();
-        $resellerAccounts = $this->getResellerAccounts($partnerData);
+        $childData = $this->getChildAccounts();
+
+        $combindAccounts = $this->combindAccounts($partnerData, $childData);
+
+        //$resellerAccounts = $this->getResellerAccounts($partnerData);
         //print_r($partnerData);
-        $this->build_report($partnerData, $resellerAccounts, $yearmonth);
+        $this->build_report($combindAccounts, $resellerAccounts, $yearmonth);
 
         $stop_time = MICROTIME(TRUE);
 
@@ -82,11 +86,11 @@ class transcodeReport {
             $stmt = $this->link->prepare("SET SESSION wait_timeout = 600");
             $stmt->execute();
 
-            $partnerIds_query = $this->link->prepare("SELECT * FROM partner WHERE status IN (1,2) AND id NOT IN (0,-1,-2,-3,-4,-5,99,10364)");
+            $partnerIds_query = $this->link->prepare("SELECT * FROM partner WHERE status IN (1,2) AND id NOT IN (0,-1,-2,-3,-4,-5,99,10364) AND (partner_parent_id IS NULL OR partner_parent_id = 0)");
             $partnerIds_query->execute();
             $partner_array = array();
             foreach ($partnerIds_query->fetchAll(PDO::FETCH_OBJ) as $row) {
-                array_push($partner_array, array('partnerId' => $row->id, 'partnerName' => $row->partner_name));
+                array_push($partner_array, array('partnerId' => $row->id, 'partnerName' => $row->partner_name, 'childAccounts' => array()));
             }
 
             return $partner_array;
@@ -98,16 +102,50 @@ class transcodeReport {
 
     public function getResellerAccounts($partnerData) {
         $reseller_accounts = array();
-        $url = 'http://10.5.25.17/index.php/api/reseller/list.json';
+        $url1 = 'http://10.5.25.17/index.php/api/reseller/list.json';
         foreach ($partnerData as $partner) {
-            $url = 'http://10.5.25.17/index.php/api/accounts/pid/' . $partner['partnerId'] . '.json';
-            $services = json_decode($this->curl_request($url));
+            $url2 = 'http://10.5.25.17/index.php/api/accounts/pid/' . $partner['partnerId'] . '.json';
+            $services = json_decode($this->curl_request($url2));
             if (property_exists($services, 'portal_reseller') && $services->portal_reseller == 1) {
                 array_push($reseller_accounts, $partner['partnerId']);
             }
         }
 
         return $reseller_accounts;
+    }
+
+    public function getChildAccounts() {
+        $date = date('Y-m-d H:i:s');
+        print($date . " [transcodeReport->getChildAccounts] INFO: Searching for partnerIds.. \n");
+
+        try {
+            $stmt = $this->link->prepare("SET SESSION wait_timeout = 600");
+            $stmt->execute();
+
+            $partnerIds_query = $this->link->prepare("SELECT * FROM partner WHERE status IN (1,2) AND id NOT IN (0,-1,-2,-3,-4,-5,99,10364) AND partner_parent_id IS NOT NULL AND partner_parent_id != 0");
+            $partnerIds_query->execute();
+            $partner_array = array();
+            foreach ($partnerIds_query->fetchAll(PDO::FETCH_OBJ) as $row) {
+                array_push($partner_array, array('partnerId' => $row->id, 'partnerName' => $row->partner_name, 'partnerParentId' => $row->partner_parent_id));
+            }
+
+            return $partner_array;
+        } catch (PDOException $e) {
+            $date = date('Y-m-d H:i:s');
+            print($date . " [transcodeReport->getChildAccounts] ERROR: Could not execute query (Search Partner Ids): " . $e->getMessage() . "\n");
+        }
+    }
+
+    public function combindAccounts($partnerData, $childData) {
+        foreach ($childData as $child) {
+            foreach ($partnerData as &$partner) {
+                if ($child['partnerParentId'] == $partner['partnerId']) {
+                    array_push($partner['childAccounts'], array('childId' => $child['partnerId'], 'childName' => $child['partnerName']));
+                }
+            }
+        }
+        //print_r($partnerData);
+        return $partnerData;
     }
 
     public function build_report($partnerData, $resellerAccounts, $yearmonth) {
@@ -211,10 +249,8 @@ class transcodeReport {
         $partner_data = array();
         $transcoding_data = array();
         $current_month = date('n');
-        $is_reseller = 0;
         foreach ($partnerData as $partner) {
             $transcoding_data = array();
-            $is_reseller = 0;
             if ($partner['partnerId'] == 13373 || $partner['partnerId'] == 10012 || $partner['partnerId'] == 12923) {
                 if ($current_month == 1) {
                     $previous_year = date("Y", strtotime("-1 years"));
@@ -232,13 +268,47 @@ class transcodeReport {
                 if (!$transcoding_stats->error) {
                     $transcoding_limit = ($transcoding_stats[0]->transcoding_limit == 0) ? 'unlimited' : $transcoding_stats[0]->transcoding_limit . ' Minutes';
                 }
-                if (in_array($partner['partnerId'], $resellerAccounts)) {
-                    $is_reseller = 1;
+                array_push($partner_data, array('partner_id' => $partner['partnerId'], 'partner_name' => $partner['partnerName'], 'transcoding_limit' => $transcoding_limit, 'is_child' => 0, 'months' => $transcoding_data));
+                if (count($partner['childAccounts']) > 0) {
+                    //print_r($partner['childAccounts']);
+                    $childData = $this->get_child_transcoding_data($partner['childAccounts']);
+                    array_push($partner_data, array('partner_id' => $childData['partner_id'], 'partner_name' => $childData['partner_name'], 'transcoding_limit' => $childData['transcoding_limit'], 'is_child' => 1, 'months' => $childData['months']));
                 }
-                array_push($partner_data, array('partner_id' => $partner['partnerId'], 'partner_name' => $partner['partnerName'], 'transcoding_limit' => $transcoding_limit, 'is_reseller' => $is_reseller, 'months' => $transcoding_data));
             }
         }
         print_r($partner_data);
+        return $partner_data;
+    }
+
+    public function get_child_transcoding_data($partnerData) {
+        $date = date('Y-m-d H:i:s');
+        print($date . " [transcodeReport->get_child_transcoding_data] INFO: Building transcoding data.. \n");
+        $partner_data = array();
+        $transcoding_data = array();
+        $current_month = date('n');
+        foreach ($partnerData as $partner) {
+            $transcoding_data = array();
+            if ($current_month == 1) {
+                $previous_year = date("Y", strtotime("-1 years"));
+                $url1 = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getMonthlyStats.php?pid=' . $partner['childId'] . '&year=' . $previous_year;
+            } else {
+                $url1 = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getMonthlyStats.php?pid=' . $partner['childId'];
+            }
+            $url2 = 'http://10.5.25.17/index.php/api/accounts/limits/' . $partner['childId'] . '.json';
+            $partner_stats = json_decode($this->curl_request($url1));
+            $transcoding_stats = json_decode($this->curl_request($url2));
+            $transcoding = $partner_stats->result->transcoding;
+            foreach ($transcoding as $data) {
+                array_push($transcoding_data, array('month' => $data->date, 'sd_duration' => $data->sd_duration, 'hd_duration' => $data->hd_duration, 'uhd_duration' => $data->uhd_duration, 'audio_duration' => $data->audio_duration));
+            }
+            if (!$transcoding_stats->error) {
+                $transcoding_limit = ($transcoding_stats[0]->transcoding_limit == 0) ? 'unlimited' : $transcoding_stats[0]->transcoding_limit . ' Minutes';
+            }
+            $partner_data['partner_id'] = $partner['childId'];
+            $partner_data['partner_name'] = $partner['childName'];
+            $partner_data['transcoding_limit'] = $transcoding_limit;
+            $partner_data['months'] = $transcoding_data;
+        }
         return $partner_data;
     }
 
