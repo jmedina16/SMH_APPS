@@ -61,7 +61,9 @@ class transcodeReport {
         }
 
         $partnerData = $this->getPartnerIds();
-        $this->build_report($partnerData, $yearmonth);
+        $resellerAccounts = $this->getResellerAccounts($partnerData);
+        print_r($resellerAccounts);
+        //$this->build_report($partnerData, $yearmonth);
 
         $stop_time = MICROTIME(TRUE);
 
@@ -92,6 +94,20 @@ class transcodeReport {
             $date = date('Y-m-d H:i:s');
             print($date . " [transcodeReport->getPartnerIds] ERROR: Could not execute query (Search Partner Ids): " . $e->getMessage() . "\n");
         }
+    }
+
+    public function getResellerAccounts($partnerData) {
+        $reseller_accounts = array();
+        $url = 'http://10.5.25.17/index.php/api/reseller/list.json';
+        foreach ($partnerData as $partner) {
+            $url = 'http://10.5.25.17/index.php/api/accounts/pid/' . $partner['partnerId'] . '.json';
+            $services = json_decode($this->curl_request($url));
+            if(property_exists($services, 'portal_reseller') && $services->portal_reseller == 1){
+                array_push($reseller_accounts,$partner['partnerId']);
+            }
+        }
+        
+        return $reseller_accounts;
     }
 
     public function build_report($partnerData, $yearmonth) {
@@ -195,24 +211,24 @@ class transcodeReport {
         foreach ($partnerData as $partner) {
             $transcoding_data = array();
             //if ($partner['partnerId'] == 13373 || $partner['partnerId'] == 10012) {
-                if ($current_month == 1) {
-                    $previous_year = date("Y", strtotime("-1 years"));
-                    $url1 = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getMonthlyStats.php?pid=' . $partner['partnerId'] . '&year=' . $previous_year;
-                } else {
-                    $url1 = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getMonthlyStats.php?pid=' . $partner['partnerId'];
-                }
-                $url2 = 'http://10.5.25.17/index.php/api/accounts/limits/' . $partner['partnerId'] . '.json';
-                $partner_stats = json_decode($this->curl_request($url1));
-                $transcoding_stats = json_decode($this->curl_request($url2));
-                $transcoding = $partner_stats->result->transcoding;
-                foreach ($transcoding as $data) {
-                    array_push($transcoding_data, array('month' => $data->date, 'sd_duration' => $data->sd_duration, 'hd_duration' => $data->hd_duration, 'uhd_duration' => $data->uhd_duration, 'audio_duration' => $data->audio_duration));
-                }
-                if (!$transcoding_stats->error) {
-                    $transcoding_limit = ($transcoding_stats[0]->transcoding_limit == 0) ? 'unlimited' : $transcoding_stats[0]->transcoding_limit . ' Minutes';
-                }
+            if ($current_month == 1) {
+                $previous_year = date("Y", strtotime("-1 years"));
+                $url1 = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getMonthlyStats.php?pid=' . $partner['partnerId'] . '&year=' . $previous_year;
+            } else {
+                $url1 = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getMonthlyStats.php?pid=' . $partner['partnerId'];
+            }
+            $url2 = 'http://10.5.25.17/index.php/api/accounts/limits/' . $partner['partnerId'] . '.json';
+            $partner_stats = json_decode($this->curl_request($url1));
+            $transcoding_stats = json_decode($this->curl_request($url2));
+            $transcoding = $partner_stats->result->transcoding;
+            foreach ($transcoding as $data) {
+                array_push($transcoding_data, array('month' => $data->date, 'sd_duration' => $data->sd_duration, 'hd_duration' => $data->hd_duration, 'uhd_duration' => $data->uhd_duration, 'audio_duration' => $data->audio_duration));
+            }
+            if (!$transcoding_stats->error) {
+                $transcoding_limit = ($transcoding_stats[0]->transcoding_limit == 0) ? 'unlimited' : $transcoding_stats[0]->transcoding_limit . ' Minutes';
+            }
 
-                array_push($partner_data, array('partner_id' => $partner['partnerId'], 'partner_name' => $partner['partnerName'], 'transcoding_limit' => $transcoding_limit, 'months' => $transcoding_data));
+            array_push($partner_data, array('partner_id' => $partner['partnerId'], 'partner_name' => $partner['partnerName'], 'transcoding_limit' => $transcoding_limit, 'months' => $transcoding_data));
             //}
         }
         //print_r($partner_data);
@@ -229,6 +245,28 @@ class transcodeReport {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $output = curl_exec($ch);
+        curl_close($ch);
+        return $output;
+    }
+
+    public function curl_post_request($url, $post) {
+        // is cURL installed yet?
+        if (!function_exists('curl_init')) {
+            shutdown('Sorry cURL is not installed!');
+        }
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+
+        if (!is_null($post)) {
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+        }
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+
         $output = curl_exec($ch);
         curl_close($ch);
         return $output;
