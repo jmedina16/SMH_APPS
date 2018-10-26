@@ -62,8 +62,8 @@ class transcodeReport {
 
         $partnerData = $this->getPartnerIds();
         $resellerAccounts = $this->getResellerAccounts($partnerData);
-        print_r($partnerData);
-        //$this->build_report($partnerData, $yearmonth);
+        //print_r($partnerData);
+        $this->build_report($partnerData, $resellerAccounts, $yearmonth);
 
         $stop_time = MICROTIME(TRUE);
 
@@ -82,7 +82,7 @@ class transcodeReport {
             $stmt = $this->link->prepare("SET SESSION wait_timeout = 600");
             $stmt->execute();
 
-            $partnerIds_query = $this->link->prepare("SELECT * FROM partner WHERE status IN (1,2) AND id NOT IN (0,-1,-2,-3,-4,-5,99,10364) AND (partner_parent_id IS NULL OR partner_parent_id = 0)");
+            $partnerIds_query = $this->link->prepare("SELECT * FROM partner WHERE status IN (1,2) AND id NOT IN (0,-1,-2,-3,-4,-5,99,10364)");
             $partnerIds_query->execute();
             $partner_array = array();
             foreach ($partnerIds_query->fetchAll(PDO::FETCH_OBJ) as $row) {
@@ -102,54 +102,57 @@ class transcodeReport {
         foreach ($partnerData as $partner) {
             $url = 'http://10.5.25.17/index.php/api/accounts/pid/' . $partner['partnerId'] . '.json';
             $services = json_decode($this->curl_request($url));
-            if(property_exists($services, 'portal_reseller') && $services->portal_reseller == 1){
-                array_push($reseller_accounts,$partner['partnerId']);
+            if (property_exists($services, 'portal_reseller') && $services->portal_reseller == 1) {
+                array_push($reseller_accounts, $partner['partnerId']);
             }
         }
-        
+
         return $reseller_accounts;
     }
 
-    public function build_report($partnerData, $yearmonth) {
+    public function build_report($partnerData, $resellerAccounts, $yearmonth) {
         $date = date('Y-m-d H:i:s');
         print($date . " [transcodeReport->build_report] INFO: Building report.. \n");
-        $transcoding_data = $this->get_transcoding_data($partnerData);
+        $transcoding_data = $this->get_transcoding_data($partnerData, $resellerAccounts);
 
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->setActiveSheetIndex(0)
                 ->setCellValue('A1', 'Account ID')
                 ->setCellValue('B1', 'Account Name')
-                ->setCellValue('C1', 'SD Minutes Used')
-                ->setCellValue('D1', 'HD Minutes Used')
-                ->setCellValue('E1', 'UHD Minutes Used')
-                ->setCellValue('F1', 'Audio Only Minutes Used')
-                ->setCellValue('G1', 'Total Minutes Used')
-                ->setCellValue('H1', 'Transcoding Limit')
-                ->setCellValue('I1', 'Transcoding Overage');
+                ->setCellValue('C1', 'Child ID')
+                ->setCellValue('D1', 'Child Account Name')
+                ->setCellValue('E1', 'SD Minutes Used')
+                ->setCellValue('F1', 'HD Minutes Used')
+                ->setCellValue('G1', 'UHD Minutes Used')
+                ->setCellValue('H1', 'Audio Only Minutes Used')
+                ->setCellValue('I1', 'Total Minutes Used')
+                ->setCellValue('J1', 'Transcoding Limit')
+                ->setCellValue('K1', 'Transcoding Overage');
 
         $i = 2;
         $overage = 0;
         $yearmonthClean = str_replace('-', '', $yearmonth);
         $transcoding_total = 0;
+        $url = 'http://10.5.25.17/index.php/api/reseller/list.json';
         foreach ($transcoding_data as $value) {
             $transcoding_total = (float) $this->get_transcoding_total($value['partner_id'], $yearmonthClean);
             $objPHPExcel->setActiveSheetIndex(0)
                     ->setCellValue('A' . $i, $value['partner_id'])
                     ->setCellValue('B' . $i, $value['partner_name'])
-                    ->setCellValue('G' . $i, $transcoding_total)
-                    ->setCellValue('H' . $i, $value['transcoding_limit']);
+                    ->setCellValue('I' . $i, $transcoding_total)
+                    ->setCellValue('J' . $i, $value['transcoding_limit']);
             foreach ($value['months'] as $data) {
                 if ($data['month'] == $yearmonth) {
                     $objPHPExcel->setActiveSheetIndex(0)
-                            ->setCellValue('C' . $i, $data['sd_duration'])
-                            ->setCellValue('D' . $i, $data['hd_duration'])
-                            ->setCellValue('E' . $i, $data['uhd_duration'])
-                            ->setCellValue('F' . $i, $data['audio_duration']);
+                            ->setCellValue('E' . $i, $data['sd_duration'])
+                            ->setCellValue('F' . $i, $data['hd_duration'])
+                            ->setCellValue('G' . $i, $data['uhd_duration'])
+                            ->setCellValue('H' . $i, $data['audio_duration']);
                     if ($value['transcoding_limit'] !== 'unlimited') {
                         if ($transcoding_total > (float) $value['transcoding_limit']) {
                             $overage = $transcoding_total - (float) $value['transcoding_limit'];
                             $objPHPExcel->setActiveSheetIndex(0)
-                                    ->setCellValue('I' . $i, $overage);
+                                    ->setCellValue('K' . $i, $overage);
                         }
                     }
                 }
@@ -157,12 +160,12 @@ class transcodeReport {
             $i++;
         }
 
-        $objPHPExcel->getActiveSheet()->setTitle('transcodingOverage-' . $yearmonth);
-        $objPHPExcel->setActiveSheetIndex(0);
-
-        $filename = 'monthlyTranscodingOverage-' . $yearmonth . '.xlsx';
-        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-        $objWriter->save($filename);
+//        $objPHPExcel->getActiveSheet()->setTitle('transcodingOverage-' . $yearmonth);
+//        $objPHPExcel->setActiveSheetIndex(0);
+//
+//        $filename = 'monthlyTranscodingOverage-' . $yearmonth . '.xlsx';
+//        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+//        $objWriter->save($filename);
     }
 
     public function getMonthYear() {
@@ -202,36 +205,40 @@ class transcodeReport {
         return $months;
     }
 
-    public function get_transcoding_data($partnerData) {
+    public function get_transcoding_data($partnerData, $resellerAccounts) {
         $date = date('Y-m-d H:i:s');
         print($date . " [transcodeReport->get_transcoding_data] INFO: Building transcoding data.. \n");
         $partner_data = array();
         $transcoding_data = array();
         $current_month = date('n');
+        $is_reseller = 0;
         foreach ($partnerData as $partner) {
             $transcoding_data = array();
-            //if ($partner['partnerId'] == 13373 || $partner['partnerId'] == 10012) {
-            if ($current_month == 1) {
-                $previous_year = date("Y", strtotime("-1 years"));
-                $url1 = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getMonthlyStats.php?pid=' . $partner['partnerId'] . '&year=' . $previous_year;
-            } else {
-                $url1 = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getMonthlyStats.php?pid=' . $partner['partnerId'];
+            $is_reseller = 0;
+            if ($partner['partnerId'] == 13373 || $partner['partnerId'] == 10012 || $partner['partnerId'] == 12923) {
+                if ($current_month == 1) {
+                    $previous_year = date("Y", strtotime("-1 years"));
+                    $url1 = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getMonthlyStats.php?pid=' . $partner['partnerId'] . '&year=' . $previous_year;
+                } else {
+                    $url1 = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getMonthlyStats.php?pid=' . $partner['partnerId'];
+                }
+                $url2 = 'http://10.5.25.17/index.php/api/accounts/limits/' . $partner['partnerId'] . '.json';
+                $partner_stats = json_decode($this->curl_request($url1));
+                $transcoding_stats = json_decode($this->curl_request($url2));
+                $transcoding = $partner_stats->result->transcoding;
+                foreach ($transcoding as $data) {
+                    array_push($transcoding_data, array('month' => $data->date, 'sd_duration' => $data->sd_duration, 'hd_duration' => $data->hd_duration, 'uhd_duration' => $data->uhd_duration, 'audio_duration' => $data->audio_duration));
+                }
+                if (!$transcoding_stats->error) {
+                    $transcoding_limit = ($transcoding_stats[0]->transcoding_limit == 0) ? 'unlimited' : $transcoding_stats[0]->transcoding_limit . ' Minutes';
+                }
+                if (in_array($partner['partnerId'], $resellerAccounts)) {
+                    $is_reseller = 1;
+                }
+                array_push($partner_data, array('partner_id' => $partner['partnerId'], 'partner_name' => $partner['partnerName'], 'transcoding_limit' => $transcoding_limit, 'is_reseller' => $is_reseller, 'months' => $transcoding_data));
             }
-            $url2 = 'http://10.5.25.17/index.php/api/accounts/limits/' . $partner['partnerId'] . '.json';
-            $partner_stats = json_decode($this->curl_request($url1));
-            $transcoding_stats = json_decode($this->curl_request($url2));
-            $transcoding = $partner_stats->result->transcoding;
-            foreach ($transcoding as $data) {
-                array_push($transcoding_data, array('month' => $data->date, 'sd_duration' => $data->sd_duration, 'hd_duration' => $data->hd_duration, 'uhd_duration' => $data->uhd_duration, 'audio_duration' => $data->audio_duration));
-            }
-            if (!$transcoding_stats->error) {
-                $transcoding_limit = ($transcoding_stats[0]->transcoding_limit == 0) ? 'unlimited' : $transcoding_stats[0]->transcoding_limit . ' Minutes';
-            }
-
-            array_push($partner_data, array('partner_id' => $partner['partnerId'], 'partner_name' => $partner['partnerName'], 'transcoding_limit' => $transcoding_limit, 'months' => $transcoding_data));
-            //}
         }
-        //print_r($partner_data);
+        print_r($partner_data);
         return $partner_data;
     }
 
