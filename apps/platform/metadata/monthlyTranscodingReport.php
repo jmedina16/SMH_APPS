@@ -62,7 +62,7 @@ class transcodeReport {
 
         $partnerData = $this->getPartnerIds();
         $resellerAccounts = $this->getResellerAccounts($partnerData);
-        print_r($resellerAccounts);
+        print_r($partnerData);
         //$this->build_report($partnerData, $yearmonth);
 
         $stop_time = MICROTIME(TRUE);
@@ -82,7 +82,7 @@ class transcodeReport {
             $stmt = $this->link->prepare("SET SESSION wait_timeout = 600");
             $stmt->execute();
 
-            $partnerIds_query = $this->link->prepare("SELECT * FROM partner WHERE status IN (1,2) AND id NOT IN (0,-1,-2,-3,-4,-5,99,10364)");
+            $partnerIds_query = $this->link->prepare("SELECT * FROM partner WHERE status IN (1,2) AND id NOT IN (0,-1,-2,-3,-4,-5,99,10364) AND (partner_parent_id IS NULL OR partner_parent_id = 0)");
             $partnerIds_query->execute();
             $partner_array = array();
             foreach ($partnerIds_query->fetchAll(PDO::FETCH_OBJ) as $row) {
