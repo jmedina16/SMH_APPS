@@ -151,7 +151,8 @@ class transcodeReport {
     public function build_report($partnerData, $yearmonth) {
         $date = date('Y-m-d H:i:s');
         print($date . " [transcodeReport->build_report] INFO: Building report.. \n");
-        $transcoding_data = $this->get_transcoding_data($partnerData, $resellerAccounts);
+        $yearmonthClean = str_replace('-', '', $yearmonth);
+        $transcoding_data = $this->get_transcoding_data($partnerData, $yearmonthClean);
 
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->setActiveSheetIndex(0)
@@ -169,22 +170,20 @@ class transcodeReport {
 
         $i = 2;
         $overage = 0;
-        $yearmonthClean = str_replace('-', '', $yearmonth);
         $transcoding_total = 0;
         $url = 'http://10.5.25.17/index.php/api/reseller/list.json';
         foreach ($transcoding_data as $value) {
-            $transcoding_total = (float) $this->get_transcoding_total($value['partner_id'], $yearmonthClean);
             if ($value['is_child']) {
                 $objPHPExcel->setActiveSheetIndex(0)
                         ->setCellValue('C' . $i, $value['partner_id'])
                         ->setCellValue('D' . $i, $value['partner_name'])
-                        ->setCellValue('I' . $i, $transcoding_total)
+                        ->setCellValue('I' . $i, $value['transcoding_total'])
                         ->setCellValue('J' . $i, $value['transcoding_limit']);
             } else {
                 $objPHPExcel->setActiveSheetIndex(0)
                         ->setCellValue('A' . $i, $value['partner_id'])
                         ->setCellValue('B' . $i, $value['partner_name'])
-                        ->setCellValue('I' . $i, $transcoding_total)
+                        ->setCellValue('I' . $i, $value['transcoding_total'])
                         ->setCellValue('J' . $i, $value['transcoding_limit']);
             }
             foreach ($value['months'] as $data) {
@@ -206,12 +205,12 @@ class transcodeReport {
             $i++;
         }
 
-        $objPHPExcel->getActiveSheet()->setTitle('transcodingOverage-' . $yearmonth);
-        $objPHPExcel->setActiveSheetIndex(0);
-
-        $filename = 'monthlyTranscodingOverage-' . $yearmonth . '.xlsx';
-        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-        $objWriter->save($filename);
+//        $objPHPExcel->getActiveSheet()->setTitle('transcodingOverage-' . $yearmonth);
+//        $objPHPExcel->setActiveSheetIndex(0);
+//
+//        $filename = 'monthlyTranscodingOverage-' . $yearmonth . '.xlsx';
+//        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+//        $objWriter->save($filename);
     }
 
     public function getMonthYear() {
@@ -251,7 +250,7 @@ class transcodeReport {
         return $months;
     }
 
-    public function get_transcoding_data($partnerData) {
+    public function get_transcoding_data($partnerData, $yearmonthClean) {
         $date = date('Y-m-d H:i:s');
         print($date . " [transcodeReport->get_transcoding_data] INFO: Building transcoding data.. \n");
         $partner_data = array();
@@ -276,17 +275,19 @@ class transcodeReport {
                 if (!$transcoding_stats->error) {
                     $transcoding_limit = ($transcoding_stats[0]->transcoding_limit == 0) ? 'unlimited' : $transcoding_stats[0]->transcoding_limit . ' Minutes';
                 }
-                array_push($partner_data, array('partner_id' => $partner['partnerId'], 'partner_name' => $partner['partnerName'], 'transcoding_limit' => $transcoding_limit, 'is_child' => 0, 'months' => $transcoding_data));
+                $transcoding_total = (float) $this->get_transcoding_total($partner['partnerId'], $yearmonthClean);
+                array_push($partner_data, array('partner_id' => $partner['partnerId'], 'partner_name' => $partner['partnerName'], 'transcoding_limit' => $transcoding_limit, 'transcoding_total' => $transcoding_total, 'is_child' => 0, 'months' => $transcoding_data));
                 if (count($partner['childAccounts']) > 0) {
                     //print_r($partner['childAccounts']);
                     $childData = $this->get_child_transcoding_data($partner['childAccounts']);
                     foreach ($childData as $child) {
-                        array_push($partner_data, array('partner_id' => $child['partner_id'], 'partner_name' => $child['partner_name'], 'transcoding_limit' => $child['transcoding_limit'], 'is_child' => 1, 'months' => $child['months']));
+                        $transcoding_total = (float) $this->get_transcoding_total($child['partner_id'], $yearmonthClean);
+                        array_push($partner_data, array('partner_id' => $child['partner_id'], 'partner_name' => $child['partner_name'], 'transcoding_limit' => $child['transcoding_limit'], 'transcoding_total' => $transcoding_total, 'is_child' => 1, 'months' => $child['months']));
                     }
                 }
             }
         }
-        //print_r($partner_data);
+        print_r($partner_data);
         return $partner_data;
     }
 
