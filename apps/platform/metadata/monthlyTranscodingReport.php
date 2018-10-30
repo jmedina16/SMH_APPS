@@ -160,11 +160,11 @@ class transcodeReport {
                 ->setCellValue('B1', 'Account Name')
                 ->setCellValue('C1', 'Child Account ID')
                 ->setCellValue('D1', 'Child Account Name')
-                ->setCellValue('E1', 'SD Minutes Used')
-                ->setCellValue('F1', 'HD Minutes Used')
-                ->setCellValue('G1', 'UHD Minutes Used')
-                ->setCellValue('H1', 'Audio Only Minutes Used')
-                ->setCellValue('I1', 'Total Minutes Used')
+                ->setCellValue('E1', 'SD Minutes Transcoded')
+                ->setCellValue('F1', 'HD Minutes Transcoded')
+                ->setCellValue('G1', 'UHD Minutes Transcoded')
+                ->setCellValue('H1', 'Audio Only Minutes Transcoded')
+                ->setCellValue('I1', 'Total Minutes Transcoded')
                 ->setCellValue('J1', 'Transcoding Limit')
                 ->setCellValue('K1', 'Transcoding Overage');
 
@@ -223,11 +223,11 @@ class transcodeReport {
         $total_uhd_minutes = number_format(array_sum($total_uhd_minutes_arr), 2);
         $total_audio_minutes = number_format(array_sum($total_audio_minutes_arr), 2);
 
-        print($date . " [transcodeReport->build_report] INFO: Total SD Minutes Used: " . $total_sd_minutes . "\n");
-        print($date . " [transcodeReport->build_report] INFO: Total HD Minutes Used: " . $total_hd_minutes . "\n");
-        print($date . " [transcodeReport->build_report] INFO: Total UHD Minutes Used: " . $total_uhd_minutes . "\n");
-        print($date . " [transcodeReport->build_report] INFO: Total Audio Only Minutes Used: " . $total_audio_minutes . "\n");
-        print($date . " [transcodeReport->build_report] INFO: Grand Total Minutes Used: " . $total_trans_minutes . "\n");
+        print($date . " [transcodeReport->build_report] INFO: Total SD Minutes Transcoded: " . $total_sd_minutes . "\n");
+        print($date . " [transcodeReport->build_report] INFO: Total HD Minutes Transcoded: " . $total_hd_minutes . "\n");
+        print($date . " [transcodeReport->build_report] INFO: Total UHD Minutes Transcoded: " . $total_uhd_minutes . "\n");
+        print($date . " [transcodeReport->build_report] INFO: Total Audio Only Minutes Transcoded: " . $total_audio_minutes . "\n");
+        print($date . " [transcodeReport->build_report] INFO: Grand Total Minutes Transcoded: " . $total_trans_minutes . "\n");
 
         $objPHPExcel->getActiveSheet()->setTitle('transcodingReport-' . $yearmonth);
         $objPHPExcel->setActiveSheetIndex(0);
@@ -246,7 +246,7 @@ class transcodeReport {
         $body = "<font face=arial size=2><b>SMH Monthly Transcoding Report v0.0.1</b><br><br>"
                 . "Reporting for " . $yearmonth . "<br>Generated on " . $timestamp->format('Y-m-d H:i:s') . "<br>"
                 . "Total Accounts Processed: $total_processed<br>"
-                . "Total SD Minutes Used: $total_sd_minutes<br>Total HD Minutes Used: $total_hd_minutes<br>Total UHD Minutes Used: $total_uhd_minutes<br>Total Audio Only Minutes Used: $total_audio_minutes<br> Grand Total Minutes Used: "
+                . "Total SD Minutes Transcoded: $total_sd_minutes<br>Total HD Minutes Transcoded: $total_hd_minutes<br>Total UHD Minutes Transcoded: $total_uhd_minutes<br>Total Audio Only Minutes Transcoded: $total_audio_minutes<br> Grand Total Minutes Transcoded: "
                 . $total_trans_minutes . "<br><br><b>See Attached Report</b>";
         shell_exec("echo \"$body\" | mutt -s \"SMH CDN Monthly Transcoding Report [" . $yearmonth . "]\""
                 . " -F /opt/kaltura/apps/platform/metadata/muttrc " . $email_primary
