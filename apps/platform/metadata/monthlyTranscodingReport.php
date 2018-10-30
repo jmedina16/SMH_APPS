@@ -205,12 +205,15 @@ class transcodeReport {
             $i++;
         }
 
-        $objPHPExcel->getActiveSheet()->setTitle('transcodingOverage-' . $yearmonth);
-        $objPHPExcel->setActiveSheetIndex(0);
-
-        $filename = 'monthlyTranscodingOverage-' . $yearmonth . '.xlsx';
-        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-        $objWriter->save($filename);
+//        $objPHPExcel->getActiveSheet()->setTitle('transcodingOverage-' . $yearmonth);
+//        $objPHPExcel->setActiveSheetIndex(0);
+//
+//        $filename = 'monthlyTranscodingOverage-' . $yearmonth . '.xlsx';
+//        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+//        $objWriter->save($filename);
+        
+        $total_processed = count($transcoding_data);
+        echo $total_processed;
     }
 
     public function getMonthYear() {
