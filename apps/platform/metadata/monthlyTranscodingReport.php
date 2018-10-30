@@ -214,14 +214,14 @@ class transcodeReport {
             }
             $i++;
         }
-        
-        $total_processed = count($transcoding_data);
-        
-        $total_trans_minutes = array_sum($total_trans_minutes_arr);
-        $total_sd_minutes = array_sum($total_sd_minutes_arr);
-        $total_hd_minutes = array_sum($total_hd_minutes_arr);
-        $total_uhd_minutes = array_sum($total_uhd_minutes_arr);
-        $total_audio_minutes = array_sum($total_audio_minutes_arr);       
+
+        $total_processed = number_format(count($transcoding_data));
+
+        $total_trans_minutes = number_format(array_sum($total_trans_minutes_arr), 2);
+        $total_sd_minutes = number_format(array_sum($total_sd_minutes_arr), 2);
+        $total_hd_minutes = number_format(array_sum($total_hd_minutes_arr), 2);
+        $total_uhd_minutes = number_format(array_sum($total_uhd_minutes_arr), 2);
+        $total_audio_minutes = number_format(array_sum($total_audio_minutes_arr), 2);
 
         print($date . " [transcodeReport->build_report] INFO: Total SD Minutes Used: " . $total_sd_minutes . "\n");
         print($date . " [transcodeReport->build_report] INFO: Total HD Minutes Used: " . $total_hd_minutes . "\n");
@@ -235,6 +235,22 @@ class transcodeReport {
         $filename = 'monthlyTranscodingReport-' . $yearmonth . '.xlsx';
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
         $objWriter->save($filename);
+        $this->emailreport($yearmonth, $total_processed, $total_sd_minutes, $total_hd_minutes, $total_uhd_minutes, $total_audio_minutes, $total_trans_minutes);
+    }
+
+    public function emailreport($yearmonth, $total_processed, $total_sd_minutes, $total_hd_minutes, $total_uhd_minutes, $total_audio_minutes, $total_trans_minutes) {
+        $email_primary = "jmedina@streamingmediahosting.com";
+        $email_cc = "-c rob@streamingmediahosting.com -c shardy@streamingmediahosting.com";
+        $report_path = "/opt/kaltura/apps/platform/metadata/monthlyTranscodingReport-" . $yearmonth . ".xlsx";
+        $timestamp = new \DateTime();
+        $body = "<font face=arial size=2><b>SMH Monthly Transcoding Report v0.0.1</b><br><br>"
+                . "Reporting for " . $yearmonth . "<br>Generated on " . $timestamp->format('Y-m-d H:i:s') . "<br>"
+                . "Total Accounts Processed: $total_processed<br>"
+                . "Total SD Minutes Used: $total_sd_minutes<br>Total HD Minutes Used: $total_hd_minutes<br>Total UHD Minutes Used: $total_uhd_minutes<br>Total Audio Only Minutes Used: $total_audio_minutes<br> Grand Total Minutes Used: "
+                . $total_trans_minutes . "<br><br><b>See Attached Report</b>";
+        shell_exec("echo \"$body\" | mutt -s \"SMH CDN Monthly Transcoding Report [" . $yearmonth . "]\""
+                . " -F /opt/kaltura/apps/platform/metadata/muttrc " . $email_primary
+                . " -a " . $report_path);
     }
 
     public function getMonthYear() {
