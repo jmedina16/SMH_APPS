@@ -171,6 +171,11 @@ class transcodeReport {
         $i = 2;
         $overage = 0;
         $transcoding_total = 0;
+        $total_trans_minutes_arr = array();
+        $total_sd_minutes_arr = array();
+        $total_hd_minutes_arr = array();
+        $total_uhd_minutes_arr = array();
+        $total_audio_minutes_arr = array();
         $url = 'http://10.5.25.17/index.php/api/reseller/list.json';
         foreach ($transcoding_data as $value) {
             if ($value['is_child']) {
@@ -180,6 +185,7 @@ class transcodeReport {
                         ->setCellValue('I' . $i, $value['transcoding_total'])
                         ->setCellValue('J' . $i, $value['transcoding_limit']);
             } else {
+                array_push($total_trans_minutes_arr, $value['transcoding_total']);
                 $objPHPExcel->setActiveSheetIndex(0)
                         ->setCellValue('A' . $i, $value['partner_id'])
                         ->setCellValue('B' . $i, $value['partner_name'])
@@ -188,6 +194,10 @@ class transcodeReport {
             }
             foreach ($value['months'] as $data) {
                 if ($data['month'] == $yearmonth) {
+                    array_push($total_sd_minutes_arr, $data['sd_duration']);
+                    array_push($total_hd_minutes_arr, $data['hd_duration']);
+                    array_push($total_uhd_minutes_arr, $data['uhd_duration']);
+                    array_push($total_audio_minutes_arr, $data['audio_duration']);
                     $objPHPExcel->setActiveSheetIndex(0)
                             ->setCellValue('E' . $i, $data['sd_duration'])
                             ->setCellValue('F' . $i, $data['hd_duration'])
@@ -204,16 +214,27 @@ class transcodeReport {
             }
             $i++;
         }
-
-//        $objPHPExcel->getActiveSheet()->setTitle('transcodingOverage-' . $yearmonth);
-//        $objPHPExcel->setActiveSheetIndex(0);
-//
-//        $filename = 'monthlyTranscodingOverage-' . $yearmonth . '.xlsx';
-//        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-//        $objWriter->save($filename);
         
         $total_processed = count($transcoding_data);
-        echo $total_processed;
+        
+        $total_trans_minutes = array_sum($total_trans_minutes_arr);
+        $total_sd_minutes = array_sum($total_sd_minutes_arr);
+        $total_hd_minutes = array_sum($total_hd_minutes_arr);
+        $total_uhd_minutes = array_sum($total_uhd_minutes_arr);
+        $total_audio_minutes = array_sum($total_audio_minutes_arr);       
+
+        print($date . " [transcodeReport->build_report] INFO: Total SD Minutes Used: " . $total_sd_minutes . "\n");
+        print($date . " [transcodeReport->build_report] INFO: Total HD Minutes Used: " . $total_hd_minutes . "\n");
+        print($date . " [transcodeReport->build_report] INFO: Total UHD Minutes Used: " . $total_uhd_minutes . "\n");
+        print($date . " [transcodeReport->build_report] INFO: Total Audio Only Minutes Used: " . $total_audio_minutes . "\n");
+        print($date . " [transcodeReport->build_report] INFO: Grand Total Minutes Used: " . $total_trans_minutes . "\n");
+
+        $objPHPExcel->getActiveSheet()->setTitle('transcodingReport-' . $yearmonth);
+        $objPHPExcel->setActiveSheetIndex(0);
+
+        $filename = 'monthlyTranscodingReport-' . $yearmonth . '.xlsx';
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save($filename);
     }
 
     public function getMonthYear() {
