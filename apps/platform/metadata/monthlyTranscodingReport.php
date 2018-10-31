@@ -62,11 +62,7 @@ class transcodeReport {
 
         $partnerData = $this->getPartnerIds();
         $childData = $this->getChildAccounts();
-
         $combindAccounts = $this->combindAccounts($partnerData, $childData);
-
-        //$resellerAccounts = $this->getResellerAccounts($partnerData);
-        //print_r($partnerData);
         $this->build_report($combindAccounts, $yearmonth);
 
         $stop_time = MICROTIME(TRUE);
@@ -98,20 +94,6 @@ class transcodeReport {
             $date = date('Y-m-d H:i:s');
             print($date . " [transcodeReport->getPartnerIds] ERROR: Could not execute query (Search Partner Ids): " . $e->getMessage() . "\n");
         }
-    }
-
-    public function getResellerAccounts($partnerData) {
-        $reseller_accounts = array();
-        $url1 = 'http://10.5.25.17/index.php/api/reseller/list.json';
-        foreach ($partnerData as $partner) {
-            $url2 = 'http://10.5.25.17/index.php/api/accounts/pid/' . $partner['partnerId'] . '.json';
-            $services = json_decode($this->curl_request($url2));
-            if (property_exists($services, 'portal_reseller') && $services->portal_reseller == 1) {
-                array_push($reseller_accounts, $partner['partnerId']);
-            }
-        }
-
-        return $reseller_accounts;
     }
 
     public function getChildAccounts() {
