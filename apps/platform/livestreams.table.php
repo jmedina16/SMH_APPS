@@ -296,7 +296,7 @@ class livestreams {
             $row[] = $livestream_thumbnail;
             $row[] = "<div class='data-break'>" . $entry->name . "</div>";
             $row[] = "<div class='data-break'>" . $entry->id . "</div>";
-            $row[] = "<div class='data-break'><a onclick='smhLS.viewSettings(\"" . htmlspecialchars(addslashes($entry->name), ENT_QUOTES) . "\",\"" . $bitrate . "\",\"" . $sn . "\");'>View Settings <i class='fa fa-external-link' style='width: 100%; text-align: center; display: inline; font-size: 12px;'></i></a></div>";
+            $row[] = "<div class='data-break'><a onclick='smhLS.viewSettings(\"" . htmlspecialchars(addslashes($entry->name), ENT_QUOTES) . "\",\"" . $bitrate . "\",\"" . $sn . "\",\"" . $entry->id . "\");'>View Settings <i class='fa fa-external-link' style='width: 100%; text-align: center; display: inline; font-size: 12px;'></i></a></div>";
             $row[] = "<div class='data-break'>" . $newDatetime . "</div>";
 
             if ($this->sn == 1) {
