@@ -1,0 +1,1618 @@
+#purchaseWindow {
+    /*    background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(62, 62, 62, 0.5) 100%) repeat scroll 0 0;*/
+    transition: top 1s ease 0s, left 1s ease 0s, width 1s ease 0s, height 1s ease 0s;
+    left: 0;
+    /*    padding: 10px;*/
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+    width: 700px;
+    height: 330px;
+}
+#purchaseWindow #entry-title{
+    font-size: 12px;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #46545c;
+    text-align: center; 
+    margin-bottom: 10px; 
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif ! important;
+    height: auto;
+    /* These are technically the same, but use both */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+#purchaseWindow #title{
+    margin-left: 35px;
+    margin-right: 35px;
+}
+
+#purchaseWindow #not-available{
+    font-size: 12px;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #8B0005;
+    text-align: center; 
+    margin-bottom: 10px; 
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif ! important;
+    height: auto;
+    /* These are technically the same, but use both */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+#purchaseWindow #purchase-ticket{
+    color: #46545c;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-size: 14px;
+    height: 78px;
+    text-align: center;
+    width: 50%;
+}
+
+#purchaseWindow #register-text{
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif ! important; 
+    font-size: 12px; 
+    margin-top: 10px; 
+    text-align: center;
+    color: #46545c;
+}
+#purchaseWindow #register-text a:hover{
+    text-decoration: none;
+}
+#purchaseWindow .wrap{
+    display: table-cell;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+    width: 340px;
+}
+
+#purchaseWindow .column {
+    display: inline-block;
+    height: auto;
+    vertical-align: middle;
+}
+
+#purchaseWindow #purchased-wrapper{
+    float: right; 
+    margin-top: 2px;
+}
+#purchaseWindow #fp-wrapper{
+    margin-top: 5px;
+}
+#purchaseWindow #fp-wrapper .fa{
+    font-size: 25px;
+    color: #46545c;
+}
+#purchaseWindow #fp-wrapper a span{
+    margin-left: 5px;
+    position: relative;
+    top: -4px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-size: 12px;
+}
+#purchaseWindow #fp-wrapper a:hover{
+    text-decoration: none;
+}
+.topBarContainer {
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%); 
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.9) 0%,rgba(0,0,0,0) 100%);  
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%,rgba(0,0,0,0) 100%); 
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); 
+    box-sizing: border-box;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    transition: opacity 0.25s cubic-bezier(0, 0, 0.2, 1) 0s;
+    width: 100%;
+    z-index: 100;
+}
+.topBarContainer.hover {
+    top: -2.6em;
+}
+.topBarContainer.open {
+    top: 0;
+}
+#purchaseWindow .open {
+    z-index: 1001;
+}
+.topBarContainer .btn {
+    color: #fff;
+    text-shadow: none;
+    padding: 8px;
+    line-height: 1.4;
+    background-color: transparent;
+    border: 0 none;
+}
+.topBarContainer .btn .fa-user {
+    font-size: 15px; 
+    margin-right: 4px;
+}
+.topBarContainer .btn .fa-sign-out {
+    font-size: 15px; 
+    margin-left: 4px;
+}
+.topBarContainer .btn:hover {
+    color: #fff;
+    opacity: 1;
+    text-shadow: 0 0 10px #fff;
+    cursor: pointer;
+}
+.btn .accessibilityLabel {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#ticket-header{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;   
+    padding: 10px;
+}
+
+#ticket-buy-button{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#ticket-price, #ticket-details {padding: 10px;}
+#ticket-details {height: 145px;}
+#ticket-table, #ticket-login-table{margin-left: auto; margin-right: auto; clear: both;}
+#ticket-wrapper{width: 216.33px;}
+#ticket-login{text-align: right;}
+#purchaseWindow a{text-decoration: none;}
+#smh_purchase_window input:focus {
+    background-color: #fff !important;
+    border-color: #1ABC9C !important;
+    outline: medium none !important;
+}
+#login-table input[type="text"], #login-table input[type="password"], #register-table input[type="text"], #register-table input[type="password"], #activate-table input[type="text"], #pass-table input[type="text"], #reset-table input[type="text"], #settings-table input[type="text"], #reset-table input[type="password"]{  
+    border: 1px solid #ccc;
+    color: #555555;
+    display: block;
+    font-size: 14px;
+    height: 34px;
+    line-height: 20px;
+    margin: 0 0 10px;
+    padding: 6px 12px;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    vertical-align: middle;
+    width: 299px !important;
+}
+
+.validate-error {
+    border-color: #E9322D !important;
+    box-shadow: 0 0 6px #F8B9B7 !important;
+}
+
+#smh-login-form label.error, #smh-register-form label.error, #smh-activation-form label.error, #smh-password-form label.error, #smh-reset-form label.error{
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-image: url("http://mediaplatform.streamingmediahosting.com/img/unchecked.gif");
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    float: left !important;
+    margin-bottom: 3px !important;
+    margin-right: 0 !important;
+    padding-left: 20px;
+    position: relative;
+    top: 4px;
+    color: #FF0000;
+    font-size: 12px;
+}
+
+#smh_purchase_window #multi-login {
+    color: #6c6c6c;
+    margin: 20px auto;
+    text-align: center;
+    width: 310px;
+}
+
+#smh_purchase_window .order-title {
+    color: #65a293;
+    font-weight: bold;
+}
+
+#smh_purchase_window .order-info {
+    color: #8e8e8e;
+}
+
+#smh_purchase_window .dataTables_wrapper .dataTables_processing {
+    margin-left: -125px !important;
+    margin-top: -25px !important;
+    padding: 8px 0 2px !important;
+    width: 250px !important;
+}
+
+#smh_purchase_window .content-data .date {
+    border-radius: 4px;
+    background: #92c1c7 none repeat scroll 0 0;
+    padding: 4px;
+    width: 80px;
+    height: 42px;
+}
+
+#smh_purchase_window .content-data .expire-date {
+    border-radius: 4px;
+    background: #ee5c4a none repeat scroll 0 0;
+    padding: 4px;
+    width: 80px;
+}
+
+#smh_purchase_window .content-data .month-day {
+    float: left;
+    text-align: center;
+    border-right: 1px solid #fff;
+    color: #fff;
+    font-weight: bold;
+    padding-right: 9px;
+    padding-left: 5px;
+    position: relative;
+    top: 2px;
+}
+
+#smh_purchase_window .content-data .year {
+    -webkit-transform: rotate(-90deg); 
+    -moz-transform: rotate(-90deg);	
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    transform: rotate(-90deg);
+    position: relative;
+    float: left;
+    top: 8px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#smh_purchase_window .content-data thead th {
+    background: transparent none repeat scroll 0 0;
+    border-bottom: medium none;
+    border-right: medium none;
+    color: #555;
+    font-size: 14px;
+    padding: 10px 0 10px 10px !important;
+}
+
+#smh_purchase_window table.dataTable.row-border tbody th, #smh_purchase_window table.dataTable.row-border tbody td, #smh_purchase_window table.dataTable.display tbody th, #smh_purchase_window table.dataTable.display tbody td {
+    border-top: medium none;
+    border-right: 1px solid #fff;
+}
+
+#smh_purchase_window .dataTables_scrollBody .content-data thead th {
+    background: #fff none repeat scroll 0 0;
+    border-bottom: medium none !important;
+    border-right: medium none;
+    padding: 0 !important;
+}
+
+#smh_purchase_window .content-data, #smh_purchase_window .dataTables_scrollHeadInner {
+    width: 759px !important;
+    font-size: 12px;
+}
+
+#smh_purchase_window .content-data td {
+    padding: 10px;
+}
+
+#smh_purchase_window .dataTables_wrapper.no-footer .dataTables_scrollBody {
+    border-bottom: medium none;
+}
+
+#smh_purchase_window #smh-register-form{
+    margin-bottom: 0px;
+    margin-top: 15px;
+}
+
+#smh_purchase_window #smh-settings-form{
+    width: 333px; 
+    margin: 25px auto 40px;
+}
+
+#smh_purchase_window #smh-request{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#smh_purchase_window #request-btn-loading{
+    display: none;
+    height: 20px;
+    margin-left: 20px;
+    margin-right: 10px;
+    position: relative;
+    top: 7px;
+    width: 20px;
+}
+
+#smh_purchase_window #btn-loading{
+    display: none;
+    float: right;
+    height: 20px;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-top: 7px;
+    width: 20px;
+}
+
+#smh_purchase_window .label {
+    font-size: 12px;
+    border-radius: 0.25em;
+    color: #fff;
+    display: inline;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0.2em 0.6em 0.3em;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+
+#smh_purchase_window #result{
+    float: right; 
+    margin-right: 10px;
+    position: relative;
+    top: 12px;
+}
+
+#smh_purchase_window .label-success {
+    background-color: #00a65a !important;
+}
+
+#smh_purchase_window .label-danger {
+    background-color: #d9534f;
+}
+
+#smh_purchase_window #smh-password-form, #smh_purchase_window #smh-activation-form{
+    margin-bottom: 0px;
+}
+
+#smh-login-form{
+    height: auto;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 335px;
+}
+#purchaseWindow a{
+    cursor: pointer;
+}
+#smh_purchase_window .nav-pills > li.active > a, #smh_purchase_window .nav-pills > li.active > a:hover, #smh_purchase_window .nav-pills > li.active > a:focus{outline: 0 !important; color: #FFFFFF !important; background-color: #428BCA;}
+#smh_purchase_window a, #purchaseWindow a{color: #39899d !important; text-decoration: none; font-weight: normal;}
+#smh_purchase_window, #register-buttons a{font-weight: normal !important;}
+#smh_purchase_window a:hover, #smh_purchase_window a:focus, #purchaseWindow a:hover, #purchaseWindow a:focus {color: #2a6496 !important; text-decoration: underline;}
+#smh_purchase_window #smh-user a{color: #428BCA  !important;}
+#smh_purchase_window h4, #smh_purchase_window .h4 {
+    font-size: 18px !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    font-weight: 500;
+}
+#smh_purchase_window .modal-header h4 {
+    display: inline-block;
+}
+#smh_purchase_window h4.modal-title{
+    color: #fff;
+    font-family: Verdana,Helvetica;
+    font-size: 18px !important;
+    font-weight: 500;
+    letter-spacing: 1px;
+    line-height: 1 !important;
+    text-align: center;
+    padding-left: 5px;
+}
+#smh_purchase_window h4.passrecov{
+    font-size: 16px !important;
+}
+#smh_purchase_window #smh-register-wrapper h4, #smh_purchase_window #smh-login-wrapper h4{
+    font-size: 23px !important;
+}
+#smh_purchase_window img{border-radius: 0 !important; box-shadow: 0 0px 0px rgba(0, 0, 0, 0) !important;}
+#smh_purchase_window {font-size: 12px !important; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;}
+.modal-dialog{margin-top: 100px !important;}
+.modal{overflow-y: auto !important;}
+.modal-body{padding: 0 20px !important;}
+.modal-footer{margin-top: 0 !important;}
+.col-md-4{border-right: solid 1px #E4E4E4; padding-left: 0 !important; padding-right: 0 !important;}
+.col-md-8{border-left: solid 1px #E4E4E4;}
+.nav-pills > li > a{border-radius: 0 !important;}
+.nav-pills > li{float: none !important;}
+.col-md-8{padding-top: 15px; padding-bottom: 15px;}
+.clear{clear: both}
+#entry{border-bottom: solid 1px #E4E4E4;}
+#entry-thumb{
+    width: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 7px;
+    border-radius: 5px;
+}
+#confirm-entry-thumb{margin-right: 10px; width: 169px; float: left;}
+#entry-details{float: left; width: 290px; word-wrap: break-word; text-align: left;}
+#confirm-entry-details{float: left; width: 480px; text-align: left; margin: 5px 5px 10px;}
+#smh_purchase_window #entry-title{
+    font-size: 20px;
+    height: auto;
+    /* These are technically the same, but use both */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    margin-bottom: 15px;
+}
+#smh_purchase_window #entry-ticket-detail{
+    color: #777;
+    font-size: 12px;
+    font-style: italic;
+    margin: 10px 0;
+}
+#smh_purchase_window #entry-price{
+    color: #57ab3e;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+#smh_purchase_window #period {
+    color: #aaa;
+    font-size: 12px;
+    font-weight: bold;
+}
+#ppv-ticket-details{
+    color: #666666;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 433px;
+}
+#smh_purchase_window .modal-footer{    
+    border-radius: 0 0 6px 6px;
+    margin-bottom: 0;
+    padding: 14px 15px 15px;
+    text-align: right;
+    border-top: 0 none;
+}
+.row {
+    margin-left: -20px !important;
+    margin-right: -20px !important;
+    margin-bottom: 0 !important;
+}
+
+.nav-pills > li + li {
+    margin-left: 0 !important;
+}
+#ppv-loading{
+    padding: 50px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 40px;
+}
+#login-fail, #register-fail{
+    font-weight: bold;
+    height: 30px;
+    /*    margin-top: 8px;*/
+    padding-top: 5px;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+}
+#register-table{
+    margin: 10px auto 0;
+    width: 336px;
+}
+#register-table .register-table-row, #ticket-login-table .ticket-login-table-row, #reset-table .reset-table-row{
+    margin-top: 19px;
+}
+#activate-table{
+    margin: 30px auto 0;
+    width: 240px;
+}
+#ticket-login-table{
+    text-align: right; 
+    width: 241px;
+}
+#pass-table{
+    margin: 0 auto; 
+    width: 240px;
+}
+#reset-table{
+    margin: 30px auto 0;  
+    width: 240px;
+}
+#smh_purchase_window table td {
+    padding-top: 5px;
+}
+#confirm-wrapper{
+    width: 500px;
+}
+#PPDGFrame .panel{
+    background-color: transparent !important;
+}
+
+#smh_purchase_window *, #smh_purchase_window *:before, #smh_purchase_window *:after {
+    -moz-box-sizing: border-box;
+}
+
+#smh_purchase_window .modal.in .modal-dialog {
+    transform: translate(0px, 0px);
+}
+
+#smh_purchase_window .modal-dialog{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px !important;
+    z-index: 1050;
+}
+
+#smh_purchase_window .dataTables_wrapper .dataTables_paginate .paginate_button {
+    margin-left: 0;
+}
+
+#smh_purchase_window .dataTables_wrapper .dataTables_paginate span .paginate_button {
+    border-width: 1px 1px 1px 0;
+}
+
+#smh_purchase_window .dataTables_wrapper .dataTables_paginate .paginate_button {
+    border: 1px solid #ddd;
+}
+
+#smh_purchase_window .dataTables_wrapper .dataTables_paginate #orders-data_next {
+    border-width: 1px 1px 1px 0;
+}
+
+#smh_purchase_window .dataTables_paginate .disabled {
+    background: transparent none repeat scroll 0 0 !important;
+    color: #999 !important;
+    cursor: default;
+}
+
+#smh_purchase_window .dataTables_paginate a:hover, #smh_purchase_window .dataTables_paginate span a:hover, #smh_purchase_window .dataTables_paginate span a:focus {
+    background: #f5f5f5 none repeat scroll 0 0;
+}
+
+#smh_purchase_window .dataTables_wrapper .dataTables_paginate .paginate_button.current, #smh_purchase_window .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    background: #f5f5f5 none repeat scroll 0 0 !important;
+}
+
+#smh_purchase_window .dataTables_wrapper .dataTables_paginate .paginate_button:active {
+    box-shadow: none;
+}
+
+#smh_purchase_window .dataTables_paginate span .current {
+    color: #999 !important;
+    cursor: default;
+}
+
+#smh_purchase_window table.dataTable.no-footer {
+    border-bottom: medium none;
+}
+body{
+    color: #333333;
+    line-height: 1.42857;
+}
+
+#smh_purchase_window .modal-content {
+    background-color: #fff;
+    border-radius: 3px;
+    outline: 0 none;
+    position: relative;
+}
+
+#smh_purchase_window .modal-header {
+    border-bottom: 0px solid #E5E5E5;
+    min-height: 16.4286px;
+    padding: 15px;
+}
+
+#smh_purchase_window .row:after {
+    clear: both;
+}
+
+#smh_purchase_window .row:before, #smh_purchase_window .row:after {
+    content: " ";
+    display: table;
+}
+
+#smh_purchase_window .col-md-4 {
+    width: 33.3333%;
+}
+
+#smh_purchase_window .col-md-8 {
+    width: 66.6667%;
+}
+
+#smh_purchase_window .col-md-4, #smh_purchase_window .col-md-8 {
+    float: left;
+}
+
+#smh_purchase_window .col-md-4, #smh_purchase_window .col-md-8 {
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+}
+
+#smh_purchase_window .nav {
+    list-style: none outside none;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+#smh_purchase_window ul, #smh_purchase_window ol {
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+#smh_purchase_window .nav-pills > #smh_purchase_window li.active > #smh_purchase_window a, #smh_purchase_window .nav-pills > #smh_purchase_window li.active > #smh_purchase_window a:hover, #smh_purchase_window .nav-pills > #smh_purchase_window li.active > #smh_purchase_window a:focus {
+    background-color: #428BCA;
+    color: #FFFFFF;
+}
+
+#smh_purchase_window .nav > #smh_purchase_window li > #smh_purchase_window a {
+    display: block;
+    padding: 10px 15px;
+    position: relative;
+}
+
+#smh_purchase_window sup{
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+    top: -0.5em;
+}
+
+#smh_purchase_window .btn-default {
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #666666;
+    display: inline-block;
+    font-family: Arial;
+    font-size: 13px !important;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal !important;
+    padding: 8px 0 9px;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+}
+
+#smh_purchase_window .btn-primary {
+    background-color: #1abc9c;
+    border: 1px solid #65a293;
+    border-radius: 4px;
+    color: #ffffff;
+    display: inline-block;
+    font-family: Arial;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal !important;
+    padding: 8px 0 9px;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+}
+#smh_purchase_window .btn-primary:hover {
+    background-color: #40a189;
+}
+
+#smh_purchase_window .btn-primary:active {
+    background-color: #40a189;
+    outline: medium none;
+}
+
+#smh_purchase_window .btn-danger {
+    background-color: #d14545;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#e97171), to(#d14545));
+    background-image: -webkit-linear-gradient(top, #e97171, #d14545);
+    background-image: -moz-linear-gradient(top, #e97171, #d14545);
+    background-image: -ms-linear-gradient(top, #e97171, #d14545);
+    background-image: -o-linear-gradient(top, #e97171, #d14545);
+    background-image: linear-gradient(top, #e97171, #d14545);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    text-shadow: 0 1px 0 rgba(0,0,0,.5);
+    -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;  
+    border: 1px solid #7e1515 !important;
+    border-radius: 4px !important;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+    color: #fff;
+    font: bold 14px Arial,Helvetica !important;
+}
+
+#smh_purchase_window .btn-danger:active {
+    outline: none;
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+}
+#smh_purchase_window .btn-danger:hover, #smh_purchase_window .btn-danger:focus {
+    background-color: #e97171;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#d14545), to(#e97171));
+    background-image: -webkit-linear-gradient(top, #d14545, #e97171);
+    background-image: -moz-linear-gradient(top, #d14545, #e97171);
+    background-image: -ms-linear-gradient(top, #d14545, #e97171);
+    background-image: -o-linear-gradient(top, #d14545, #e97171);
+    background-image: linear-gradient(top, #d14545, #e97171);
+}
+
+#smh_purchase_window .btn-success {
+    background-color: #1abc9c;
+    border: 1px solid #65a293;
+    border-radius: 4px;
+    color: #ffffff;
+    display: inline-block;
+    font-family: Arial;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal !important;
+    padding: 8px 0 9px;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+}
+
+#smh_purchase_window .btn-default:hover, #smh_purchase_window .btn-default:focus, #smh_purchase_window .open .dropdown-toggle.btn-default {
+    background-color: #c7c7c7 !important;
+    color: #484848 !important;
+}
+
+#smh_purchase_window .btn-default:active, #smh_purchase_window .btn-default.active{
+    position:relative;
+    top:1px;
+}
+
+#smh_purchase_window .btn-success:hover {
+    background-color: #40a189;
+}
+
+#smh_purchase_window .btn-success:active {
+    background-color: #40a189;
+    outline: medium none;
+}
+
+#smh_purchase_window .btn {
+    -moz-user-select: none;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 8px 11px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: auto;
+    margin-right: 2px;
+    transition: background-color 0.23s ease-in-out 0s;
+}
+
+.modal-backdrop.in {
+    opacity: 0.5 !important;
+}
+
+.modal-backdrop {
+    background-color: #000000;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1030;
+}
+
+.fade {
+    opacity: 0;
+    transition: opacity 0.15s linear 0s;
+}
+
+.modal {
+    bottom: 0;
+    display: none;
+    left: 0;
+    overflow-x: auto;
+    overflow-y: scroll;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1040;
+}
+
+body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom {
+    margin-right: 15px;
+}
+
+.modal-open {
+    overflow: hidden;
+}
+
+.fade.in {
+    opacity: 1;
+}
+
+.modal.in .modal-dialog {
+    transform: translate(0px, 0px);
+}
+
+.modal.fade .modal-dialog {
+    transform: translate(0px, -25%);
+    transition: transform 0.3s ease-out 0s;
+}
+
+#smh_purchase_window .modal-dialog {
+    left: 50%;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    right: auto;
+    position: static;
+}
+
+.modal.in .modal-dialog {
+    transform: translate(0px, 0px);
+}
+
+.nav:before, .nav:after {
+    content: " ";
+    display: table;
+}
+
+.nav:after {
+    clear: both;
+}
+
+.nav-pills > li {
+    float: left;
+}
+
+.nav > li {
+    display: block;
+    position: relative;
+}
+
+.nav-pills > li > a {
+    border-radius: 5px;
+}
+
+.nav > li > a {
+    display: block;
+    padding: 10px 15px;
+    position: relative;
+}
+
+.tab-content > .tab-pane, .pill-content > .pill-pane {
+    display: none;
+}
+
+.tab-content > .active, .pill-content > .active {
+    display: block;
+}
+
+#smh_purchase_window a:hover, #smh_purchase_window a:focus {
+    color: #2A6496;
+    text-decoration: underline;
+}
+
+#smh_purchase_window .alert-info {
+    background-color: #D9EDF7;
+    border-color: #BCE8F1;
+    color: #3A87AD;
+}
+
+#smh_purchase_window .alert {
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+#smh_purchase_window .alert h4 {
+    color: inherit;
+    margin-top: 0;
+}
+
+#smh_purchase_window .alert-success {
+    background-color: #DFF0D8;
+    border-color: #D6E9C6;
+    color: #468847;
+    font-weight: bold;
+}
+
+#smh_purchase_window .alert-danger {
+    background-color: #d9534f;
+    border-color: #D6E9C6;
+    color: #fff;
+    font-weight: bold;
+}
+
+#smh_purchase_window .nav > li > a:hover, .nav > li > a:focus {
+    background-color: #EEEEEE;
+    text-decoration: none;
+}
+
+#smh_purchase_window .nav > li > a {
+    text-decoration: none;
+    text-align: left;
+}
+
+#smh_purchase_window h3 {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#smh_purchase_window #ppv-loading img{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#smh_purchase_window input{
+    margin: 0 !important;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    #smh_purchase_window .content-data .date {
+        height: 33px;
+    }
+}
+
+@media (min-width: 992px){
+    .col-md-4 {
+        width: 33.33333333333333%;
+    } 
+
+    .col-md-4, .col-md-8 {
+        float: left;
+    }
+
+    .col-md-8 {
+        width: 66.66666666666666%;
+    }
+}
+
+@media all and (min-width: 992px){
+    .col-md-4 {
+        width: 33.33%;
+    } 
+
+    .col-md-4, .col-md-8 {
+        float: left;
+    }
+
+    .col-md-8 {
+        width: 66.66%;
+    }
+}
+
+#purchaseWindow #header {
+    background-color: transparent !important;
+    font-size: 15px; 
+    text-align: center; 
+    margin-bottom: 5px;
+    padding-bottom: 10px;
+    color: #46545c;
+    font-weight: bold;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    /* These are technically the same, but use both */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    white-space: normal;
+}
+
+#purchaseWindow #header .fa {
+    position: absolute; 
+    left: 15px; 
+    font-size: 30px;
+    color: #46545c;
+}
+
+#purchaseWindow #smh_button_wrapper{
+    margin: 0 auto;
+    padding: 9px;
+    overflow: hidden;
+    text-align: left;
+    white-space: nowrap;
+    width: 340px;
+    height: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    z-index: 1000;
+    -webkit-box-shadow: 0px 0px 2px 4px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: rgba(246, 246, 246, 0.97);
+}
+
+#purchaseWindow #smh_vplaylist_button_wrapper{
+    margin: 0 auto;
+    padding: 15px;
+    overflow: hidden;
+    text-align: left;
+    white-space: nowrap;
+    width: 340px;
+    height: auto;
+    position: relative;
+    top: 30%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    z-index: 1000;
+    -webkit-box-shadow: 0px 0px 2px 4px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: rgba(246, 246, 246, 0.97);
+}
+
+#purchaseWindow .buyButton {
+    background: #61B2A7 none repeat scroll 0 0;
+    border-radius: 3px;
+    border-width: 0;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 9px 17px;
+    position: relative;
+    text-decoration: none;
+    transform: translateY(30%);
+    vertical-align: middle;
+    width: 126px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    transition: background-color 0.23s ease-in-out 0s;
+}
+
+#smh_purchase_window .profile-row {
+    position: relative;
+    width: 100%; 
+    font-size: 13px;
+    margin-bottom: 5px; 
+    padding-bottom: 4px; 
+    border-bottom: 1px solid #ccc; 
+    color: #46545c;
+}
+
+#smh_purchase_window .profile-option {
+    bottom: 0;
+    float: left;
+    position: absolute;
+}
+
+#smh_purchase_window .profile-value {
+    color: #9298a3; 
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+#smh_purchase_window .profile-change {
+    float: right;
+    padding: 3px; 
+    font-size: 12px;
+    border: medium none;
+    font-weight: bold; 
+    color: #fff; 
+    background-color: #608f95;
+}
+
+#smh_purchase_window .profile-change:hover {
+    cursor: pointer;
+    background-color: #406f75;
+}
+
+#purchaseWindow #purchasedButton {
+    width: 126px;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: transparent;
+    border: transparent;
+    border-radius: 3px;
+    color: #39899d;
+    display: block;
+    font-family: Arial;
+    font-size: 12px !important;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal !important;
+    padding: 3px 0 3px 3px;
+    text-align: right;
+    text-decoration: none;
+    text-indent: 0;
+    transition: background-color 0.23s ease-in-out 0s;
+    transform: translateY(53%);
+}
+
+#purchaseWindow #purchasedButton:hover {
+    background-color: transparent !important;
+    cursor: pointer;
+    color: #2a6496 !important;
+}
+
+#purchaseWindow .buyButton:hover {
+    background: #35867b;
+    color: #fff;
+}
+
+#purchaseWindow .purchasedButton:hover {
+    background: none repeat scroll 0 0 rgba(0, 68, 68, 0.9);
+    color: #fff;
+}
+
+#smh_purchase_window .button_wrapper{
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 310px;
+}
+
+#smh_purchase_window #ticket-wrapper{
+    margin-left: auto;
+    margin-right: auto;
+    width: 310px;
+    margin-bottom: 17px;
+}
+
+#smh_purchase_window #entry-wrapper {
+    float: left;
+    padding-bottom: 17px;
+    padding-right: 18px;
+    width: 190px;
+}
+
+#smh_purchase_window #confirm-entry-wrapper{
+    float: left;
+    width: 287px;
+}
+
+#smh_purchase_window #entry-desc {
+    border-bottom: 1px solid #eeeeee;
+    color: #666;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 282px;
+}
+
+#smh_purchase_window #entry-confirm-desc {
+    color: #666;
+    width: 100%;
+}
+
+#smh_purchase_window h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #777;
+}
+
+#smh_purchase_window .ticket_button{
+    /*    float: left;
+        margin-right: 9px;*/
+    width: 116px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#smh_purchase_window .ticket_info{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+}
+
+#smh_purchase_window .ticket-btn{
+    margin-bottom: 3px;
+    width: 115px;
+    position: relative;
+}
+
+#smh_purchase_window .close{
+    color: #000;
+    float: right;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1;
+    opacity: 0.2;
+}
+
+#smh_purchase_window .sr-only {
+    border: 0 none;
+    clip: rect(0px, 0px, 0px, 0px);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+#smh_purchase_window button.close {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 0 none;
+    cursor: pointer;
+    padding: 0;
+}
+
+#smh_purchase_window .close:focus, #smh_purchase_window .close:hover {
+    color: #fff;
+    cursor: pointer;
+    text-shadow: none;
+    opacity: 1;
+}
+
+#smh_purchase_window .modal-header .close {
+    margin-top: -2px;
+}
+
+#smh_purchase_window .modal-header {
+    background-color: #65a293;
+    border-bottom: medium none;
+    color: #fff;
+    font-weight: bold !important;
+}
+
+#smh_purchase_window #smh-register-wrapper{
+    border: 2px solid #e2e2e2;
+    border-radius: 9px;
+    float: left;
+    padding: 20px;
+    height: 370px;
+}
+
+#smh_purchase_window #smh-login-wrapper{
+    float: left;
+    margin-left: 17px;
+    border: 2px solid #e2e2e2;
+    border-radius: 9px;
+    padding: 20px;
+    height: 370px;
+}
+
+#smh_purchase_window #signin{
+    float: right;
+}
+
+#smh_purchase_window #back{
+    float: left;
+}
+
+.tooltipster-base {
+    width: auto !important;
+}
+
+.nav-pills > li > a{border-radius: 0 !important;}
+.nav-pills > li{float: none !important;}
+.nav-pills > li + li {
+    margin-left: 0 !important;
+}
+#smh_purchase_window .nav {
+    list-style: none outside none;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+#smh_purchase_window .nav-tabs {
+    border-bottom: 1px solid #ddd;
+}
+
+#smh_purchase_window .nav-tabs > li {
+    float: left;
+    margin-bottom: -1px;
+}
+
+#smh_purchase_window .nav > li {
+    display: block;
+    position: relative;
+}
+
+#smh_purchase_window .nav-tabs > li.active > a, #smh_purchase_window .nav-tabs > li.active > a:hover, #smh_purchase_window .nav-tabs > li.active > a:focus {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #f7f7f7;
+    border-color: #ddd #ddd transparent;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+    color: #555;
+    cursor: default;
+    border-bottom-color: transparent;
+}
+#smh_purchase_window .nav-tabs > li > a {
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    line-height: 1.42857;
+    margin-right: 2px;
+}
+#smh_purchase_window .nav > li > a {
+    display: block;
+    padding: 10px 15px;
+    position: relative;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#smh_purchase_window ul, #smh_purchase_window ol {
+    margin-bottom: 20px !important;
+    margin-top: 0;
+}
+
+#smh_purchase_window .nav-pills > #smh_purchase_window li.active > #smh_purchase_window a, #smh_purchase_window .nav-pills > #smh_purchase_window li.active > #smh_purchase_window a:hover, #smh_purchase_window .nav-pills > #smh_purchase_window li.active > #smh_purchase_window a:focus {
+    background-color: #428BCA;
+    color: #FFFFFF;
+}
+
+#smh_purchase_window .nav > #smh_purchase_window li > #smh_purchase_window a {
+    display: block;
+    padding: 10px 15px;
+    position: relative;
+}
+#smh_purchase_window #smh-register-wrapper{
+    background-color: #edeff1;
+    border: 2px solid #e2e2e2;
+    border-radius: 9px;
+    padding: 20px;
+    height: 370px;
+}
+
+#smh_purchase_window #smh-login-wrapper{
+    float: left;
+    margin-left: 17px;
+    border: 2px solid #e2e2e2;
+    border-radius: 9px;
+    padding: 20px;
+    height: 370px;
+}
+
+#smh_purchase_window #signin{
+    float: right;
+}
+
+#smh_purchase_window #back{
+    float: left;
+}
+
+.tooltipster-base {
+    width: auto !important;
+}
+
+#smh_purchase_window #register-buttons{
+    margin-top: 19px;
+}
+
+#smh_purchase_window .input-group .form-control {
+    float: left;
+    margin-bottom: 0;
+    position: relative;
+    width: 100%;
+    z-index: 2;
+}
+#smh_purchase_window .form-control {
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    display: block;
+    font-size: 14px;
+    height: 34px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+}
+
+#smh_purchase_window .form-group {
+    margin-bottom: 15px;
+}
+
+#smh_purchase_window .input-group {
+    border-collapse: separate;
+    display: table;
+    position: relative;
+}
+
+#smh_purchase_window .input-group-addon:first-child {
+    border-right: 0 none;
+}
+
+#smh_purchase_window .input-group-addon {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #555;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    padding: 6px 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#smh_purchase_window .input-group-addon, #smh_purchase_window .input-group-btn, #smh_purchase_window .input-group .form-control {
+    display: table-cell;
+}
+
+#smh_purchase_window .input-group .form-control:last-child, #smh_purchase_window .input-group-addon:last-child, #smh_purchase_window .input-group-btn:last-child > .btn, #smh_purchase_window .input-group-btn:last-child > .btn-group > .btn, #smh_purchase_window .input-group-btn:last-child > .dropdown-toggle, #smh_purchase_window .input-group-btn:first-child > .btn:not(:first-child), #smh_purchase_window .input-group-btn:first-child > .btn-group:not(:first-child) > .btn {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+#smh_purchase_window .input-group .form-control:first-child, #smh_purchase_window .input-group-addon:first-child, #smh_purchase_window .input-group-btn:first-child > .btn, #smh_purchase_window .input-group-btn:first-child > .btn-group > .btn, #smh_purchase_window .input-group-btn:first-child > .dropdown-toggle, #smh_purchase_window .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle), #smh_purchase_window .input-group-btn:last-child > .btn-group:not(:last-child) > .btn {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+#smh_purchase_window #login-fail, #smh_purchase_window #register-fail, #smh_purchase_window #settings-fail{
+    display: none;
+    font-size: 12px !important;
+    color: #a94442 !important;
+}
+
+#smh_purchase_window #pass-instructions {
+    color: #777;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#smh_purchase_window .btn.disabled, #smh_purchase_window .btn[disabled], #smh_purchase_window fieldset[disabled] .btn {
+    opacity: 0.39;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+#smh_purchase_window #smh-password-form, #smh_purchase_window #smh-activation-form {
+    margin-bottom: 10px;
+    margin-top: 45px;
+}
+
+#smh_purchase_window .modal-body {
+    padding: 20px !important;
+}
+
+#purchaseWindow .watchButton {
+    background: none repeat scroll 0 0 rgba(0, 81, 95, 0.8);
+    color: #efefef;
+    border-radius: 3px;
+    border-width: 0;
+    cursor: pointer;
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: auto;
+    padding: 9px 17px;
+    text-decoration: none;
+    width: 126px;
+}
+
+#purchaseWindow .watchButton:hover {
+    background: none repeat scroll 0 0 rgba(0, 81, 95, 0.9);
+    color: #fff;
+}
+
+#purchaseWindow #smh-countdown-top-border{
+    font-size: 12px; 
+    border-bottom: 1px solid #ccc; 
+    margin-bottom: 5px; 
+    padding-bottom: 5px; 
+    margin-top: 5px;
+}
+
+#purchaseWindow #smh-countdown-wrapper{
+    display: block;
+    text-align: center; 
+    margin-left: auto; 
+    margin-right: auto; 
+    margin-top: 10px;
+    font-size: 22px; 
+    color: rgb(70, 84, 92); 
+    width: auto;
+}
+
+#purchaseWindow #smh-countdown-text{ 
+    font-size: 10px; 
+    margin-top: 3px;
+    font-weight: normal;
+}
+
+#purchaseWindow #smh-countdown-paid-text{ 
+    color: #65a293;
+    font-size: 13px; 
+    margin-top: 3px;
+}
+
+#purchaseWindow .smh-countdown-time-wrapper{
+    float: left; 
+    margin-right: 20px;
+}
+
+#purchaseWindow .smh-countdown-time{
+    font-size: 10px;
+    font-weight: normal;
+}
+
+#purchaseWindow #smh-countdown-wrapper #clock{
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+}
+
+#purchaseWindow #date-time{
+    font-size: 12px; 
+    font-weight: normal;
+    padding: 5px; 
+    color: rgb(93, 107, 115);
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
+
+#purchaseWindow .smh-countdown-time-wrapper .time{
+    font-weight: bold;
+} 

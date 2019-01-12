@@ -1,0 +1,111 @@
+.playPauseBtn, .icon-volume-high {
+    color: #007396 !important;
+}
+
+.icon-volume-mute:hover {
+    color: #007396 !important;
+}
+
+.playPauseBtn {
+    width: 47px !important;
+    text-shadow: unset !important;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #979797;
+}
+
+.scrubber .playHead {
+    border: 1px solid #979797;
+    top: -8px !important;
+    transform: scale(.8,.8) !important;
+    color: #007396 !important;
+    background: linear-gradient(to bottom,rgba(0,115,150,1) 0%,rgba(0,115,150,1) 50%,rgba(0,115,150,1) 100%) !important;
+}
+
+.scrubber {
+    height: .1em !important;
+    margin-bottom: 18px;
+    margin-top: 21px;
+}
+
+.mwPlayerContainer:not(.mobile) .controlsContainer, .topBarContainer {
+    font-size: 22px;
+}
+
+.mobile .controlsContainer {
+    font-size: 40px !important;
+}
+
+.mobile .timers {
+    font-size: 25px !important;
+    top: -10px !important;
+}
+
+.mobile .scrubber .playHead {
+    top: -15px !important;
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.mobile .controlsContainer {
+    height: 0.05em !important
+}
+
+.mobile .videoHolder {
+    height: 0px !important;
+}
+
+.mobile .controlBarContainer {
+    height: 88px;
+}
+
+.icon-download, .icon-expand {
+    color: #7A7A7A !important;
+    display: inline-block !important;
+}
+
+.controlsContainer .dropdown-menu > li > a {
+    font-size: 0.6em !important;
+}
+
+.volumeControl.vertical {
+    width: unset !important;
+}
+
+.volumeControl .sliderContainer {
+    margin-top: -163px !important;
+    margin-left: 8px !important;
+}
+
+.durationLabel, .currentTimeLabel {
+    color: #4A4A4A !important;
+}
+
+.durationLabel {
+    padding-left: 0 !important;
+}
+
+.controlBarContainer {
+    border: 1px solid #F5F5F5 !important;
+}
+.controlsContainer {
+    border-top: 0 !important;
+    border: 1px solid #F5F5F5 !important;
+    box-shadow: unset !important;
+}
+
+.timers {
+    font-size: 17px !important;
+    top: -5px !important;
+}
+
+.btn:focus {
+    outline: unset !important;
+}
+
+.volumeControl .ui-slider-horizontal.slider {
+    top: -6px !important;
+}
+
+body {
+    background: #F5F5F5 !important;
+}

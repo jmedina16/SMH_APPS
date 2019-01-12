@@ -1,0 +1,290 @@
+body {
+    background: #f6f6f6 none repeat scroll 0 0;
+    font-size: 15px;
+}
+body, html {
+    font-family: "Open Sans",Arial,sans-serif !important;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    text-align:left;
+    margin-right:-4px;
+}
+.row-centered {
+    margin-left: 9px;
+    margin-right: 9px;
+}
+
+#payment-header {
+    background: #eef2f4 none repeat scroll 0 0;
+    border-bottom: 1px solid #dedede;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: #5d6f78;
+    font-size: 24px;
+    font-weight: 300;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+#payment-wrapper{
+    margin: 30px auto;
+}
+
+#payment-form{
+    margin: 0 25px 25px;
+}
+
+#checkout{
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ddd;
+    border-radius: 9px;
+}
+
+label {
+    color: #46545c;
+    margin-bottom: 2px;
+}
+label {
+    display: inline-block;
+    font-weight: 700;
+    max-width: 100%;
+}
+.detail-m{
+    margin-top: 20px;
+}
+.detail-l{
+    padding-left: 0;
+}
+.detail-r{
+    padding-right: 0;
+}
+#details-wrapper{
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.form-horizontal .control-label-l{
+    margin-bottom: 0;
+    padding-top: 7px;
+}
+
+.title-placeholder{
+    font-size: 20px;
+    height: auto;
+    /* These are technically the same, but use both */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+.amount-placeholder {
+    color: #57ab3e;
+    font-size: 25px;
+    height: 34px;
+}
+#period{
+    color: #aaa;
+    font-size: 13px;
+    font-weight: bold;
+}
+.title-details{
+    font-size: 12px;
+    color: #777;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+input:focus {
+    background-color: #eef9f9 !important;
+    border-color: #b0e5e3 !important;
+}
+.form-control::-moz-placeholder {
+    color: #999;
+    opacity: 1;
+}
+input {
+    box-shadow: none !important;
+}
+.card-image {
+    background-position: right 2px center !important;
+    background-repeat: no-repeat !important;
+    background-size: auto 90% !important;
+    padding-right: 50px;
+}
+.expiry-date-group {
+    float: left;
+    width: 50%;
+}
+.expiry-date-group input {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    width: calc(100% + 1px);
+}
+.security-code-group {
+    float: right;
+    width: 50%;
+}
+.input-container {
+    position: relative;
+}
+.input-container input {
+    padding-right: 25px;
+}
+.security-code-group input {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+.input-container > i {
+    color: #d3d3d3;
+    cursor: pointer;
+    font-size: 16px;
+    height: 30px;
+    line-height: 30px;
+    position: absolute;
+    right: 2px;
+    text-align: center;
+    top: 2px;
+    width: 25px;
+}
+
+.input-container > i:hover {
+    color: #777;
+}
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+legend {
+    font-size: 20px;
+}
+.security-code-group .popover.top {
+    margin-top: -11px;
+}
+.zip-code-group .popover.top {
+    margin-top: -150px;
+}
+.cvc-preview-container {
+    overflow: hidden;
+}
+.cvc-preview-container.two-card div.amex-cvc-preview {
+    float: right;
+}
+.cvc-preview-container.two-card div {
+    height: 80px;
+    width: 48%;
+}
+.amex-cvc-preview {
+    background: rgba(0, 0, 0, 0) url("https://mediaplatform.streamingmediahosting.com/html5/html5lib/v2.35/kWidget/onPagePlugins/ppv_dev/resources/img/card2.png") no-repeat scroll center center / contain ;
+}
+.cvc-preview-container.two-card div.visa-mc-dis-cvc-preview {
+    float: left;
+}
+.cvc-preview-container.two-card div {
+    height: 80px;
+    width: 48%;
+}
+.visa-mc-dis-cvc-preview {
+    background: rgba(0, 0, 0, 0) url("https://mediaplatform.streamingmediahosting.com/html5/html5lib/v2.35/kWidget/onPagePlugins/ppv_dev/resources/img/card1.png") no-repeat scroll center center / contain ;
+}
+.popover {
+    left: unset !important;
+    right: 0;
+}
+.zip-code-group {
+    clear: both;
+}
+.card-row {
+    margin: 10px 0px;
+    text-align: center;
+}
+.card-row span {
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    height: 30px;
+    margin-right: 3px;
+    width: 48px;
+}
+.visa {
+    background: #fff url("https://mediaplatform.streamingmediahosting.com/html5/html5lib/v2.35/kWidget/onPagePlugins/ppv_dev/resources/img/visa.png") repeat scroll 0 0;
+}
+.mastercard {
+    background: #fff url("https://mediaplatform.streamingmediahosting.com/html5/html5lib/v2.35/kWidget/onPagePlugins/ppv_dev/resources/img/master_card.png") repeat scroll 0 0;
+}
+.amex {
+    background: #fff url("https://mediaplatform.streamingmediahosting.com/html5/html5lib/v2.35/kWidget/onPagePlugins/ppv_dev/resources/img/amex.png") repeat scroll 0 0;
+}
+.discover {
+    background: #fff url("https://mediaplatform.streamingmediahosting.com/html5/html5lib/v2.35/kWidget/onPagePlugins/ppv_dev/resources/img/discover.png") repeat scroll 0 0;
+}
+#PayButton {
+    background-color: #54c7c3;
+    border: medium none;
+    font-size: 16px;
+    height: 42px;
+    outline: 0 none;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+#PayButton:hover {
+    background-color: #6dcecb;
+}
+.submit-button-lock{
+    display: inline-block;
+    height: 20px;
+    margin-right: 7px;
+    margin-top: -2px;
+    vertical-align: middle;
+    width: 14px;
+    font-size: 21px;
+}
+.error {
+    color: #db4f4f;
+    font-size: 13px;
+}
+
+input.error {
+    background-color: #fef8f8 !important;
+    border-color: #db4f4f !important;
+}
+.btn-danger {
+    background-color: #d9534f !important;
+    border-color: #d43f3a !important;
+    color: #fff;
+}
+.payment-errors {
+    font-weight: bold;
+    color: red;
+    padding: 2px 8px;
+    margin-top: 2px;
+}
+#disclaimer{
+    margin-top: 20px; 
+    text-align: center; 
+    font-size: 13px;
+}
+
+#cancel{
+    margin-top: 20px; 
+    font-size: 16px ! important; 
+    text-align: center; 
+    color: #2c9ab7;
+}
+
+#cancel-link:hover{
+    cursor: pointer;
+}

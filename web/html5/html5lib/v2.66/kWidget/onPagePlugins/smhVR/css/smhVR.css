@@ -1,0 +1,103 @@
+.hideVideo {
+    top:-9999em !important;
+    left:-9999em !important;
+    visibility: hidden !important;
+}
+.playerPoster.fill-height {
+    width: 100% !important;
+}
+.kaltura-logo {
+    display: none !important;
+}
+
+.largePlayBtn, .playerPoster {
+    z-index: 1000 !important;
+}
+
+.vrHover:hover{
+    cursor: move;
+}
+.nonVrHover:hover{
+    cursor: pointer;
+}
+.smh-vr{
+    background-image: url("../images/smh-vr.png");
+    background-position: 5px -5px;
+    background-size: 66px 34px;
+    cursor: pointer;
+    height: 31.6667px;
+    opacity: 1;
+    overflow: visible;
+    pointer-events: auto;
+    position: relative;
+    width: 40px;
+    z-index: 1;
+    margin-right: 3px !important;
+}
+.smh-vr:hover{
+    background-position: -28px -5px;
+    right: -3px;
+    /*    top: -1px;*/
+}
+
+.controlBarContainer.hover {
+    z-index: 1000 !important;
+}
+
+.smh-vr-overlay {
+    background: rgb(0,0,0);
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=60);
+    filter: alpha(opacity=60);
+    background: rgba(0,0,0,0.6);
+}
+
+.smh-vr-alert-container {
+    z-index: 101;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 90%;
+    max-height: 100%;
+    vertical-align: middle;
+    display: table;
+}
+
+.smh-vr-alert-title {
+    padding-left: 1.8em;
+    padding-bottom: 0.6em;
+    text-align: center;
+    padding : 5px;
+    margin: 5px;
+    font-weight : normal !important;
+    font-size: 14px !important;
+    -webkit-border-top-left-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -moz-border-radius-topright: 3px;
+    border-top-right-radius: 3px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.smh-vr-alert-text {
+    color: white !important;
+}
+
+.smh-vr-overlay .btn{
+    font-size: 8px;
+    width: auto;
+    height: auto;
+    font-weight: bold !important;
+    color: #828485;
+    float: right;
+}
