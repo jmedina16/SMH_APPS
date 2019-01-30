@@ -31,3 +31,8 @@
     width: 280px !important;
     height: 30px !important;
 }
+
+.currentTimeLabel {
+    padding-left: 1em;
+    color: #000000 !important;
+}
