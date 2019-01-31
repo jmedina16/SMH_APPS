@@ -1,0 +1,43 @@
+.logo {
+    width: 280px !important;
+    height: 30px;
+    position: relative;
+    display: inline-block !important;
+    margin-right: 3px !important;
+    border-right: solid 5px #007F3D !important;
+}
+
+
+.btnFixed {
+    display: inline-block;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 280px !important;
+    cursor: pointer;
+    border: 0;
+    font-size: 1.1em;
+}
+
+.logo img {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    max-width: 100%;
+    max-height: 100%;
+    border: 0px;
+    width: 280px !important;
+    height: 30px !important;
+}
+
+.currentTimeLabel {
+    padding-left: 1em;
+    color: #000000 !important;
+}
+
+.controlsContainer {
+    border: solid 4px #007F3D !important;
+}
