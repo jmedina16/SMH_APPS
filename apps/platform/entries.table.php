@@ -1,6 +1,6 @@
 <?php
 
-#error_reporting(0);
+error_reporting(0);
 $tz = $_POST['tz'];
 date_default_timezone_set($tz);
 require_once('../../app/clients/php5/KalturaClient.php');
@@ -43,7 +43,7 @@ class entries {
         $this->flavors = $_POST["flavors"];
         $this->ac = $_POST["ac"];
         $this->category = $_POST["category"];
-        $this->search = $_POST["search"];
+        $this->search = $_POST["search"]["value"];
         $this->delete_perm = $_POST['delete_perm'];
         $this->modify_perm = $_POST['modify_perm'];
         $this->config_perm = $_POST['config_perm'];
@@ -80,7 +80,7 @@ class entries {
     public function getTable() {
         $partnerId = 0;
         $config = new KalturaConfiguration($partnerId);
-        $config->serviceUrl = 'http://devplatform.streamingmediahosting.com/';
+        $config->serviceUrl = 'http://mediaplatform.streamingmediahosting.com/';
         $client = new KalturaClient($config);
         $client->setKs($this->ks);
         $filter = new KalturaMediaEntryFilter();
@@ -113,7 +113,7 @@ class entries {
 
         // FILTERING
         if (isset($this->search) && $this->search != "") {
-            //$filter->freeText = $this->search;
+            $filter->freeText = $this->search;
         }
 
         if (isset($this->category) && $this->category != "" && $this->category != undefined) {
@@ -148,8 +148,6 @@ class entries {
             "recordsFiltered" => intval($result->totalCount),
             "data" => array(),
         );
-        
-        syslog(LOG_NOTICE, "SMH DEBUG : getTable " . print_r($filter,true));
 
         foreach ($result->objects as $entry) {
             $delete_action = '';
