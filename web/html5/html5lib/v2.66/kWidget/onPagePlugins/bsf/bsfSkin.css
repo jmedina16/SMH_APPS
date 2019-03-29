@@ -63,7 +63,7 @@
     display: inline-block !important;
 }
 
-@media all and (max-width: 421px){
+@media (max-width: 424px){
     .icon-download, .icon-expand {
         width: 1.6em !important;
     }
