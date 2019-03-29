@@ -63,6 +63,12 @@
     display: inline-block !important;
 }
 
+@media all and (max-width: 421px){
+    .icon-download, .icon-expand {
+        width: 1.6em !important;
+    }
+}
+
 .controlsContainer .dropdown-menu > li > a {
     font-size: 0.6em !important;
 }
