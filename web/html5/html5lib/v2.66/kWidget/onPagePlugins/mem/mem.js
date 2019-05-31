@@ -79,7 +79,7 @@ kWidget.addReadyCallback(function (playerId) {
                     dataType: 'json',
                     beforeSend: function () {
                         window.smh('#register-button').attr('disabled', '');
-                        window.smh('#register-loading').html('<img width="20px" src="' + protocol + '://hwimages.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/img/loading.gif">');
+                        window.smh('#register-loading').html('<img width="20px" src="' + protocol + '://climages.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/img/loading.gif">');
                     }
                 }).done(function (data) {
                     if (data['success']) {
@@ -646,7 +646,7 @@ kWidget.addReadyCallback(function (playerId) {
                     data: sessData,
                     dataType: 'json',
                     beforeSend: function () {
-                        window.smh('#login-loading').html('<img width="20px" src="' + protocol + '://hwimages.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/img/loading.gif">');
+                        window.smh('#login-loading').html('<img width="20px" src="' + protocol + '://climages.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/img/loading.gif">');
                     }
                 }).done(function (data) {
                     if (data['success']) {
@@ -668,7 +668,7 @@ kWidget.addReadyCallback(function (playerId) {
                         }
 
                         window.smh('.modal-dialog').css('width', '515px');
-                        window.smh('.modal-content').html('<div id="mem-loading"><img width="200px" src="' + protocol + '://hwimages.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/img/loading_icon.gif"></div>');
+                        window.smh('.modal-content').html('<div id="mem-loading"><img width="200px" src="' + protocol + '://climages.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/img/loading_icon.gif"></div>');
 
                         if (!playlist && !category) {
                             kdp.setKDPAttribute('servicesProxy.kalturaClient', 'ks', data['token']);
@@ -821,7 +821,7 @@ kWidget.addReadyCallback(function (playerId) {
                     dataType: 'json',
                     beforeSend: function () {
                         window.smh('#pass-submit').attr('disabled', '');
-                        window.smh('#loading').html('<img width="20px" src="' + protocol + '://hwimages.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/img/loading.gif">');
+                        window.smh('#loading').html('<img width="20px" src="' + protocol + '://climages.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/img/loading.gif">');
                     }
                 }).done(function (data) {
                     var header, content;
@@ -886,7 +886,7 @@ kWidget.addReadyCallback(function (playerId) {
                     '<div id="smh-request">' +
                     '<h2 style="font-size: 13px;">To change your email, click on the button below to submit your request.</h2>' +
                     '<button onclick="mem_obj.updateEmail(\'' + email + '\'); return false;" id="update" style="float: none; margin-left: auto; margin-right: auto;" class="btn btn-primary" type="button">Submit Request</button>' +
-                    '<span id="request-btn-loading"><img width="20px" src="' + protocol + '://hwimages.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/img/loading.gif"></span>' +
+                    '<span id="request-btn-loading"><img width="20px" src="' + protocol + '://climages.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/img/loading.gif"></span>' +
                     '</div>');
         },
         changePsswd: function (email, pid) {
@@ -895,7 +895,7 @@ kWidget.addReadyCallback(function (playerId) {
                     '<div id="smh-request">' +
                     '<h2 style="font-size: 13px;">To change your password, click on the button below to submit your request.</h2>' +
                     '<button onclick="mem_obj.updatePassword(\'' + email + '\'); return false;" id="update" style="float: none; margin-left: auto; margin-right: auto;" class="btn btn-primary" type="button">Submit Request</button>' +
-                    '<span id="request-btn-loading"><img width="20px" src="' + protocol + '://hwimages.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/img/loading.gif"></span>' +
+                    '<span id="request-btn-loading"><img width="20px" src="' + protocol + '://climages.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/img/loading.gif"></span>' +
                     '</div>');
         },
         updateEmail: function (email) {
@@ -1021,7 +1021,7 @@ kWidget.addReadyCallback(function (playerId) {
                     '<div id="register-buttons">' +
                     '<button type="button" class="btn btn-primary" style="margin-left: 5px; float: right;" id="update" onclick="mem_obj.updateFname(); return false;">Update</button>' +
                     '<div id="result"></div>' +
-                    '<span id="btn-loading"><img width="20px" src="' + protocol + '://hwimages.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/img/loading.gif"></span>' +
+                    '<span id="btn-loading"><img width="20px" src="' + protocol + '://climages.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/img/loading.gif"></span>' +
                     '</div>' +
                     '<div class="clear"></div>' +
                     '</div>' +
@@ -1118,7 +1118,7 @@ kWidget.addReadyCallback(function (playerId) {
                     '<div id="register-buttons">' +
                     '<button type="button" class="btn btn-primary" style="margin-left: 5px; float: right;" id="update" onclick="mem_obj.updateLname(); return false;">Update</button>' +
                     '<div id="result"></div>' +
-                    '<span id="btn-loading"><img width="20px" src="' + protocol + '://hwimages.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/img/loading.gif"></span>' +
+                    '<span id="btn-loading"><img width="20px" src="' + protocol + '://climages.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/img/loading.gif"></span>' +
                     '</div>' +
                     '<div class="clear"></div>' +
                     '</div>' +
@@ -1386,7 +1386,7 @@ kWidget.addReadyCallback(function (playerId) {
                             .append(
                                     window.smh('<img />')
                                     .attr({
-                                        'src': protocol + '://hwimages.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + clip['entry_id'] + '/width/' + thumbWidth
+                                        'src': protocol + '://climages.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + clip['entry_id'] + '/width/' + thumbWidth
                                     }),
                                     window.smh('<div />')
                                     .addClass('k-clip-desc')
@@ -1556,7 +1556,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://hwapi.streamingmediahosting.com/apps/mem/v1.0/index.php?action=w_get_thumb",
+                url: protocol + "://clapi.streamingmediahosting.com/apps/mem/v1.0/index.php?action=w_get_thumb",
                 data: sessData,
                 dataType: 'json'
             }).done(function (data) {
@@ -1570,7 +1570,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://hwapi.streamingmediahosting.com/apps/mem/v1.0/index.php?action=w_get_cat_thumb",
+                url: protocol + "://clapi.streamingmediahosting.com/apps/mem/v1.0/index.php?action=w_get_cat_thumb",
                 data: sessData,
                 dataType: 'json'
             }).done(function (data) {

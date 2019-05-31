@@ -80,7 +80,7 @@ ppv_init.prototype = {
         }
         window.smh.ajax({
             type: "GET",
-            url: protocol + "://hwapi.streamingmediahosting.com/apps/ppv/v1.0/index.php?action=setup_player",
+            url: protocol + "://clapi.streamingmediahosting.com/apps/ppv/v1.0/index.php?action=setup_player",
             data: sessData,
             dataType: 'json'
         }).done(function (data) {
@@ -139,7 +139,7 @@ ppv_init.prototype = {
                 }
                 window.smh.ajax({
                     type: "GET",
-                    url: protocol + "://hwapi.streamingmediahosting.com/apps/ppv/v1.0/index.php?action=get_cat_entries",
+                    url: protocol + "://clapi.streamingmediahosting.com/apps/ppv/v1.0/index.php?action=get_cat_entries",
                     data: sessData,
                     dataType: 'json'
                 }).done(function (data) {
@@ -485,7 +485,7 @@ ppv_init.prototype = {
                     '<div class="wrap">' +
                     '<div id="entry-thumb" class="column">' +
                     date_time +
-                    '<img width="130px" src="' + protocol + '://hwimages.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
+                    '<img width="130px" src="' + protocol + '://climages.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
                     free_preview +
                     '</div>' +
                     '<div id="purchase-ticket" class="column">' +
@@ -660,7 +660,7 @@ ppv_init.prototype = {
                     '<div class="wrap">' +
                     '<div id="entry-thumb" class="column">' +
                     date_time +
-                    '<img width="130px" src="' + protocol + '://hwimages.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
+                    '<img width="130px" src="' + protocol + '://climages.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
                     free_preview +
                     '</div>' +
                     purchase_ticket +
@@ -770,7 +770,7 @@ ppv_init.prototype = {
                         '<div class="wrap">' +
                         '<div id="entry-thumb" class="column">' +
                         date_time +
-                        '<img width="130px" src="' + protocol + '://hwimages.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
+                        '<img width="130px" src="' + protocol + '://climages.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
                         '</div>' +
                         '</div>' +
                         '<div class="clear"></div>' +
@@ -847,7 +847,7 @@ ppv_init.prototype = {
                         '<div id="content-wrapper">' +
                         '<div class="wrap">' +
                         '<div id="entry-thumb" class="column">' +
-                        '<img width="130px" src="' + protocol + '://hwimages.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
+                        '<img width="130px" src="' + protocol + '://climages.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
                         '</div>' +
                         '</div>' +
                         '<div class="clear"></div>' +
@@ -996,7 +996,7 @@ ppv_init.prototype = {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://hwapi.streamingmediahosting.com/apps/ppv/v1.0/index.php?action=w_get_thumb",
+                url: protocol + "://clapi.streamingmediahosting.com/apps/ppv/v1.0/index.php?action=w_get_thumb",
                 data: sessData,
                 dataType: 'json'
             }).done(function (data) {
@@ -1047,7 +1047,7 @@ ppv_init.prototype = {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://hwapi.streamingmediahosting.com/apps/ppv/v1.0/index.php?action=w_get_cat_thumb",
+                url: protocol + "://clapi.streamingmediahosting.com/apps/ppv/v1.0/index.php?action=w_get_cat_thumb",
                 data: sessData,
                 dataType: 'json'
             }).done(function (data) {

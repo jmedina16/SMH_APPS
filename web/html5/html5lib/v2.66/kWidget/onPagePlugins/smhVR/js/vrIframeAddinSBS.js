@@ -66,6 +66,8 @@ if (false)
             cache_path = 'hwapps.streamingmediahosting.com';
         } else if (cdn_cache === 'ec') {
             cache_path = 'apps.mediaplatform.streamingmediahosting.com';
+        } else if (cdn_cache === 'cl') {
+            cache_path = 'clapps.streamingmediahosting.com';
         }
     }
     if (PID) {
