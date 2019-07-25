@@ -4,21 +4,12 @@ mw.kalturaPluginWrapper(function () {
     mw.PluginManager.add('resumePlayback', mw.KBaseComponent.extend({
         setup: function () {
             var kdp = this.getPlayer();
-            console.log(kdp);
-            kdp.kBind('mediaReady', function () {
-                console.log('mediaReady');
-            });
-            // initialization code goes here.
-            // call a method for event bindings:
-            //this.addBindings();
-        },
-        addBindings: function () {
-            this.kBind('playerReady', function () {
-                console.log('mediaReady');
+            var _this = this;
+            _this.bind('playerReady', function () {
                 if (this.evaluate('{mediaProxy.entry.type}') === 1) {
                     entry_id = this.evaluate('{mediaProxy.entry.id}');
-                    this.bind('playbackComplete', function () {
-                        this.setCookie("resumevideodata_" + entry_id, 0, -1);
+                    _this.bind('playbackComplete', function () {
+                        _this.setCookie("resumevideodata_" + entry_id, 0, -1);
                         clearTimeout(timeout);
                     });
 
@@ -27,16 +18,17 @@ mw.kalturaPluginWrapper(function () {
                         var cookie = document.cookie.match(regex);
                         var cookie_split = cookie[0].split('=');
                         var cookie_value = cookie_split[1].split(';')[0];
-                        this.getPlayer().sendNotification("doSeek", cookie_value);
-                        this.kBind('firstPlay', function () {
+                        kdp.sendNotification("doSeek", cookie_value);
+                        kdp.sendNotification("doSeek", cookie_value);
+                        _this.bind('firstPlay', function () {
                             timeout = setTimeout(function () {
-                                this.rememberPosition(kdp, entry_id);
+                                _this.rememberPosition(kdp, entry_id);
                             }, 5000);
                         });
                     } else {
-                        this.kBind('firstPlay', function () {
+                        _this.bind('firstPlay', function () {
                             timeout = setTimeout(function () {
-                                this.rememberPosition(kdp, entry_id);
+                                _this.rememberPosition(kdp, entry_id);
                             }, 5000);
                         });
                     }
@@ -44,9 +36,10 @@ mw.kalturaPluginWrapper(function () {
             });
         },
         rememberPosition: function (kdp, entryId) {
+            var _this = this;
             this.setCookie("resumevideodata_" + entryId, Math.round(kdp.evaluate('{video.player.currentTime}')), 7);
             timeout = setTimeout(function () {
-                rememberPosition(kdp, entry_id);
+                _this.rememberPosition(kdp, entry_id);
             }, 5000);
         },
         setCookie: function (c_name, value, expiredays) {
