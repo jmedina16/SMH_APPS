@@ -14,11 +14,13 @@ mw.kalturaPluginWrapper(function () {
                     });
 
                     var regex = new RegExp('^(.*;)?\s*resumevideodata_' + entry_id + '\s*=\s*[^;]+(.*)?$', "g");
+                    console.log(regex);
+                    console.log(document.cookie);
                     if (document.cookie.match(regex)) {
+                        console.log('MATCH FOUND');
                         var cookie = document.cookie.match(regex);
                         var cookie_split = cookie[0].split('=');
                         var cookie_value = cookie_split[1].split(';')[0];
-                        kdp.sendNotification("doSeek", cookie_value);
                         kdp.sendNotification("doSeek", cookie_value);
                         _this.bind('firstPlay', function () {
                             timeout = setTimeout(function () {
