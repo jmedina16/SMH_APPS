@@ -1,6 +1,5 @@
 var entry_id;
 var timeout;
-//console.log(window.kWidget.isIE());
 mw.kalturaPluginWrapper(function () {
     mw.PluginManager.add('resumePlayback', mw.KBaseComponent.extend({
         setup: function () {
@@ -16,13 +15,12 @@ mw.kalturaPluginWrapper(function () {
 
                     var cookie = _this.getCookie('resumevideodata_' + entry_id);
                     if (cookie !== "") {
-                        _this.doSeek(cookie);
-                        //kdp.sendNotification("doSeek", cookie);
                         _this.bind('firstPlay', function () {
                             timeout = setTimeout(function () {
                                 _this.rememberPosition(kdp, entry_id);
                             }, 5000);
                         });
+                        _this.doSeek(cookie);
                     } else {
                         _this.bind('firstPlay', function () {
                             timeout = setTimeout(function () {
@@ -35,10 +33,14 @@ mw.kalturaPluginWrapper(function () {
         },
         doSeek: function (seconds) {
             var kdp = this.getPlayer();
-            var _this = this;
             if (mw.isIE() || this.isEdge() || mw.isMobileDevice()) {
-                console.log('TEST1');
                 kdp.sendNotification('doPlay');
+                kdp.sendNotification('doSeek', seconds);
+                this.bind('seeked', function () {
+                    setTimeout(function () {
+                        kdp.sendNotification('doPause');
+                    }, 1500);
+                });
             } else {
                 kdp.sendNotification("doSeek", seconds);
             }
