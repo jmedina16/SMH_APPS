@@ -1,5 +1,6 @@
 var entry_id;
 var timeout;
+//console.log(window.kWidget.isIE());
 mw.kalturaPluginWrapper(function () {
     mw.PluginManager.add('resumePlayback', mw.KBaseComponent.extend({
         setup: function () {
@@ -13,15 +14,10 @@ mw.kalturaPluginWrapper(function () {
                         clearTimeout(timeout);
                     });
 
-                    var regex = new RegExp('^(.*;)?\s*resumevideodata_' + entry_id + '\s*=\s*[^;]+(.*)?$', "g");
-                    console.log(regex);
-                    console.log(document.cookie);
-                    if (document.cookie.match(regex)) {
-                        console.log('MATCH FOUND');
-                        var cookie = document.cookie.match(regex);
-                        var cookie_split = cookie[0].split('=');
-                        var cookie_value = cookie_split[1].split(';')[0];
-                        kdp.sendNotification("doSeek", cookie_value);
+                    var cookie = _this.getCookie('resumevideodata_' + entry_id);
+                    if (cookie !== "") {
+                        _this.doSeek(cookie);
+                        //kdp.sendNotification("doSeek", cookie);
                         _this.bind('firstPlay', function () {
                             timeout = setTimeout(function () {
                                 _this.rememberPosition(kdp, entry_id);
@@ -36,6 +32,34 @@ mw.kalturaPluginWrapper(function () {
                     }
                 }
             });
+        },
+        doSeek: function (seconds) {
+            var kdp = this.getPlayer();
+            var _this = this;
+            if (mw.isIE() || this.isEdge() || mw.isMobileDevice()) {
+                console.log('TEST1');
+                kdp.sendNotification('doPlay');
+            } else {
+                kdp.sendNotification("doSeek", seconds);
+            }
+        },
+        isEdge: function () {
+            return ((navigator.userAgent.indexOf('Edge') != -1));
+        },
+        getCookie: function (cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
         },
         rememberPosition: function (kdp, entryId) {
             var _this = this;
