@@ -55,7 +55,7 @@ mem_init.prototype = {
         }
         window.smh.ajax({
             type: "GET",
-            url: protocol + "://clapi.streamingmediahosting.com/apps/mem/v1.0/index.php?action=setup_player",
+            url: protocol + "://hwapi.streamingmediahosting.com/apps/mem/v1.0/index.php?action=setup_player",
             data: sessData,
             dataType: 'json'
         }).done(function (data) {
@@ -87,7 +87,7 @@ mem_init.prototype = {
                 }
                 window.smh.ajax({
                     type: "GET",
-                    url: protocol + "://clapi.streamingmediahosting.com/apps/mem/v1.0/index.php?action=get_cat_entries",
+                    url: protocol + "://hwapi.streamingmediahosting.com/apps/mem/v1.0/index.php?action=get_cat_entries",
                     data: sessData,
                     dataType: 'json'
                 }).done(function (data) {
@@ -133,19 +133,19 @@ mem_init.prototype = {
     loadBaseAssets: function (pid, sm_ak, uiconf_id, uiconf_width, uiconf_height, entryId, type) {
         // An array of scripts you want to load in order
         var scriptLibrary = [];
-        scriptLibrary.push(new Array(mem_protocol + '://clapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/resources/jquery/jquery.min.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(mem_protocol + '://clapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/js/jquery.dataTables.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(mem_protocol + '://clapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/js/jquery.cookie.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(mem_protocol + '://clapps.streamingmediahosting.com/p/' + pid + '/sp/' + pid + '00/embedIframeJs/uiconf_id/' + uiconf_id + '/partner_id/' + pid, 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(mem_protocol + '://clapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/mem.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(mem_protocol + '://clapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/js/jquery.validate.min.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(mem_protocol + '://clapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/js/jstz.min.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(mem_protocol + '://clapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/js/jquery.tooltipster.min.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(mem_protocol + '://clapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/js/bootstrap.min.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(mem_protocol + '://clapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/css/font-awesome.min.css?v=1.6', 'link', 'text/css'));
-        scriptLibrary.push(new Array(mem_protocol + '://clapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/css/jquery.dataTables.min.css?v=1.6', 'link', 'text/css'));
-        scriptLibrary.push(new Array(mem_protocol + '://clapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/css/tooltipster.css?v=1.6', 'link', 'text/css'));
-        scriptLibrary.push(new Array(mem_protocol + '://clapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/css/smh_mem_style.css?v=1.6', 'link', 'text/css'));
+        scriptLibrary.push(new Array(mem_protocol + '://hwapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/resources/jquery/jquery.min.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(mem_protocol + '://hwapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/js/jquery.dataTables.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(mem_protocol + '://hwapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/js/jquery.cookie.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(mem_protocol + '://hwapps.streamingmediahosting.com/p/' + pid + '/sp/' + pid + '00/embedIframeJs/uiconf_id/' + uiconf_id + '/partner_id/' + pid, 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(mem_protocol + '://hwapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/mem.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(mem_protocol + '://hwapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/js/jquery.validate.min.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(mem_protocol + '://hwapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/js/jstz.min.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(mem_protocol + '://hwapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/js/jquery.tooltipster.min.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(mem_protocol + '://hwapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/js/bootstrap.min.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(mem_protocol + '://hwapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/css/font-awesome.min.css?v=1.6', 'link', 'text/css'));
+        scriptLibrary.push(new Array(mem_protocol + '://hwapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/css/jquery.dataTables.min.css?v=1.6', 'link', 'text/css'));
+        scriptLibrary.push(new Array(mem_protocol + '://hwapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/css/tooltipster.css?v=1.6', 'link', 'text/css'));
+        scriptLibrary.push(new Array(mem_protocol + '://hwapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/css/smh_mem_style.css?v=1.6', 'link', 'text/css'));
 
         mem.loadJsFilesSequentially(scriptLibrary, 0, function () {
             window.onload = function () {
@@ -213,7 +213,7 @@ mem_init.prototype = {
         var headTag = document.getElementsByTagName("head")[0];
         var jqTag = document.createElement('script');
         jqTag.type = 'text/javascript';
-        jqTag.src = mem_protocol + '://clapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/libs/jcarousellite.js?v=1.6';
+        jqTag.src = mem_protocol + '://hwapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/libs/jcarousellite.js?v=1.6';
         jqTag.onload = mem.loadSortJs(pid);
         headTag.appendChild(jqTag);
     },
@@ -221,7 +221,7 @@ mem_init.prototype = {
         var headTag = document.getElementsByTagName("head")[0];
         var jqTag = document.createElement('script');
         jqTag.type = 'text/javascript';
-        jqTag.src = mem_protocol + '://clapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/libs/jquery.sortElements.js?v=1.6';
+        jqTag.src = mem_protocol + '://hwapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/libs/jquery.sortElements.js?v=1.6';
         jqTag.onload = mem.loadCatCss(pid);
         headTag.appendChild(jqTag);
     },
@@ -230,7 +230,7 @@ mem_init.prototype = {
         var jqTag = document.createElement('link');
         jqTag.setAttribute("rel", "stylesheet");
         jqTag.setAttribute("type", "text/css")
-        jqTag.setAttribute("href", mem_protocol + '://clapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/css/categoryOnPage.css?v=1.6');
+        jqTag.setAttribute("href", mem_protocol + '://hwapps.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/mem/resources/css/categoryOnPage.css?v=1.6');
         headTag.appendChild(jqTag);
     },
     isActive: function (pid, sm_ak, userId) {
@@ -356,7 +356,7 @@ mem_init.prototype = {
                     '<div id="content-wrapper">' +
                     '<div class="wrap">' +
                     '<div id="entry-thumb" class="column">' +
-                    '<img width="130px" src="' + protocol + '://ecimages.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
+                    '<img width="130px" src="' + protocol + '://hwimages.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
                     free_preview +
                     '</div>' +
                     '<div id="purchase-ticket" class="column">' +
@@ -545,7 +545,7 @@ mem_init.prototype = {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://clapi.streamingmediahosting.com/apps/mem/v1.0/index.php?action=w_get_thumb",
+                url: protocol + "://hwapi.streamingmediahosting.com/apps/mem/v1.0/index.php?action=w_get_thumb",
                 data: sessData,
                 dataType: 'json'
             }).done(function (data) {
@@ -596,7 +596,7 @@ mem_init.prototype = {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://clapi.streamingmediahosting.com/apps/mem/v1.0/index.php?action=w_get_cat_thumb",
+                url: protocol + "://hwapi.streamingmediahosting.com/apps/mem/v1.0/index.php?action=w_get_cat_thumb",
                 data: sessData,
                 dataType: 'json'
             }).done(function (data) {
