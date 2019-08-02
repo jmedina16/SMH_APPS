@@ -130,6 +130,23 @@ mem_init.prototype = {
             }
         });
     },
+    logoutOnWindowClose: function (pid, sm_ak) {
+        window.addEventListener("beforeunload", function (event) {
+            window.smh.removeCookie('smh_auth_key');
+            var sessData = {
+                uid: userId,
+                pid: pid,
+                sm_ak: sm_ak
+            }
+            window.smh.ajax({
+                type: "GET",
+                url: protocol + "://mediaplatform.streamingmediahosting.com/apps/mem/v1.0/index.php?action=is_not_active",
+                data: sessData,
+                dataType: 'json',
+                async: false
+            });
+        });
+    },
     loadBaseAssets: function (pid, sm_ak, uiconf_id, uiconf_width, uiconf_height, entryId, type) {
         // An array of scripts you want to load in order
         var scriptLibrary = [];
@@ -321,11 +338,23 @@ mem_init.prototype = {
         if (!is_logged_in) {
             window.smh('#memWindow').css('top', window.smh('#' + kdpId).position().top);
             window.smh('#memWindow').css('left', window.smh('#' + kdpId).position().left);
-            window.smh('#memWindow').css('width', parseInt(window.smh('#' + kdpId).css('width')));
-            if (smh_vr && showCompMessage) {
-                window.smh('#memWindow').css('height', parseInt(window.smh('#' + kdpId).css('height')) - 70);
+            if (uiconf_width == 0 & uiconf_height == 0) {
+                window.smh('#memWindow').css('width', '100%');
             } else {
-                window.smh('#memWindow').css('height', parseInt(window.smh('#' + kdpId).css('height')));
+                window.smh('#memWindow').css('width', parseInt(window.smh('#' + kdpId).css('width')));
+            }
+            if (smh_vr && showCompMessage) {
+                if (uiconf_width == 0 & uiconf_height == 0) {
+                    window.smh('#memWindow').css('height', '100%');
+                } else {
+                    window.smh('#memWindow').css('height', parseInt(window.smh('#' + kdpId).css('height')) - 70);
+                }
+            } else {
+                if (uiconf_width == 0 & uiconf_height == 0) {
+                    window.smh('#memWindow').css('height', '100%');
+                } else {
+                    window.smh('#memWindow').css('height', parseInt(window.smh('#' + kdpId).css('height')));
+                }
             }
             if (playlist) {
                 if (uiconf_height > uiconf_width) {
@@ -368,6 +397,21 @@ mem_init.prototype = {
                     '</div>' +
                     '</div>');
             mem.startResize(kdpId);
+            if (uiconf_width == 0 && uiconf_height == 0) {
+                if (window.smh(window).width() < 450) {
+                    window.smh('#' + button_id).css('width', '100%');
+                } else {
+                    window.smh('#' + button_id).css('width', '340px');
+                }
+                window.smh(window).resize(function () {
+                    if (window.smh(window).width() < 450) {
+                        window.smh('#' + button_id).css('width', '100%');
+                    } else {
+                        window.smh('#' + button_id).css('width', '340px');
+                    }
+                });
+
+            }
         } else {
             mem.fadeLogout(kdpId, entryId);
         }
@@ -418,9 +462,15 @@ mem_init.prototype = {
         var uniqid = +new Date();
         var kdpId = 'smhtarget' + uniqid;
 
-        window.smh('#myVideoContainer').html(
-                '<div id="' + kdpId + '" style="width:400px;height:330px"></div>'
-                );
+        if (uiconf_width == 0 && uiconf_height == 0) {
+            window.smh('#myVideoContainer').html(
+                    '<div style="margin-top: 56.25%;"></div><div id="' + kdpId + '" style="position:absolute;top:0;left:0;left: 0;right: 0;bottom:0;"></div>'
+                    );
+        } else {
+            window.smh('#myVideoContainer').html(
+                    '<div id="' + kdpId + '" style="width:400px;height:330px"></div>'
+                    );
+        }
         mw.setConfig('Kaltura.LeadWithHTML5', true);
         flashvars = {};
         flashvars.externalInterfaceDisabled = false;
