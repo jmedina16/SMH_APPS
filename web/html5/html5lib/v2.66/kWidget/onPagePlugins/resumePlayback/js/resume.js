@@ -5,7 +5,9 @@ mw.kalturaPluginWrapper(function () {
         setup: function () {
             var kdp = this.getPlayer();
             var _this = this;
+            var autoplay = false;
             _this.bind('playerReady', function () {
+                autoplay = this.evaluate('{autoPlay}');
                 if (this.evaluate('{mediaProxy.entry.type}') === 1) {
                     entry_id = this.evaluate('{mediaProxy.entry.id}');
                     _this.bind('playbackComplete', function () {
@@ -20,7 +22,7 @@ mw.kalturaPluginWrapper(function () {
                                 _this.rememberPosition(kdp, entry_id);
                             }, 5000);
                         });
-                        _this.doSeek(cookie);
+                        _this.doSeek(cookie, autoplay);
                     } else {
                         _this.bind('firstPlay', function () {
                             timeout = setTimeout(function () {
@@ -31,7 +33,7 @@ mw.kalturaPluginWrapper(function () {
                 }
             });
         },
-        doSeek: function (seconds) {
+        doSeek: function (seconds, autoplay) {
             var kdp = this.getPlayer();
             var _this = this;
             if (mw.isIE() || this.isEdge() || mw.isMobileDevice()) {
@@ -40,11 +42,19 @@ mw.kalturaPluginWrapper(function () {
                 this.bind('seeked', function () {
                     setTimeout(function () {
                         kdp.sendNotification('doPause');
-                        _this.unbind('seeked'); 
+                        _this.unbind('seeked');
                     }, 1500);
                 });
             } else {
                 kdp.sendNotification("doSeek", seconds);
+                if (autoplay) {
+                    this.bind('seeked', function () {
+                        setTimeout(function () {
+                            kdp.sendNotification('doPlay');
+                            _this.unbind('seeked');
+                        }, 1500);
+                    });
+                }
             }
         },
         isEdge: function () {
