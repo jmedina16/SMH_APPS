@@ -262,12 +262,12 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
                 width: 96% !important;
             }
         </style>
-        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.52.3/kWidget/onPagePlugins/ppv_dev/resources/css/smh_ppv_style.css?1385197029"></link>
-        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.52.3/kWidget/onPagePlugins/ppv_dev/resources/css/bootstrap.min.css?1385197029"></link>
-        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.52.3/kWidget/onPagePlugins/ppv_dev/resources/css/categoryOnPage.css?1385197029"></link>
-        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.52.3/kWidget/onPagePlugins/ppv_dev/resources/css/font-awesome.min.css?1385197029"></link>
-        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.52.3/kWidget/onPagePlugins/ppv_dev/resources/css/tooltipster.css?1385197029"></link>
-        <script src="/html5/html5lib/v2.55/resources/jquery/jquery.min.js"></script>
+        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/css/smh_ppv_style.css?1385197029"></link>
+        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/css/bootstrap.min.css?1385197029"></link>
+        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/css/categoryOnPage.css?1385197029"></link>
+        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/css/font-awesome.min.css?1385197029"></link>
+        <link type="text/css" rel="stylesheet" media="screen" href="/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/css/tooltipster.css?1385197029"></link>
+        <script src="/html5/html5lib/v2.66/resources/jquery/jquery.min.js"></script>
     </head>
     <body>
         <?php
@@ -280,7 +280,7 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
                     var headTag = document.getElementsByTagName("head")[0];
                     var jqTag = document.createElement('script');
                     jqTag.setAttribute("type", "text/javascript")
-                    jqTag.setAttribute("src", 'https://devplatform.streamingmediahosting.com/html5/html5lib/v2.55/kWidget/onPagePlugins/ppv/ppv_init.js');
+                    jqTag.setAttribute("src", 'https://devplatform.streamingmediahosting.com/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv/ppv_init.js');
                     headTag.appendChild(jqTag);
                 });
 
@@ -394,7 +394,7 @@ if ($mode == 's' || $mode == 'cr' || $mode == 'cl' || $mode == 'ct' || $mode == 
                 }
 
                 function getPlayerEmbed(pid, sm_ak, uiconf_id, width, height, entry_id, mode, protocol) {
-                    var player = '<script>ppv_protocol=\'' + protocol + '\';ppv_type=\'' + mode + '\';function load_smh_ppv(){ppv.init(\'' + protocol + '\');ppv.checkAccess(' + pid + ',"' + sm_ak + '",' + uiconf_id + ',' + width + ',' + height + ',"' + entry_id + '",ppv_type);}<\/script><script src="' + protocol + '://mediaplatform.streamingmediahosting.com/p/<?php echo $_GET['pid'] ?>/html5/html5lib/v2.55/kWidget/onPagePlugins/ppv_dev/ppv_init.js" type="text/javascript"><\/script><div id="myVideoContainer"></div><div id="purchaseWindow" style="display: none;"></div>';
+                    var player = '<script>ppv_protocol=\'' + protocol + '\';ppv_type=\'' + mode + '\';function load_smh_ppv(){ppv.init(\'' + protocol + '\');ppv.checkAccess(' + pid + ',"' + sm_ak + '",' + uiconf_id + ',' + width + ',' + height + ',"' + entry_id + '",ppv_type);}<\/script><script src="' + protocol + '://mediaplatform.streamingmediahosting.com/p/<?php echo $_GET['pid'] ?>/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/ppv_init.js" type="text/javascript"><\/script><div id="myVideoContainer"></div><div id="purchaseWindow" style="display: none;"></div>';
                     return player;
                 }
             </script>
