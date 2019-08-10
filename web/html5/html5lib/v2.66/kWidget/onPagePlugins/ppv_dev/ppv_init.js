@@ -80,7 +80,7 @@ ppv_init.prototype = {
         }
         window.smh.ajax({
             type: "GET",
-            url: protocol + "://api.mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=setup_player",
+            url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=setup_player",
             data: sessData,
             dataType: 'json'
         }).done(function (data) {
@@ -139,7 +139,7 @@ ppv_init.prototype = {
                 }
                 window.smh.ajax({
                     type: "GET",
-                    url: protocol + "://api.mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_cat_entries",
+                    url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_cat_entries",
                     data: sessData,
                     dataType: 'json'
                 }).done(function (data) {
@@ -158,7 +158,7 @@ ppv_init.prototype = {
                 }
                 window.smh.ajax({
                     type: "GET",
-                    url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=is_logged_in",
+                    url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=is_logged_in",
                     data: sessData,
                     dataType: 'json'
                 }).done(function (data) {
@@ -196,22 +196,22 @@ ppv_init.prototype = {
     loadBaseAssets: function (pid, sm_ak, uiconf_id, uiconf_width, uiconf_height, entryId, type) {
         // An array of scripts you want to load in order
         var scriptLibrary = [];
-        scriptLibrary.push(new Array(ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/resources/jquery/jquery.min.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/jquery.dataTables.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/jquery.cookie.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/sp/' + pid + '00/embedIframeJs/uiconf_id/' + uiconf_id + '/partner_id/' + pid, 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/ppv.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/jquery.validate.min.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/jstz.min.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/jquery.tooltipster.min.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/moment.min.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/moment-timezone-with-data.min.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/jquery.countdown.min.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/bootstrap.min.js?v=1.6', 'script', 'text/javascript'));
-        scriptLibrary.push(new Array(ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/css/font-awesome.min.css?v=1.6', 'link', 'text/css'));
-        scriptLibrary.push(new Array(ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/css/jquery.dataTables.min.css?v=1.6', 'link', 'text/css'));
-        scriptLibrary.push(new Array(ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/css/tooltipster.css?v=1.6', 'link', 'text/css'));
-        scriptLibrary.push(new Array(ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/css/smh_ppv_style.css?v=1.6', 'link', 'text/css'));
+        scriptLibrary.push(new Array(ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/resources/jquery/jquery.min.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/jquery.dataTables.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/jquery.cookie.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/sp/' + pid + '00/embedIframeJs/uiconf_id/' + uiconf_id + '/partner_id/' + pid, 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/ppv.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/jquery.validate.min.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/jstz.min.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/jquery.tooltipster.min.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/moment.min.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/moment-timezone-with-data.min.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/jquery.countdown.min.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/js/bootstrap.min.js?v=1.6', 'script', 'text/javascript'));
+        scriptLibrary.push(new Array(ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/css/font-awesome.min.css?v=1.6', 'link', 'text/css'));
+        scriptLibrary.push(new Array(ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/css/jquery.dataTables.min.css?v=1.6', 'link', 'text/css'));
+        scriptLibrary.push(new Array(ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/css/tooltipster.css?v=1.6', 'link', 'text/css'));
+        scriptLibrary.push(new Array(ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/css/smh_ppv_style.css?v=1.6', 'link', 'text/css'));
 
         ppv.loadJsFilesSequentially(scriptLibrary, 0, function () {
             window.onload = function () {
@@ -288,7 +288,7 @@ ppv_init.prototype = {
         var headTag = document.getElementsByTagName("head")[0];
         var jqTag = document.createElement('script');
         jqTag.type = 'text/javascript';
-        jqTag.src = ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/libs/jcarousellite.js?v=1.6';
+        jqTag.src = ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/libs/jcarousellite.js?v=1.6';
         jqTag.onload = ppv.loadSortJs(pid);
         headTag.appendChild(jqTag);
     },
@@ -296,7 +296,7 @@ ppv_init.prototype = {
         var headTag = document.getElementsByTagName("head")[0];
         var jqTag = document.createElement('script');
         jqTag.type = 'text/javascript';
-        jqTag.src = ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/libs/jquery.sortElements.js?v=1.6';
+        jqTag.src = ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/libs/jquery.sortElements.js?v=1.6';
         jqTag.onload = ppv.loadCatCss(pid);
         headTag.appendChild(jqTag);
     },
@@ -305,7 +305,7 @@ ppv_init.prototype = {
         var jqTag = document.createElement('link');
         jqTag.setAttribute("rel", "stylesheet");
         jqTag.setAttribute("type", "text/css")
-        jqTag.setAttribute("href", ppv_protocol + '://apps.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/css/categoryOnPage.css?v=1.6');
+        jqTag.setAttribute("href", ppv_protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/css/categoryOnPage.css?v=1.6');
         headTag.appendChild(jqTag);
     },
     isActive: function (pid, sm_ak) {
@@ -316,7 +316,7 @@ ppv_init.prototype = {
         }
         window.smh.ajax({
             type: "GET",
-            url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=is_active",
+            url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=is_active",
             data: sessData,
             dataType: 'json'
         });
@@ -331,7 +331,7 @@ ppv_init.prototype = {
         }
         window.smh.ajax({
             type: "GET",
-            url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=is_not_active",
+            url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=is_not_active",
             data: sessData,
             dataType: 'json'
         });
@@ -347,7 +347,7 @@ ppv_init.prototype = {
         }
         window.smh.ajax({
             type: "GET",
-            url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=check_inventory",
+            url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=check_inventory",
             data: sessData,
             dataType: 'json'
         }).done(function (data) {
@@ -482,7 +482,7 @@ ppv_init.prototype = {
                     '<div class="wrap">' +
                     '<div id="entry-thumb" class="column">' +
                     date_time +
-                    '<img width="130px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
+                    '<img width="130px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
                     free_preview +
                     '</div>' +
                     '<div id="purchase-ticket" class="column">' +
@@ -654,7 +654,7 @@ ppv_init.prototype = {
                     '<div class="wrap">' +
                     '<div id="entry-thumb" class="column">' +
                     date_time +
-                    '<img width="130px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
+                    '<img width="130px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
                     free_preview +
                     '</div>' +
                     purchase_ticket +
@@ -764,7 +764,7 @@ ppv_init.prototype = {
                         '<div class="wrap">' +
                         '<div id="entry-thumb" class="column">' +
                         date_time +
-                        '<img width="130px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
+                        '<img width="130px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
                         '</div>' +
                         '</div>' +
                         '<div class="clear"></div>' +
@@ -841,7 +841,7 @@ ppv_init.prototype = {
                         '<div id="content-wrapper">' +
                         '<div class="wrap">' +
                         '<div id="entry-thumb" class="column">' +
-                        '<img width="130px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
+                        '<img width="130px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + thumbId + '/width/130">' +
                         '</div>' +
                         '</div>' +
                         '<div class="clear"></div>' +
@@ -990,7 +990,7 @@ ppv_init.prototype = {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://api.mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=w_get_thumb",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=w_get_thumb",
                 data: sessData,
                 dataType: 'json'
             }).done(function (data) {
@@ -1041,7 +1041,7 @@ ppv_init.prototype = {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://api.mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=w_get_cat_thumb",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=w_get_cat_thumb",
                 data: sessData,
                 dataType: 'json'
             }).done(function (data) {

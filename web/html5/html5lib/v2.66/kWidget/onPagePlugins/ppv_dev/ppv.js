@@ -45,7 +45,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://api.mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_tickets",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_tickets",
                 data: sessData,
                 dataType: 'json',
                 beforeSend: function () {
@@ -53,7 +53,7 @@ kWidget.addReadyCallback(function (playerId) {
                         backdrop: 'static'
                     });
                     window.smh('.modal-dialog').css('width', '400px');
-                    window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif"></div>');
+                    window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif"></div>');
                 }
             }).done(function (msg) {
                 ppv_obj.resetModal();
@@ -498,12 +498,12 @@ kWidget.addReadyCallback(function (playerId) {
                 }
                 window.smh.ajax({
                     type: "GET",
-                    url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=register_account",
+                    url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=register_account",
                     data: sessData,
                     dataType: 'json',
                     beforeSend: function () {
                         window.smh('#register-button').attr('disabled', '');
-                        window.smh('#register-loading').html('<img width="20px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif">');
+                        window.smh('#register-loading').html('<img width="20px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif">');
                     }
                 }).done(function (data) {
                     if (data['success']) {
@@ -569,7 +569,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://api.mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_confirm",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_confirm",
                 data: sessData,
                 dataType: 'json',
                 beforeSend: function () {
@@ -577,7 +577,7 @@ kWidget.addReadyCallback(function (playerId) {
                         backdrop: 'static'
                     });
                     window.smh('.modal-dialog').css('width', '520px');
-                    window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif"></div>');
+                    window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif"></div>');
                 }
             }).done(function (msg) {
                 ppv_obj.resetModal();
@@ -624,7 +624,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://api.mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_confirm",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_confirm",
                 data: sessData,
                 dataType: 'json',
                 beforeSend: function () {
@@ -632,7 +632,7 @@ kWidget.addReadyCallback(function (playerId) {
                         backdrop: 'static'
                     });
                     window.smh('.modal-dialog').css('width', '520px');
-                    window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif"></div>');
+                    window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif"></div>');
                 }
             }).done(function (msg) {
                 ppv_obj.resetModal();
@@ -675,7 +675,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=add_order",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=add_order",
                 data: sessData,
                 dataType: 'json',
                 beforeSend: function () {
@@ -701,7 +701,7 @@ kWidget.addReadyCallback(function (playerId) {
                         backdrop: 'static'
                     });
                     window.smh('.modal-dialog').css('width', '520px');
-                    window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif">' + text + '</div>');
+                    window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif">' + text + '</div>');
                     if (gw_type == 1) {
                         if (!isMobile) {
                             var width = 800;
@@ -755,7 +755,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=check_inventory",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=check_inventory",
                 data: sessData,
                 dataType: 'json'
             }).done(function (data) {
@@ -791,7 +791,7 @@ kWidget.addReadyCallback(function (playerId) {
                     '<div id="register-buttons">' +
                     '<button type="button" class="btn btn-primary" style="margin-left: 5px; float: right;" id="update" onclick="ppv_obj.updateFname(); return false;">Update</button>' +
                     '<div id="result"></div>' +
-                    '<span id="btn-loading"><img width="20px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif"></span>' +
+                    '<span id="btn-loading"><img width="20px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif"></span>' +
                     '</div>' +
                     '<div class="clear"></div>' +
                     '</div>' +
@@ -844,7 +844,7 @@ kWidget.addReadyCallback(function (playerId) {
                 }
                 window.smh.ajax({
                     type: "GET",
-                    url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=update_fname",
+                    url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=update_fname",
                     data: sessData,
                     dataType: 'json',
                     beforeSend: function () {
@@ -884,7 +884,7 @@ kWidget.addReadyCallback(function (playerId) {
                     '<div id="register-buttons">' +
                     '<button type="button" class="btn btn-primary" style="margin-left: 5px; float: right;" id="update" onclick="ppv_obj.updateLname(); return false;">Update</button>' +
                     '<div id="result"></div>' +
-                    '<span id="btn-loading"><img width="20px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif"></span>' +
+                    '<span id="btn-loading"><img width="20px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif"></span>' +
                     '</div>' +
                     '<div class="clear"></div>' +
                     '</div>' +
@@ -937,7 +937,7 @@ kWidget.addReadyCallback(function (playerId) {
                 }
                 window.smh.ajax({
                     type: "GET",
-                    url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=update_lname",
+                    url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=update_lname",
                     data: sessData,
                     dataType: 'json',
                     beforeSend: function () {
@@ -968,7 +968,7 @@ kWidget.addReadyCallback(function (playerId) {
                     '<div id="smh-request">' +
                     '<h2 style="font-size: 13px;">To change your email, click on the button below to submit your request.</h2>' +
                     '<button onclick="ppv_obj.updateEmail(\'' + email + '\'); return false;" id="update" style="float: none; margin-left: auto; margin-right: auto;" class="btn btn-primary" type="button">Submit Request</button>' +
-                    '<span id="request-btn-loading"><img width="20px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif"></span>' +
+                    '<span id="request-btn-loading"><img width="20px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif"></span>' +
                     '</div>');
         },
         changePsswd: function (email, pid) {
@@ -977,7 +977,7 @@ kWidget.addReadyCallback(function (playerId) {
                     '<div id="smh-request">' +
                     '<h2 style="font-size: 13px;">To change your password, click on the button below to submit your request.</h2>' +
                     '<button onclick="ppv_obj.updatePassword(\'' + email + '\'); return false;" id="update" style="float: none; margin-left: auto; margin-right: auto;" class="btn btn-primary" type="button">Submit Request</button>' +
-                    '<span id="request-btn-loading"><img width="20px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif"></span>' +
+                    '<span id="request-btn-loading"><img width="20px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif"></span>' +
                     '</div>');
         },
         updateEmail: function (email) {
@@ -991,7 +991,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=reset_email_request",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=reset_email_request",
                 data: sessData,
                 dataType: 'json',
                 beforeSend: function () {
@@ -1019,7 +1019,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=reset_psswd_request",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=reset_psswd_request",
                 data: sessData,
                 dataType: 'json',
                 beforeSend: function () {
@@ -1049,7 +1049,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_user_details",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_user_details",
                 data: sessData,
                 dataType: 'json'
             }).done(function (data) {
@@ -1098,7 +1098,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_user_details",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_user_details",
                 data: sessData,
                 dataType: 'json'
             }).done(function (data) {
@@ -1154,7 +1154,7 @@ kWidget.addReadyCallback(function (playerId) {
                     "info": false,
                     "lengthChange": false,
                     "ajax": {
-                        "url": protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=w_get_user_orders",
+                        "url": protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=w_get_user_orders",
                         "type": "GET",
                         "data": function (d) {
                             var smh_sess = window.smh.cookie('smh_auth_key');
@@ -1205,7 +1205,7 @@ kWidget.addReadyCallback(function (playerId) {
                     '<div id="smh-request">' +
                     '<h2 style="font-size: 13px;">Are you sure you want to cancel this subscription?</h2>' +
                     '<button onclick="ppv_obj.doDeleteSub(' + sid + '); return false;" id="update" style="float: none; margin-left: auto; margin-right: auto;" class="btn btn-primary" type="button">Cancel Subscription</button>' +
-                    '<span id="request-btn-loading"><img width="20px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif"></span>' +
+                    '<span id="request-btn-loading"><img width="20px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif"></span>' +
                     '</div>');
         },
         cancel_sub: function (sid, pid) {
@@ -1214,7 +1214,7 @@ kWidget.addReadyCallback(function (playerId) {
                     '<div id="smh-request">' +
                     '<h2 style="font-size: 13px;">Are you sure you want to cancel this subscription?</h2>' +
                     '<button onclick="ppv_obj.doSubCancel(' + sid + '); return false;" id="update" style="float: none; margin-left: auto; margin-right: auto;" class="btn btn-primary" type="button">Cancel Subscription</button>' +
-                    '<span id="request-btn-loading"><img width="20px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif"></span>' +
+                    '<span id="request-btn-loading"><img width="20px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif"></span>' +
                     '</div>');
         },
         smh_back_subs: function () {
@@ -1236,7 +1236,7 @@ kWidget.addReadyCallback(function (playerId) {
                 "info": false,
                 "lengthChange": false,
                 "ajax": {
-                    "url": protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=w_get_user_subs",
+                    "url": protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=w_get_user_subs",
                     "type": "GET",
                     "data": function (d) {
                         var smh_sess = window.smh.cookie('smh_auth_key');
@@ -1281,7 +1281,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=w_delete_sub",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=w_delete_sub",
                 data: sessData,
                 dataType: 'json',
                 beforeSend: function () {
@@ -1310,7 +1310,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=w_cancel_sub",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=w_cancel_sub",
                 data: sessData,
                 dataType: 'json',
                 beforeSend: function () {
@@ -1337,7 +1337,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=cancel_order",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=cancel_order",
                 data: sessData,
                 dataType: 'json'
             }).done(function (data) {
@@ -1387,7 +1387,7 @@ kWidget.addReadyCallback(function (playerId) {
                     '<input type="hidden" name="x_last_name" value="' + data['options']['lname'] + '">' +
                     '<input type="hidden" name="x_email" value="' + data['options']['email'] + '">' +
                     '<input type="hidden" name="x_email_customer" value="FALSE">' +
-                    '<input type="hidden" name="x_cancel_url" value="https://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/authnet_cancel.php?oid=' + data['order_id'] + '&sid=' + data['sub_id'] + '&pid=' + pid + '&sm_ak=' + encodeURIComponent(sm_ak) + '">' +
+                    '<input type="hidden" name="x_cancel_url" value="https://devplatform.streamingmediahosting.com/apps/ppv/v1.0/authnet_cancel.php?oid=' + data['order_id'] + '&sid=' + data['sub_id'] + '&pid=' + pid + '&sm_ak=' + encodeURIComponent(sm_ak) + '">' +
                     '<input type="hidden" name="x_cancel_url_text" value="Cancel_Order">' +
                     '<input type="hidden" name="x_rename" value="x_description, Title">' +
                     '<input type="hidden" name="x_version" value="3.1">' +
@@ -1441,7 +1441,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://mediaplatform.streamingmediahosting.com/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/php/pptransact.php",
+                url: protocol + "://devplatform.streamingmediahosting.com/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/php/pptransact.php",
                 data: sessData,
                 dataType: 'json'
             }).done(function (resp) {
@@ -1538,7 +1538,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://api.mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_tickets",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_tickets",
                 data: sessData,
                 dataType: 'json',
                 beforeSend: function () {
@@ -1546,7 +1546,7 @@ kWidget.addReadyCallback(function (playerId) {
                         backdrop: 'static'
                     });
                     window.smh('.modal-dialog').css('width', '400px');
-                    window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif"></div>');
+                    window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif"></div>');
                 }
             }).done(function (msg) {
                 ppv_obj.resetModal();
@@ -1756,11 +1756,11 @@ kWidget.addReadyCallback(function (playerId) {
                 }
                 window.smh.ajax({
                     type: "GET",
-                    url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=login_user",
+                    url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=login_user",
                     data: sessData,
                     dataType: 'json',
                     beforeSend: function () {
-                        window.smh('#login-loading').html('<img width="20px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif">');
+                        window.smh('#login-loading').html('<img width="20px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif">');
                     }
                 }).done(function (data) {
                     if (data['success']) {
@@ -2023,12 +2023,12 @@ kWidget.addReadyCallback(function (playerId) {
                 }
                 window.smh.ajax({
                     type: "GET",
-                    url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=reset_psswd_request",
+                    url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=reset_psswd_request",
                     data: sessData,
                     dataType: 'json',
                     beforeSend: function () {
                         window.smh('#pass-submit').attr('disabled', '');
-                        window.smh('#loading').html('<img width="20px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif">');
+                        window.smh('#loading').html('<img width="20px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading.gif">');
                     }
                 }).done(function (data) {
                     var header, content;
@@ -2064,7 +2064,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=check_inventory",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=check_inventory",
                 data: sessData,
                 dataType: 'json'
             }).done(function (data) {
@@ -2084,7 +2084,7 @@ kWidget.addReadyCallback(function (playerId) {
                         }
                         window.smh.ajax({
                             type: "GET",
-                            url: protocol + "://api.mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_tickets",
+                            url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_tickets",
                             data: sessData,
                             dataType: 'json',
                             beforeSend: function () {
@@ -2092,7 +2092,7 @@ kWidget.addReadyCallback(function (playerId) {
                                     backdrop: 'static'
                                 });
                                 window.smh('.modal-dialog').css('width', '400px');
-                                window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif"></div>');
+                                window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif"></div>');
                             }
                         }).done(function (msg) {
                             window.ppv.loadVideo('', pid, sm_ak, uiconf_id, uiconf_width, uiconf_height, entryId, type);
@@ -2130,7 +2130,7 @@ kWidget.addReadyCallback(function (playerId) {
                     is_logged_in = true;
                     userId = uid;
                     window.smh('.modal-dialog').css('width', '520px');
-                    window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif"></div>');
+                    window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif"></div>');
                     window.smh('#purchaseWindow').css('display', 'none');
                     if (!scheduled_is_before && !scheduled_is_after) {
                         kdp.addJsListener("playerPlayed", "playerPlayedHandler");
@@ -2177,7 +2177,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://api.mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_tickets",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_tickets",
                 data: sessData,
                 dataType: 'json',
                 beforeSend: function () {
@@ -2185,7 +2185,7 @@ kWidget.addReadyCallback(function (playerId) {
                         backdrop: 'static'
                     });
                     window.smh('.modal-dialog').css('width', '400px');
-                    window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif"></div>');
+                    window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif"></div>');
                 }
             }).done(function (msg) {
                 if (!msg['success']) {
@@ -2226,7 +2226,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://api.mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_tickets",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=get_tickets",
                 data: sessData,
                 dataType: 'json',
                 beforeSend: function () {
@@ -2234,7 +2234,7 @@ kWidget.addReadyCallback(function (playerId) {
                         backdrop: 'static'
                     });
                     window.smh('.modal-dialog').css('width', '400px');
-                    window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif"></div>');
+                    window.smh('.modal-content').html('<div id="ppv-loading"><img width="200px" src="' + protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/html5/html5lib/v2.66/kWidget/onPagePlugins/ppv_dev/resources/img/loading_icon.gif"></div>');
                 }
             }).done(function (msg) {
                 ppv_obj.resetModal();
@@ -2274,7 +2274,7 @@ kWidget.addReadyCallback(function (playerId) {
 
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=update_user_views",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=update_user_views",
                 data: sessData,
                 dataType: 'json'
             });
@@ -2465,7 +2465,7 @@ kWidget.addReadyCallback(function (playerId) {
                             .append(
                                     window.smh('<img />')
                                     .attr({
-                                        'src': protocol + '://images.mediaplatform.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + clip['entry_id'] + '/width/' + thumbWidth
+                                        'src': protocol + '://devplatform.streamingmediahosting.com/p/' + pid + '/thumbnail/entry_id/' + clip['entry_id'] + '/width/' + thumbWidth
                                     }),
                                     window.smh('<div />')
                                     .addClass('k-clip-desc')
@@ -2546,7 +2546,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=check_cat_inventory",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=check_cat_inventory",
                 data: sessData,
                 dataType: 'json'
             }).done(function (data) {
@@ -2627,7 +2627,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://api.mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=w_get_thumb",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=w_get_thumb",
                 data: sessData,
                 dataType: 'json'
             }).done(function (data) {
@@ -2641,7 +2641,7 @@ kWidget.addReadyCallback(function (playerId) {
             }
             window.smh.ajax({
                 type: "GET",
-                url: protocol + "://api.mediaplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=w_get_cat_thumb",
+                url: protocol + "://devplatform.streamingmediahosting.com/apps/ppv/v1.0/dev.php?action=w_get_cat_thumb",
                 data: sessData,
                 dataType: 'json'
             }).done(function (data) {
