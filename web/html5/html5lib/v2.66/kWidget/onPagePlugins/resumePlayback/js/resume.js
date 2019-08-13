@@ -5,6 +5,10 @@ mw.kalturaPluginWrapper(function () {
         setup: function () {
             var kdp = this.getPlayer();
             var _this = this;
+            _this.bind("chromecastReceiverLoaded", function () {
+                console.log('SMH DEBUG');
+                console.log('Chromecast Receiver Loaded');
+            });
             _this.bind('playerReady', function () {
                 if (this.evaluate('{mediaProxy.entry.type}') === 1) {
                     entry_id = this.evaluate('{mediaProxy.entry.id}');
@@ -40,11 +44,11 @@ mw.kalturaPluginWrapper(function () {
                 this.bind('seeked', function () {
                     setTimeout(function () {
                         kdp.sendNotification('doPause');
-                        _this.unbind('seeked'); 
+                        _this.unbind('seeked');
                     }, 1500);
                 });
             } else {
-                kdp.sendNotification("doSeek", seconds);
+                //kdp.sendNotification("doSeek", seconds);
             }
         },
         isEdge: function () {
@@ -76,6 +80,18 @@ mw.kalturaPluginWrapper(function () {
             var exdate = new Date();
             exdate.setDate(exdate.getDate() + expiredays);
             document.cookie = c_name + "=" + escape(value) + ((expiredays == null) ? "" : ";expires=" + exdate.toUTCString());
+        },
+        getComponent: function () {
+            var _this = this;
+            if (!this.$el) {
+                this.$el = $('<button />')
+                        .attr('title', 'Play')
+                        .addClass('btn icon-play' + this.getCssClass())
+                        .click(function () {
+                            _this.togglePlayback();
+                        });
+            }
+            return this.$el;
         }
     }));
 });
