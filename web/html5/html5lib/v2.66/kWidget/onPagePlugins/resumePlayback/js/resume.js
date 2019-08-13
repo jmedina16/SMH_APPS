@@ -39,14 +39,14 @@ mw.kalturaPluginWrapper(function () {
             var kdp = this.getPlayer();
             var _this = this;
             if (mw.isIE() || this.isEdge() || mw.isMobileDevice()) {
-                kdp.sendNotification('doPlay');
-                kdp.sendNotification('doSeek', seconds);
-                this.bind('seeked', function () {
-                    setTimeout(function () {
-                        kdp.sendNotification('doPause');
-                        _this.unbind('seeked');
-                    }, 1500);
-                });
+//                kdp.sendNotification('doPlay');
+//                kdp.sendNotification('doSeek', seconds);
+//                this.bind('seeked', function () {
+//                    setTimeout(function () {
+//                        kdp.sendNotification('doPause');
+//                        _this.unbind('seeked');
+//                    }, 1500);
+//                });
             } else {
                 //kdp.sendNotification("doSeek", seconds);
             }
