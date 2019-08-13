@@ -1,9 +1,16 @@
 //window.kWidget.addReadyCallback(function (playerId) {
-//    var kdp = document.getElementById( playerId );
-//    kdp.kBind( "playerReady", function(){ 
+//    var test = window.document.getElementById(playerId);
+//    test.kBind("playerReady", function () {
 //        console.log('SMH DEBUG: PLAYER READY')
 //    });
 //});
+
+(function (mw, $) {
+    "use strict";
+    $(mw).bind('EmbedPlayerNewPlayer', function () {
+        console.log('SMH DEBUG: PLAYER READY')
+    });
+})(window.mw, window.jQuery);
 
 //var entry_id;
 //var timeout;
