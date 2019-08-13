@@ -12,14 +12,18 @@ kWidget.addReadyCallback(function (playerId) {
 
             var cookie = getCookie('resumevideodata_' + entry_id);
             if (cookie !== "") {
-                timeout = setTimeout(function () {
-                    rememberPosition(kdp, entry_id);
-                }, 5000);
+                kdp.kBind('firstPlay', function () {
+                    timeout = setTimeout(function () {
+                        rememberPosition(kdp, entry_id);
+                    }, 5000);
+                });
                 doSeek(kdp, cookie);
             } else {
-                timeout = setTimeout(function () {
-                    rememberPosition(kdp, entry_id);
-                }, 5000);
+                kdp.kBind('firstPlay', function () {
+                    timeout = setTimeout(function () {
+                        rememberPosition(kdp, entry_id);
+                    }, 5000);
+                });
             }
         }
     });
@@ -36,7 +40,10 @@ function doSeek(kdp, seconds) {
             }, 1500);
         });
     } else {
-        kdp.sendNotification("doSeek", seconds);
+        setTimeout(function () {
+            kdp.sendNotification("doSeek", seconds);
+            kdp.sendNotification("changeVolume", 0.5);
+        }, 1000);
     }
 }
 function isEdge() {
