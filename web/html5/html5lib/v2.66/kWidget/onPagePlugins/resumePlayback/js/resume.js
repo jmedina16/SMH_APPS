@@ -48,7 +48,7 @@ mw.kalturaPluginWrapper(function () {
 //                    }, 1500);
 //                });
             } else {
-                //kdp.sendNotification("doSeek", seconds);
+                kdp.sendNotification("doSeek", seconds);
             }
         },
         isEdge: function () {
