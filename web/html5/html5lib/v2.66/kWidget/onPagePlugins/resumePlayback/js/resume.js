@@ -1,16 +1,27 @@
-//window.kWidget.addReadyCallback(function (playerId) {
-//    var test = window.document.getElementById(playerId);
-//    test.kBind("playerReady", function () {
+
+var i = 0;
+loaded = false;
+kWidget.addReadyCallback(function (playerId) {
+    console.log('SMH DEBUG COUNT: ' + i);
+    //if (i == 0) {
+        var kdp = $('#' + playerId)[0];
+//        console.log('SMH DEBUG:');
+//        console.log(kdp);
+        kdp.kBind("playerReady", function () {
+            console.log('SMH DEBUG: PLAYER READY')
+        });
+//        loaded = true;
+    //}
+    i++;
+});
+
+//(function (mw, $) {
+//    "use strict";
+//    this.bind('EmbedPlayerNewPlayer', function (event, embedPlayer) {
+//        //alert('TEST');
 //        console.log('SMH DEBUG: PLAYER READY')
 //    });
-//});
-
-(function (mw, $) {
-    "use strict";
-    $(mw).bind('EmbedPlayerNewPlayer', function () {
-        console.log('SMH DEBUG: PLAYER READY')
-    });
-})(window.mw, window.jQuery);
+//})(window.mw, window.jQuery);
 
 //var entry_id;
 //var timeout;
