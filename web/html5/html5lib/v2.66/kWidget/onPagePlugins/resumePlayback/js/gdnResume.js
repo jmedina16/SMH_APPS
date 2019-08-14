@@ -1,16 +1,11 @@
 var entry_id;
 var timeout;
 kWidget.addReadyCallback(function (playerId) {
-    console.log('SMH DEBUG: Ready Callback');
     var kdp = document.getElementById(playerId);
     kdp.kBind("playerReady", function () {
-        console.log('SMH DEBUG: playerReady');
-        console.log('SMH DEBUG: entryType: ');
-        console.log(kdp.evaluate('{mediaProxy.entry.type}'));
         if (kdp.evaluate('{mediaProxy.entry.type}') === 1) {
-            console.log('SMH DEBUG: entryId: ');
-            console.log(kdp.evaluate('{mediaProxy.entry.id}'));
             entry_id = kdp.evaluate('{mediaProxy.entry.id}');
+            var mediaType = kdp.evaluate('{mediaProxy.entry.mediaType}');
             kdp.kBind('playbackComplete', function () {
                 setCookie("resumevideodata_" + entry_id, 0, -1);
                 clearTimeout(timeout);
@@ -18,19 +13,30 @@ kWidget.addReadyCallback(function (playerId) {
 
             var cookie = getCookie('resumevideodata_' + entry_id);
             if (cookie !== "") {
-                //kdp.kBind('firstPlay', function () {
+                if (mediaType == 1) {
+                    kdp.kBind('firstPlay', function () {
+                        timeout = setTimeout(function () {
+                            rememberPosition(kdp, entry_id);
+                        }, 5000);
+                    });
+                } else {
                     timeout = setTimeout(function () {
                         rememberPosition(kdp, entry_id);
                     }, 5000);
-                //});
+                }
                 doSeek(kdp, cookie);
             } else {
-                //kdp.kBind('firstPlay', function () {
-                    console.log('SMH DEBUG: firstPlay ');
+                if (mediaType == 1) {
+                    kdp.kBind('firstPlay', function () {
+                        timeout = setTimeout(function () {
+                            rememberPosition(kdp, entry_id);
+                        }, 5000);
+                    });
+                } else {
                     timeout = setTimeout(function () {
                         rememberPosition(kdp, entry_id);
                     }, 5000);
-                //});
+                }
             }
         }
     });
@@ -49,7 +55,7 @@ function doSeek(kdp, seconds) {
     } else {
         setTimeout(function () {
             kdp.sendNotification("doSeek", seconds);
-            kdp.sendNotification("changeVolume", 0.5);
+            kdp.sendNotification("changeVolume", 0.7);
         }, 1000);
     }
 }
