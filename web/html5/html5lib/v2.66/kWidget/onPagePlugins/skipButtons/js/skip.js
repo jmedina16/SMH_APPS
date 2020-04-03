@@ -23,9 +23,6 @@
             },
             addBindings: function () {
                 var _this = this;
-                this.bind('playerReady', function () {
-                    console.log("player is ready");
-                });
                 this.bind('updateBufferPercent', function () {
                     _this.canSeek = true;
                 });
@@ -35,16 +32,12 @@
                 if (!this.$el) {
                     this.$el = $('<button />')
                             .attr('title', 'Click Me!')
-                            .addClass('btn icon-myicon' + this.getCssClass())
+                            .addClass('btn icon-skip-forward' + this.getCssClass())
                             .click(function () {
-                                _this.fireMyCustomEvent();
+                                _this.seek('forward');
                             });
                 }
                 return this.$el;
-            },
-            fireMyCustomEvent: function () {
-                // dispatch the 'myCustomEventName' event
-                console.log("IT WORKED!!");
             },
             seek: function (direction) {
                 if (!this.canSeek) {
