@@ -13,7 +13,8 @@
                 // the alignment of the button
                 align: "right",
                 // custom property and custom value
-                seekTimeConfig: "30"
+                seekTimeConfig: "30",
+                showTooltip: true,
             },
             canSeek: false,
             setup: function () {

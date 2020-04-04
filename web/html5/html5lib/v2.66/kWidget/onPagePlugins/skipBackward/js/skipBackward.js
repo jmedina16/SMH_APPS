@@ -13,7 +13,8 @@
                 // the alignment of the button
                 align: "right",
                 // custom property and custom value
-                seekTimeConfig: "30"
+                seekTimeConfig: "30",
+                showTooltip: true,
             },
             canSeek: false,
             setup: function () {
@@ -31,7 +32,6 @@
                 var _this = this;
                 if (!this.$el) {
                     this.$el = $('<button />')
-                            .attr('data-show-tooltip', true)
                             .attr('title', 'Skip Backward')
                             .addClass('btn icon-prev' + this.getCssClass())
                             .click(function () {
