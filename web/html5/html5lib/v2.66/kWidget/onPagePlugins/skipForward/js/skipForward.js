@@ -20,22 +20,17 @@
             setup: function () {
                 // initialization code goes here.
                 this.addBindings();
-                if (this.getPlayer().evaluate('{mediaProxy.entry.type}') !== 1) {
-                    console.log('TEEEST');
-                    this.hide();
-                } else {
-                    this.addBindings();
-                }
             },
             addBindings: function () {
                 var _this = this;
-                this.bind('updateBufferPercent', function () {
-                    _this.canSeek = true;
-                });
-
                 this.bind('playerReady', function () {
-                    console.log("player is ready");
-                    _this.hide();
+                    if (_this.getPlayer().evaluate('{mediaProxy.entry.type}') === 1) {
+                        _this.bind('updateBufferPercent', function () {
+                            _this.canSeek = true;
+                        });                        
+                    } else {
+                        _this.hide();
+                    }
                 });
             },
             getComponent: function () {

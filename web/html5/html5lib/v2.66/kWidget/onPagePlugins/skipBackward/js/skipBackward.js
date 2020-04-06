@@ -24,23 +24,26 @@
             },
             addBindings: function () {
                 var _this = this;
-                this.bind('updateBufferPercent', function () {
-                    _this.canSeek = true;
+                this.bind('playerReady', function () {
+                    if (_this.getPlayer().evaluate('{mediaProxy.entry.type}') === 1) {
+                        _this.bind('updateBufferPercent', function () {
+                            _this.canSeek = true;
+                        });
+                    } else {
+                        _this.hide();
+                    }
                 });
             },
             getComponent: function () {
-//                this.$el = "";
-//                if (this.getPlayer().evaluate('{mediaProxy.entry.type}') === 1) {
-                    var _this = this;
-                    if (!this.$el) {
-                        this.$el = $('<button />')
-                                .attr('title', 'Skip Backward')
-                                .addClass('btn icon-prev' + this.getCssClass())
-                                .click(function () {
-                                    _this.seek();
-                                });
-                    }
-                //}
+                var _this = this;
+                if (!this.$el) {
+                    this.$el = $('<button />')
+                            .attr('title', 'Skip Backward')
+                            .addClass('btn icon-prev' + this.getCssClass())
+                            .click(function () {
+                                _this.seek();
+                            });
+                }
 
                 return this.$el;
             },
