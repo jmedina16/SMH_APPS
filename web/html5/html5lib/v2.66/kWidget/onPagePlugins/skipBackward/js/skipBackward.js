@@ -13,7 +13,7 @@
                 // the alignment of the button
                 align: "right",
                 // custom property and custom value
-                seekTimeConfig: "30",
+                seekTime: "30",
                 showTooltip: true,
             },
             canSeek: false,
@@ -29,22 +29,26 @@
                 });
             },
             getComponent: function () {
-                var _this = this;
-                if (!this.$el) {
-                    this.$el = $('<button />')
-                            .attr('title', 'Skip Backward')
-                            .addClass('btn icon-prev' + this.getCssClass())
-                            .click(function () {
-                                _this.seek();
-                            });
-                }
+//                this.$el = "";
+//                if (this.getPlayer().evaluate('{mediaProxy.entry.type}') === 1) {
+                    var _this = this;
+                    if (!this.$el) {
+                        this.$el = $('<button />')
+                                .attr('title', 'Skip Backward')
+                                .addClass('btn icon-prev' + this.getCssClass())
+                                .click(function () {
+                                    _this.seek();
+                                });
+                    }
+                //}
+
                 return this.$el;
             },
             seek: function () {
                 if (!this.canSeek) {
                     return false;
                 }
-                var seekTime = parseFloat(this.getConfig('seekTimeConfig'));
+                var seekTime = parseFloat(this.getConfig('seekTime'));
                 var currentTime = parseFloat(this.getPlayer().currentTime);
                 var newCurrentTime = 0;
                 newCurrentTime = currentTime - seekTime;

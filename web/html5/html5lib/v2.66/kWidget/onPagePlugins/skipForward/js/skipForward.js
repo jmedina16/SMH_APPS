@@ -13,19 +13,29 @@
                 // the alignment of the button
                 align: "right",
                 // custom property and custom value
-                seekTimeConfig: "30",
+                seekTime: "30",
                 showTooltip: true,
             },
             canSeek: false,
             setup: function () {
                 // initialization code goes here.
-                // call a method for event bindings:
                 this.addBindings();
+                if (this.getPlayer().evaluate('{mediaProxy.entry.type}') !== 1) {
+                    console.log('TEEEST');
+                    this.hide();
+                } else {
+                    this.addBindings();
+                }
             },
             addBindings: function () {
                 var _this = this;
                 this.bind('updateBufferPercent', function () {
                     _this.canSeek = true;
+                });
+
+                this.bind('playerReady', function () {
+                    console.log("player is ready");
+                    _this.hide();
                 });
             },
             getComponent: function () {
@@ -38,13 +48,14 @@
                                 _this.seek();
                             });
                 }
+
                 return this.$el;
             },
             seek: function () {
                 if (!this.canSeek) {
                     return false;
                 }
-                var seekTime = parseFloat(this.getConfig('seekTimeConfig'));
+                var seekTime = parseFloat(this.getConfig('seekTime'));
                 var currentTime = parseFloat(this.getPlayer().currentTime);
                 var newCurrentTime = 0;
                 newCurrentTime = currentTime + seekTime;
