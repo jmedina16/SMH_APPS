@@ -136,7 +136,7 @@ class reseller {
 
         foreach ($result[1]->objects as $partner) {
             $row = array();
-            $url = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getStats.php?pid=' . $partner->id;
+            $url = 'https://hwapps.streamingmediahosting.com/apps/scripts/getStats.php?pid=' . $partner->id;
             $partner_stats = json_decode($this->curl_request($url));
             $storage = '';
             $storage_gb = 0;
@@ -265,7 +265,7 @@ class reseller {
 
     public function get_user_stats() {
         $stats = array();
-        $url = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getStats.php?pid=' . $this->parent_id;
+        $url = 'http://hwapps.streamingmediahosting.com/apps/scripts/getStats.php?pid=' . $this->parent_id;
         $user_stats = json_decode($this->curl_request($url));
         if ($user_stats->Error) {
             $storage = 0;
