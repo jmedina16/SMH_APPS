@@ -93,15 +93,15 @@ class reseller {
         $user_data_transfer = $this->formatStorage($bandwidth_total);
         $user_storage_used = $this->formatStorage($storage_total);
 
-//        $user_bandwidth_limit_80 = $this->get_percentage(80, $user_limits['bandwidth_limit_gb']);
-//        $user_storage_limit_80 = $this->get_percentage(80, $user_limits['storage_limit_gb']);
+//      $user_bandwidth_limit_80 = $this->get_percentage(80, $user_limits['bandwidth_limit_gb']);
+//      $user_storage_limit_80 = $this->get_percentage(80, $user_limits['storage_limit_gb']);
 //
-//        $bandwidth_total_formated = floatval(str_replace(',', '', $bandwidth_total));
-//        $user_bandwidth_limit_80_formated = floatval(str_replace(',', '', $user_bandwidth_limit_80));
-//        $user_bandwidth_limit_gb_formated = floatval(str_replace(',', '', $user_bandwidth_limit_gb));
-//        $storage_total_formated = floatval(str_replace(',', '', $storage_total));
-//        $user_storage_limit_80_formated = floatval(str_replace(',', '', $user_storage_limit_80));
-//        $user_storage_limit_gb_formated = floatval(str_replace(',', '', $user_storage_limit_gb));
+//      $bandwidth_total_formated = floatval(str_replace(',', '', $bandwidth_total));
+//      $user_bandwidth_limit_80_formated = floatval(str_replace(',', '', $user_bandwidth_limit_80));
+//      $user_bandwidth_limit_gb_formated = floatval(str_replace(',', '', $user_bandwidth_limit_gb));
+//      $storage_total_formated = floatval(str_replace(',', '', $storage_total));
+//      $user_storage_limit_80_formated = floatval(str_replace(',', '', $user_storage_limit_80));
+//      $user_storage_limit_gb_formated = floatval(str_replace(',', '', $user_storage_limit_gb));
 
 
         $url = 'http://mediaplatform.streamingmediahosting.com/apps/services/v1.0/index.php?action=get_services&pid=' . $this->parent_id;
@@ -305,7 +305,7 @@ class reseller {
         $bandwidth_total = 0;
         $bandwidth_limit_total = 0;
         foreach ($child_ids as $child) {
-            $url = 'http://mediaplatform.streamingmediahosting.com/apps/scripts/getStats.php?pid=' . $child;
+            $url = 'https://hwapps.streamingmediahosting.com/apps/scripts/getStats.php?pid=' . $child;
             $limits_url = 'http://10.5.25.17/index.php/api/accounts/limits/' . $child . '.json';
             $partner_stats = json_decode($this->curl_request($url));
             $partner_limits = json_decode($this->curl_request($limits_url));
